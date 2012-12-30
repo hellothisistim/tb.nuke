@@ -35,12 +35,6 @@ else:
     m_edit = nuke.menu("Nuke").findItem("Edit")
     m_edit.addCommand("Tabtabtab", tabtabtab.main, "Tab")
 
-### K_viewerMemory
-try:
-    import K_viewerMemory
-except ImportError as e:
-    nuke.tprint('*** Skipping import of K_viewerMemory. Error:', e)
-
 ### markDangerousExpressions
 nuke.tprint('Importing markDangerousExpressions')
 try:
@@ -297,12 +291,6 @@ tm.addCommand('Linked Bezier from Tracker (trans, rot, center)', lambda: tracked
 #tm.addCommand('findKnobsWithExpressions', lambda: findKnobsWithExpressions())
 tm.addCommand('Remove proxy from Reads', lambda: removeProxyFromReads(nuke.selectedNodes()))
 
-
-# K_viewerMemory
-if 'K_viewerMemory' in sys.modules.keys():
-    tm.addSeparator()
-    tm.addCommand('Viewer input memorise',lambda: K_viewerMemory.K_viewerMemory_memorise(),'Meta+Alt+v')
-    tm.addCommand('Viewer input restore',lambda: K_viewerMemory.K_viewerMemory_restore(),'Meta+v')
 
 ##
 ## Node defaults
