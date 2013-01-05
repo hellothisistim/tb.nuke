@@ -1,0 +1,10 @@
+############### IP Menu #######################
+m = toolbar.addMenu("IP", "IP.png")
+m.addCommand('Grid','nuke.load("viewerInputNodes"), viewerInput(ipNode="Grid", openPanel=True)')
+m.addCommand('Mirror','nuke.load("viewerInputNodes"), viewerInput(ipNode="Mirror")')
+m.addCommand('Normalize','nuke.load("viewerInputNodes"), viewerInput(ipNode="Normalize")')
+m.addCommand('Saturation','nuke.load("viewerInputNodes"), viewerInput(ipNode="Saturation")')
+m.addCommand('Over Checkerboard','nuke.load("viewerInputNodes"), viewerInput(ipNode="Over Checkerboard")')
+m.addCommand('Over 18% Grey','nuke.load("viewerInputNodes"), viewerInput(ipNode="Over 18% Grey")')
+m.addCommand('choose from list','nuke.load("viewerInputNodes"), viewerInput()')
+m.addCommand('remove','nuke.load("viewerInputNodes"), viewerInput(ipNode="Remove")')
