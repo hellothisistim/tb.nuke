@@ -9,6 +9,7 @@ import os
 nuke.pluginAddPath('./gizmos')
 nuke.pluginAddPath('./icons')
 nuke.pluginAddPath('./python')
+nuke.pluginAddPath('./nukepedia')
 nuke.pluginAddPath('./studio')
 nuke.pluginAddPath(os.getenv('HOME') + '/code/skunkworks')
 # AtomKraft
