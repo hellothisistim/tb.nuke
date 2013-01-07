@@ -21,10 +21,10 @@ if tm is not None:
         nuke.tprint('labelDots not found.')
 
 try:
-	import cycle_vlut
+    import cycle_vlut
     cycle_vlut.setup_menu()
 except:
-	nuke.tprint('cycle_vlut not found.')
+    nuke.tprint('cycle_vlut not found.')
 
 
 nuke.tprint('ALL DONE from the ~/.nuke/nukepedia/menu.py')
