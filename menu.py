@@ -297,6 +297,11 @@ tm.addCommand('Remove proxy from Reads', lambda: removeProxyFromReads(nuke.selec
 ## Node defaults
 ##
 
+# Pre-select alpha for "unpremult" knob on these nodes:
+nodes = ['Grade', 'ColorCorrect', 'Add', 'Gamma', 'Multiply']
+for node in nodes:
+    nuke.knobDefault(node+'.unpremult', '-rgba.alpha'g)
+
 #nuke.knobDefault("BackdropNode.tile_color", "0x777777ff")
 nuke.knobDefault("BackdropNode.note_font_size", "128")
 nuke.knobDefault("BackdropNode.note_font", "bold")
