@@ -229,7 +229,7 @@ def editLabel():
 
 
 # Smart Roto
-def smartRoto():
+def smartBezier():
     """If a node with some transform data (for example a Tracker or 
     Transform node with translate, rotate, scale, and center knobs)
     is selected when this method is called, a bezier will be created with 
@@ -325,7 +325,7 @@ nuke.knobDefault("Output.note_font", "bold")
 # TODO: Figure out why this isn't working. It's probably because StickyNotes get created by a method in Nuke's menu.py.
 nuke.knobDefault("StickyNote.label", '<align left>')
 
-nuke.knobDefault("Grade.unpremult","-rgba.alpha")
+#nuke.knobDefault("Grade.unpremult","-rgba.alpha")
 nuke.knobDefault("VectorBlur.uv","forward")
 nuke.knobDefault("Dot.note_font_size","22")
 
@@ -334,7 +334,7 @@ tm.addSeparator()
 mkshort = tm.addMenu('(These are my special keyboard shortcuts)')
 mkshort.addCommand('AutoBackdrop', "tb_autobackdrop()", shortcut='Alt+Shift+B')
 mkshort.addCommand('Edit Label', "editLabel()", shortcut='Ctrl+L')
-mkshort.addCommand('Smart Roto', "smartRoto()", shortcut='p')
+mkshort.addCommand('Smart Roto', "smartBezier()", shortcut='p')
 
 
 
