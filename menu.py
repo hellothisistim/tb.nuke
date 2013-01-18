@@ -254,6 +254,29 @@ def smartBezier():
 
     trackedBezier(node)
 
+# Frame Range to Viewer
+def frameRangeToViewer(node=None):
+    """Set the custom frame range for all viewers to match the frame range 
+    at the selected node.
+
+    Returns None
+    """
+
+    if node is None:
+        try:
+            node = nuke.selectedNode()
+        except ValueError:
+            node = nuke.root()
+    first = node.firstFrame()
+    last = node.lastFrame()
+
+    print first, last
+
+    viewers = nuke.allNodes('Viewer')
+    for viewer in viewers:
+        viewer.knob('frame_range').setValue(str(first) + '-' + str(last))
+        viewer.knob('frame_range_lock').setValue(True)
+
 
 ##
 ## Main
@@ -285,13 +308,17 @@ for mode in nuke.nodes.Read().knob('cacheLocal').values():
 # AOV Merge
 tm.addCommand('AOVMerge', "aovMerge()")
 # Tracked Bezier
-tm.addCommand('Linked Bezier from Tracker (all)', lambda: trackedBezier(nuke.selectedNode()))
-tm.addCommand('Linked Bezier from Tracker (trans, center)', lambda: trackedBezier(nuke.selectedNode(), translate=True, rotate=False, scale=False, center=True))
-tm.addCommand('Linked Bezier from Tracker (trans, rot, center)', lambda: trackedBezier(nuke.selectedNode(), translate=True, rotate=True, scale=False, center=True))
+tm.addCommand('Linked Bezier from Tracker (all)', 
+    lambda: trackedBezier(nuke.selectedNode()))
+tm.addCommand('Linked Bezier from Tracker (trans, center)', 
+    lambda: trackedBezier(nuke.selectedNode(), translate=True, rotate=False, scale=False, center=True))
+tm.addCommand('Linked Bezier from Tracker (trans, rot, center)', 
+    lambda: trackedBezier(nuke.selectedNode(), translate=True, rotate=True, scale=False, center=True))
 
 #tm.addCommand('findKnobsWithExpressions', lambda: findKnobsWithExpressions())
-tm.addCommand('Remove proxy from Reads', lambda: removeProxyFromReads(nuke.selectedNodes()))
-
+tm.addCommand('Remove proxy from Reads', 
+    lambda: removeProxyFromReads(nuke.selectedNodes()))
+tm.addCommand('Frame Range to Viewer', lambda: frameRangeToViewer())
 
 ##
 ## Node defaults
