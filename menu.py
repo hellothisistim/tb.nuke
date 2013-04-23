@@ -235,6 +235,33 @@ def smartBezier():
     is selected when this method is called, a bezier will be created with 
     it's transform tab bits expression-linked to the transform node. 
     Otherwise, a regular bezier will be created.
+
+    Deprecated.
+    
+    """
+
+    # TODO: Oh, bother... I really should be deselecting all the selected 
+    # nodes before I make the expression-linked bezier. But not before I 
+    # make a regular one.
+    
+    nodes = nuke.selectedNodes()
+    # Remove nodes that aren't linkable
+    nodes = [node for node in nodes if nodeHasTransformKnobs(node)]
+    # No link nodes selected?
+    if len(nodes) < 1:
+        nuke.createNode('Bezier')
+        return
+
+    node = nodes[-1]
+
+    trackedBezier(node)
+
+def smartRoto():
+    """If a node with some transform data (for example a Tracker or 
+    Transform node with translate, rotate, scale, and center knobs)
+    is selected when this method is called, a bezier will be created with 
+    it's transform tab bits expression-linked to the transform node. 
+    Otherwise, a regular bezier will be created.
     
     """
 
@@ -325,7 +352,7 @@ tm.addCommand('Frame Range to Viewer', lambda: frameRangeToViewer())
 ##
 
 # Pre-select alpha for "unpremult" knob on these nodes:
-nodes = ['Grade', 'ColorCorrect', 'Add', 'Gamma', 'Multiply']
+nodes = ['Grade', 'ColorCorrect', 'Add', 'Gamma', 'Multiply', 'HueCorrect']
 for node in nodes:
     nuke.knobDefault(node+'.unpremult', '-rgba.alpha')
 
