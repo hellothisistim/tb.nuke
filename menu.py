@@ -278,6 +278,24 @@ def frameRangeToViewer(node=None):
         viewer.knob('frame_range_lock').setValue(True)
 
 
+# Self-Labeling Dot
+def selfLabellingDot(name=None):
+    dot = nuke.createNode('Dot', inpanel=False)
+    dot['label'].setValue('[value name]')
+    if name:
+        dot.setName(name)
+    return dot
+
+
+# Labeled Dot Organizer
+def labledDotOrganizer():
+    items = ['Previous version', 'Plate', 'Last to client', 'Layout', 'Animation', 'Light', 'FX', 'Edit ref']
+    for i in items:
+        selfLabellingDot(i)
+    # TODO: fancy placement at bottom of script, below lowest write node.
+
+
+
 ##
 ## Main
 ##
