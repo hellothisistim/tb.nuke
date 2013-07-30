@@ -1,5 +1,6 @@
 # ~/.nuke/menu.py
 
+import getpass
 import os
 
 
@@ -327,15 +328,20 @@ def labledDotOrganizer():
 ## Main
 ##
 nuke.tprint('HELLO from the ~/.nuke/menu.py')
-user = os.getenv('USER')
-
+user = getpass.getuser()
+if user is None:
+    user = 'foo'
 
 ## 
 ## The "me" menu
 ##
 m = nuke.menu('Nodes')
 icon = user+'-icon.png'
-tm = m.addMenu(user, icon)
+if os.path.exists(icon):
+    tm = m.addMenu(user, icon)
+else:
+	tm = m.addMenu(user)
+
 
 # Expression Reorder
 tm.addCommand('RGBA', "make_expression_reorder('rgba')")
