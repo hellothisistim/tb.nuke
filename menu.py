@@ -412,7 +412,8 @@ tm.addSeparator()
 mkshort = tm.addMenu('(These are my special keyboard shortcuts)')
 mkshort.addCommand('AutoBackdrop', "tb_autobackdrop()", shortcut='Alt+Shift+B')
 mkshort.addCommand('Edit Label', "editLabel()", shortcut='Ctrl+L')
-mkshort.addCommand('Smart Roto', "smartBezier()", shortcut='p')
+# It's time to let this go until I get smartRoto working for the Nuke7 world.
+#mkshort.addCommand('Smart Roto', "smartBezier()", shortcut='p')
 
 
 
