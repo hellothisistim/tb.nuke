@@ -44,7 +44,11 @@ try:
 except ImportError as e:
     nuke.tprint('*** Skipping import of markDangerousExpressions. Error:', e)
 
-    
+### Load bgNukes
+try:
+    import bgNukes
+except ImportError as e:
+    nuke.tprint('*** Skipping import of bgNukes. Error:', e)
 
   
 
@@ -323,6 +327,19 @@ def labledDotOrganizer():
     # TODO: fancy placement at bottom of script, below lowest write node.
 
 
+# createWriteDir
+def createWriteDir():
+  import nuke, os, errno
+  file = nuke.filename(nuke.thisNode())
+  dir = os.path.dirname( file )
+  osdir = nuke.callbacks.filenameFilter( dir )
+  # cope with the directory existing already by ignoring that exception
+  try:
+    os.makedirs( osdir )
+  except OSError, e:
+    if e.errno != errno.EEXIST:
+      raise
+
 
 ##
 ## Main
@@ -370,6 +387,7 @@ tm.addCommand('Linked Bezier from Tracker (trans, rot, center)',
 tm.addCommand('Remove proxy from Reads', 
     lambda: removeProxyFromReads(nuke.selectedNodes()))
 tm.addCommand('Frame Range to Viewer', lambda: frameRangeToViewer())
+tm.addCommand('Labeled Dot Organizer', lambda: labeledDotOrganizer())
 
 ##
 ## Node defaults
@@ -415,7 +433,8 @@ mkshort.addCommand('Edit Label', "editLabel()", shortcut='Ctrl+L')
 # It's time to let this go until I get smartRoto working for the Nuke7 world.
 #mkshort.addCommand('Smart Roto', "smartBezier()", shortcut='p')
 
-
+# Callbacks
+nuke.addBeforeRender(createWriteDir)
 
 nuke.tprint('ALL DONE from the ~/.nuke/menu.py')
 
