@@ -1,0 +1,76 @@
+set cut_paste_input [stack 0]
+version 8.0 v3
+push $cut_paste_input
+Group {
+ name LabelIt
+ selected true
+ xpos 5748
+ ypos 2060
+ addUserKnob {20 User}
+ addUserKnob {41 message T Text2.message}
+ addUserKnob {41 font T Text2.font}
+ addUserKnob {41 size T Text2.size}
+ addUserKnob {41 xjustify l justify T Text2.xjustify}
+ addUserKnob {41 yjustify l "" -STARTLINE T Text2.yjustify}
+ addUserKnob {41 translate T Text2.translate}
+ addUserKnob {41 text_color l "Text Color" T Add1.value}
+ addUserKnob {41 bg_color l "Background Color" T Multiply1.value}
+ addUserKnob {3 border}
+ border 3
+}
+ Text {
+  inputs 0
+  message Plate
+  font "/Library/Fonts/Arial Unicode.ttf"
+  Transform 1
+  translate {32 32}
+  name Text2
+  xpos 557
+  ypos 242
+ }
+ Rectangle {
+  inputs 0
+  area {{"Text2.bbox.x - parent.border"} {"Text2.bbox.y - parent.border"} {"Text2.bbox.r + parent.border"} {"Text2.bbox.t + parent.border"}}
+  name Rectangle1
+  xpos 560
+  ypos 162
+ }
+ Input {
+  inputs 0
+  name in
+  xpos 708
+  ypos 81
+ }
+ Multiply {
+  inputs 1+1
+  channels rgb
+  value 0.25
+  unpremult -rgba.alpha
+  name Multiply1
+  label "\[value value]"
+  xpos 708
+  ypos 158
+ }
+ Add {
+  inputs 1+1
+  channels rgb
+  value 1
+  unpremult -rgba.alpha
+  name Add1
+  label "\[value value]"
+  xpos 708
+  ypos 238
+ }
+ Output {
+  name Output1
+  xpos 708
+  ypos 354
+ }
+ Viewer {
+  inputs 0
+  input_process false
+  name Viewer1
+  xpos 433
+  ypos 247
+ }
+end_group
