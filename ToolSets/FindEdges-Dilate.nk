@@ -2,32 +2,35 @@ set cut_paste_input [stack 0]
 version 8.0 v3
 push $cut_paste_input
 Dot {
- name Dot8
- note_font_size 22
- selected true
- xpos 5238
- ypos 1859
+name Dot37
+note_font_size 22
+selected true
+xpos 5556
+ypos 2131
 }
-set N57a73150 [stack 0]
+set N2a1aa050 [stack 0]
 Dilate {
- size {{"- parent.Dilate3.size"}}
- name Dilate5
- selected true
- xpos 5250
- ypos 1911
+channels alpha
+size {{"- parent.Dilate3.size"}}
+name Dilate5
+selected true
+xpos 5568
+ypos 2171
 }
-push $N57a73150
+push $N2a1aa050
 Dilate {
- size 2
- name Dilate3
- selected true
- xpos 5154
- ypos 1911
+channels alpha
+size 2
+name Dilate3
+selected true
+xpos 5471
+ypos 2169
 }
-Difference {
- inputs 2
- name Difference1
- selected true
- xpos 5200
- ypos 1959
+Merge2 {
+inputs 2
+operation difference
+name Merge23
+selected true
+xpos 5518
+ypos 2213
 }
