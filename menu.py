@@ -395,7 +395,7 @@ tm.addCommand('Labeled Dot Organizer', lambda: labeledDotOrganizer())
 ##
 
 # Pre-select alpha for "unpremult" knob on these nodes:
-nodes = ['Grade', 'ColorCorrect', 'Add', 'Gamma', 'Multiply', 'HueCorrect']
+nodes = ['Grade', 'ColorCorrect', 'Add', 'Gamma', 'Multiply', 'HueCorrect', 'EXPTool']
 for node in nodes:
     nuke.knobDefault(node+'.unpremult', '-rgba.alpha')
 
