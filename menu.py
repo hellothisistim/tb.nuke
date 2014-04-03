@@ -51,6 +51,11 @@ try:
 except ImportError as e:
     nuke.tprint('*** Skipping import of bgNukes. Error:', e)
 
+### Load phoswindows
+try:
+    import phoswindows
+except ImportError as e:
+    nuke.tprint('*** Skipping import of phoswindows. Error:', e)
   
 
 ##
