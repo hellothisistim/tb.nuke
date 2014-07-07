@@ -1,0 +1,124 @@
+#! /Applications/Nuke8.0v5/Nuke8.0v5.app/Contents/MacOS/libnuke-8.0.v5.dylib -nx
+version 8.0 v5
+Gizmo {
+ help "This gizmo does a down-n-dirty vanishing point adjustment for single-point perspective situations.\n\nPut src_center at the vanishing point in the source image, and move dest_center where you need the vanishing point to be. Distorted edges can be smoothed out using the soften control, which is measured in pixels. It may be helpful to stabilize moving footage before applying the perspective correction."
+ tile_color 0x19d2ffff
+ addUserKnob {20 User}
+ addUserKnob {41 src_center T PERSPECTIVE_CONTROL.src_center}
+ addUserKnob {41 dest_center T PERSPECTIVE_CONTROL.dest_center}
+ addUserKnob {41 soften T Blur1.size}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -134
+  ypos -142
+ }
+ Dot {
+  name Dot1
+  note_font_size 22
+  xpos -100
+  ypos -102
+ }
+set Nd046700 [stack 0]
+ Remove {
+  name Remove1
+  xpos 171
+  ypos -111
+ }
+set N1fc68010 [stack 0]
+ Ramp {
+  output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  p0 {100 {parent.PERSPECTIVE_CONTROL.dest_center.y}}
+  p1 {100 {input.height}}
+  color {{"1 - (parent.PERSPECTIVE_CONTROL.src_center.y / input.height)"}}
+  name Ramp_y_top
+  xpos 324
+  ypos -14
+ }
+push $N1fc68010
+ Ramp {
+  output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  p0 {100 0}
+  p1 {100 {parent.PERSPECTIVE_CONTROL.dest_center.y}}
+  color {{"parent.PERSPECTIVE_CONTROL.src_center.y / input.height"}}
+  name Ramp_y_bottom
+  xpos 232
+  ypos -14
+ }
+push 0
+push $N1fc68010
+ Ramp {
+  output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  p0 {{parent.PERSPECTIVE_CONTROL.dest_center.x} 100}
+  p1 {{input.width} 100}
+  color {{"1 - (PERSPECTIVE_CONTROL.src_center.x / input.width)"}}
+  name Ramp_x_right
+  xpos 115
+  ypos -16
+ }
+push $N1fc68010
+ Ramp {
+  output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  p0 {0 100}
+  p1 {{parent.PERSPECTIVE_CONTROL.dest_center.x} 100}
+  color {{"PERSPECTIVE_CONTROL.src_center.x / input.width"}}
+  name Ramp_x_left
+  xpos 23
+  ypos -18
+ }
+ Merge2 {
+  inputs 4+1
+  operation plus
+  name Merge2
+  xpos 178
+  ypos 84
+ }
+set N1fc9e900 [stack 0]
+ Blur {
+  channels rgba
+  size 100
+  name Blur1
+  label "\[value size]"
+  xpos 20
+  ypos 78
+ }
+set Nd0298d0 [stack 0]
+push $Nd046700
+ NoOp {
+  name PERSPECTIVE_CONTROL
+  tile_color 0xff8200ff
+  xpos -134
+  ypos -17
+  addUserKnob {20 User}
+  addUserKnob {12 src_center}
+  src_center {982 772}
+  addUserKnob {12 dest_center}
+  dest_center {616 448}
+ }
+ STMap {
+  inputs 2
+  uv rgb
+  name STMap1
+  xpos -134
+  ypos 78
+ }
+ Output {
+  name Output1
+  xpos -134
+  ypos 154
+ }
+push $N1fc9e900
+push $Nd0298d0
+ Viewer {
+  inputs 2
+  input_number 1
+  gain 1.35
+  gamma 0.085
+  input_process false
+  name Viewer1
+  selected true
+  xpos 36
+  ypos 171
+ }
+end_group
