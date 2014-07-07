@@ -424,6 +424,7 @@ nuke.knobDefault("Remove.operation", "keep")
 nuke.knobDefault("Remove.label", "[value channels]")
 nuke.knobDefault("Output.note_font_size", "18")
 nuke.knobDefault("Output.note_font", "bold")
+nuke.knobDefault("FrameRange.label", "x[value knob.first_frame]-[value knob.last_frame]")
 # TODO: Figure out why this isn't working. It's probably because StickyNotes get created by a method in Nuke's menu.py.
 nuke.knobDefault("StickyNote.label", '<align left>')
 
