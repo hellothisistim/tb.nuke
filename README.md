@@ -8,7 +8,7 @@ I'm a freelancer, so I sit down at a new workstation in a new studio pretty ofte
 The best way I've found to do both of those things is to download this repo, unzip it into the user folder (the directory where the .nuke directory lives) and make sure it's named "tb.nuke". Then add this one line to the meny.py inside .nuke:
 
 ```
-nuke.pluginaddPath(os.path.expanduser("~/tb.nuke"))
+nuke.pluginAddPath(os.path.expanduser("~/tb.nuke"))
 ```
 
 If os.path is not being imported already, you may need to do this first:
