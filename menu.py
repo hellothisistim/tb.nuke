@@ -427,8 +427,8 @@ nuke.knobDefault("Output.note_font", "bold")
 nuke.knobDefault("FrameRange.label", "x[value knob.first_frame]-[value knob.last_frame]")
 # TODO: Figure out why this isn't working. It's probably because StickyNotes get created by a method in Nuke's menu.py.
 nuke.knobDefault("StickyNote.label", '<align left>')
-# TODO: This doesn't work either. Why?
-nuke.knobDefault("Retime", "before continue after continue")
+nuke.knobDefault("Retime.before", "continue")
+nuke.knobDefault("Retime.after", "continue")
 
 #nuke.knobDefault("Grade.unpremult","-rgba.alpha")
 nuke.knobDefault("VectorBlur.uv","forward")
