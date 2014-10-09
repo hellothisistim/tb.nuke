@@ -22,3 +22,18 @@ def createWriteDir():
     if e.errno != errno.EEXIST:
       raise
 nuke.addBeforeRender(createWriteDir)
+
+
+# Make all filepaths load without errors regardless of OS (No Linux support and no C: support)
+# Big thanks to Fredrik Averpil: http://fredrik.averpil.com/post/17033531721
+def myFilenameFilter(filename):
+  if nuke.env['MACOS']:
+    filename = filename.replace( 'X:', '/Volumes/Work/jobs/phos' )
+  if nuke.env['WIN32']:
+    filename = filename.replace( '/Volumes/Work/jobs/phos', 'X:' )
+
+  return filename
+
+
+# Use the filenameFilter(s)
+nuke.addFilenameFilter(myFilenameFilter)
