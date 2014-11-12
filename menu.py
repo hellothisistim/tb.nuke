@@ -428,6 +428,14 @@ mkshort.addCommand('Edit Label', "editLabel()", shortcut='Ctrl+L')
 # It's time to let this go until I get smartRoto working for the Nuke7 world.
 #mkshort.addCommand('Smart Roto', "smartBezier()", shortcut='p')
 
+### Load labelDots
+try:
+    import labelDots
+except ImportError as e:
+    nuke.tprint('*** Skipping import of labelDots. Error:', e)
+else:
+	tm.addCommand('Label Dots', "labelDots.dotLabel()", "Ctrl+Shift+L")
+
 
 
 # Callbacks
