@@ -333,20 +333,6 @@ def labledDotOrganizer():
     # TODO: fancy placement at bottom of script, below lowest write node.
 
 
-# createWriteDir
-def createWriteDir():
-  import nuke, os, errno
-  file = nuke.filename(nuke.thisNode())
-  dir = os.path.dirname( file )
-  osdir = nuke.callbacks.filenameFilter( dir )
-  # cope with the directory existing already by ignoring that exception
-  try:
-    os.makedirs( osdir )
-  except OSError, e:
-    if e.errno != errno.EEXIST:
-      raise
-
-
 ##
 ## Main
 ##
