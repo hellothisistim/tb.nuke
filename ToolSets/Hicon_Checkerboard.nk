@@ -1,0 +1,15 @@
+set cut_paste_input [stack 0]
+version 8.0 v3
+CheckerBoard2 {
+ inputs 0
+ color0 0
+ color1 1
+ color2 0
+ color3 1
+ centerlinecolor 1
+ centerlinewidth 0
+ name Hicon_CheckerBoard
+ selected true
+ xpos 195
+ ypos -44
+}
