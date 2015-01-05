@@ -438,8 +438,6 @@ else:
 
 
 
-# Callbacks
-nuke.addBeforeRender(createWriteDir)
 
 nuke.tprint('ALL DONE from the ~/.nuke/menu.py')
 
