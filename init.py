@@ -37,3 +37,5 @@ def myFilenameFilter(filename):
 
 # Use the filenameFilter(s)
 nuke.addFilenameFilter(myFilenameFilter)
+# Callbacks
+nuke.addBeforeRender(createWriteDir)
