@@ -5,9 +5,10 @@ This is stuff I like to have in my ~/.nuke folder. It makes my life easier while
 
 I'm a freelancer, so I sit down at a new workstation in a new studio pretty often. I want to use my own Nuke customizations (captured here in this tb.nuke repository), but I don't want to make any permanent changes to the studio's Nuke config.
 
-The best way I've found to do both of those things is to download this repo, unzip it into the user folder (the directory where the .nuke directory lives) and make sure it's named "tb.nuke". Then add this one line to the meny.py inside .nuke:
+The best way I've found to do both of those things is to download this repo, unzip it into the user folder (the directory where the .nuke directory lives) and make sure it's named "tb.nuke". Then add this one line to the init.py inside .nuke:
 
 ```
+import os.path
 nuke.pluginAddPath(os.path.expanduser("~/tb.nuke"))
 ```
 
