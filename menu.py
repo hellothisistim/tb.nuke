@@ -38,12 +38,12 @@ else:
     m_edit = nuke.menu("Nuke").findItem("Edit")
     m_edit.addCommand("Tabtabtab", tabtabtab.main, "Tab")
 
-### markDangerousExpressions
-nuke.tprint('Importing markDangerousExpressions')
+### mark_tricky_nodes
+nuke.tprint('Importing mark_tricky_nodes')
 try:
-    import markDangerousExpressions
+    import mark_tricky_nodes
 except ImportError as e:
-    nuke.tprint('*** Skipping import of markDangerousExpressions. Error:', e)
+    nuke.tprint('*** Skipping import of mark_tricky_nodes. Error:', e)
 
 ### Load bgNukes
 try:
