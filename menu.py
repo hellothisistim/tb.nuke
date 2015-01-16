@@ -415,6 +415,7 @@ nuke.knobDefault("FrameRange.label", "x[value knob.first_frame]-[value knob.last
 nuke.knobDefault("StickyNote.label", '<align left>')
 nuke.knobDefault("Retime.before", "continue")
 nuke.knobDefault("Retime.after", "continue")
+nuke.knobDefault("Roto.output", 'rgba')
 
 #nuke.knobDefault("Grade.unpremult","-rgba.alpha")
 nuke.knobDefault("VectorBlur.uv","forward")
