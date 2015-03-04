@@ -7,6 +7,7 @@ nuke.pluginAddPath('./gizmos')
 nuke.pluginAddPath('./icons')
 nuke.pluginAddPath('./python')
 
+nuke.pluginAddPath('/Volumes/Support/software/binks/jops/2.2v1/osx/J_Ops')
 
 ## Create output directories automatically
 ## Taken from the Nuke Python Dev Guide
