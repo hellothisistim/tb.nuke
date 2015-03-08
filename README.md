@@ -1,7 +1,7 @@
 dot_nuke
 ========
 
-This is stuff I like to have in my ~/.nuke folder. It makes my life easier while using Nuke from The Foundry.
+This is stuff I like to have in my ~/.nuke folder. It makes my life easier while using [Nuke from The Foundry](http://www.thefoundry.co.uk/).
 
 I'm a freelancer, so I sit down at a new workstation in a new studio pretty often. I want to use my own Nuke customizations (captured here in this tb.nuke repository), but I don't want to make any permanent changes to the studio's Nuke config.
 
