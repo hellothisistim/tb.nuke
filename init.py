@@ -9,6 +9,8 @@ nuke.pluginAddPath('./python')
 
 nuke.pluginAddPath('/Volumes/Support/software/binks/jops/2.2v1/osx/J_Ops')
 
+nuke.pluginAddPath('/Volumes/Work/jobs/phos/gizmos')
+
 ## Create output directories automatically
 ## Taken from the Nuke Python Dev Guide
 def createWriteDir():
