@@ -96,6 +96,7 @@ def aovMerge():
     m.setName('MergeAOVs')
 
 # Expression Reorder
+# TODO: Remove this. It's a horrible idea. Expressions evaluate way more slowly than Shuffle nodes.
 def make_expression_reorder(order="rgba"):
     """I can't stand that the Shuffle node is commonly used for simple 
     reorder operations. An Expression node with smart labels shold be much 
