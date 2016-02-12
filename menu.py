@@ -333,6 +333,11 @@ def labledDotOrganizer():
         selfLabellingDot(i)
     # TODO: fancy placement at bottom of script, below lowest write node.
 
+# Run AutoCrop
+# Special thanks to Jack Hughes [https://magicbeansvfx.wordpress.com/2015/07/27/nukes-hidden-autocrop-script/]
+def runAutoCrop():
+    nukescripts.autocrop(first=None, last=None, inc=None, layer="rgba")
+
 
 ##
 ## Main
@@ -381,6 +386,7 @@ tm.addCommand('Remove proxy from Reads',
     lambda: removeProxyFromReads(nuke.selectedNodes()))
 tm.addCommand('Frame Range to Viewer', lambda: frameRangeToViewer())
 tm.addCommand('Labeled Dot Organizer', lambda: labeledDotOrganizer())
+tm.addCommand('AutoCrop', lambda: runAutoCrop())
 
 ##
 ## Node defaults
