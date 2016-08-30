@@ -368,9 +368,10 @@ tm.addCommand('BBBB', "make_expression_reorder('bbbb')")
 tm.addCommand('AAAA', "make_expression_reorder('aaaa')")
 tm.addCommand('1111', "make_expression_reorder('1111')")
 tm.addCommand('0000', "make_expression_reorder('0000')")
-# Read: local caching
-for mode in nuke.nodes.Read().knob('cacheLocal').values():
-    tm.addCommand('Read: cache '+ mode, "setReadCache('"+mode+"')")
+# Read: local caching (obsolete in Nuke10!)
+if nuke.env['NukeVersionMajor'] <= 9:
+	for mode in nuke.nodes.Read().knob('cacheLocal').values():
+		tm.addCommand('Read: cache '+ mode, "setReadCache('"+mode+"')")
 # AOV Merge
 tm.addCommand('AOVMerge', "aovMerge()")
 # Tracked Bezier
