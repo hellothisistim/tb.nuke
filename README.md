@@ -12,9 +12,6 @@ import os.path
 nuke.pluginAddPath(os.path.expanduser("~/tb.nuke"))
 ```
 
-If os.path is not being imported already, you may need to do this first:
-```
-import os.path
-```
+If os.path has been imported already, you may skip doing it redundantly.
 
 When I leave the studio, I can delete the "tb.nuke" folder and remove the line from menu.py and it's like I was never there. 
