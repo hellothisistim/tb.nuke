@@ -1,0 +1,65 @@
+#! C:/Program Files/Nuke10.5v6/nuke-10.5.6.dll -nx
+version 10.5 v6
+Gizmo {
+ tile_color 0xc166c1ff
+ addUserKnob {20 User}
+ addUserKnob {41 translate T offset.translate}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 462
+  ypos 137
+ }
+ Dot {
+  name Dot1
+  xpos 496
+  ypos 177
+ }
+set N4b212000 [stack 0]
+ Position {
+  name offset
+  xpos 606
+  ypos 173
+ }
+ Crop {
+  box {0 0 2048 1556}
+  name Crop1
+  selected true
+  xpos 606
+  ypos 199
+ }
+set N4b212800 [stack 0]
+ Expression {
+  temp_name0 xx
+  temp_expr0 "(x + 0.5 - offset.translate.x) / input.width"
+  temp_name1 yy
+  temp_expr1 "(y + 0.5 - offset.translate.y) / input.height"
+  expr0 "xx - floor(xx)"
+  expr1 "yy - floor(yy)"
+  expr2 0
+  name Expression1
+  xpos 606
+  ypos 230
+ }
+push $N4b212000
+ STMap {
+  inputs 2
+  uv rgb
+  name STMap1
+  xpos 462
+  ypos 249
+ }
+ Output {
+  name Output1
+  xpos 462
+  ypos 349
+ }
+push $N4b212800
+ Viewer {
+  frame_range 1-100
+  name Viewer1
+  xpos 462
+  ypos 195
+ }
+end_group
