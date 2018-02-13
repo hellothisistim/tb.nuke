@@ -1,7 +1,13 @@
-#! C:/Program Files/Nuke10.5v6/nuke-10.5.6.dll -nx
+set cut_paste_input [stack 0]
 version 10.5 v6
+push $cut_paste_input
 Gizmo {
+ name Offset
+ help "Shift the image. Pixels that fall off one side magically reappear of the opposite side. Well, actually it's not magic, it's math.\n\nThis gizmo is very similar to the Offset plugin in After Effects."
  tile_color 0xc166c1ff
+ selected true
+ xpos 397
+ ypos 34
  addUserKnob {20 User}
  addUserKnob {41 translate T offset.translate}
  addUserKnob {41 filter T STMap1.filter}
@@ -20,13 +26,13 @@ Gizmo {
   xpos 496
   ypos 164
  }
-set N3c97c00 [stack 0]
+set N64e17800 [stack 0]
  Transform {
   name offset
   xpos 612
   ypos 160
  }
-set N3c97800 [stack 0]
+set N64e17400 [stack 0]
  Dot {
   name Dot3
   xpos 739
@@ -37,7 +43,7 @@ set N3c97800 [stack 0]
   xpos 739
   ypos 363
  }
-push $N3c97800
+push $N64e17400
  Crop {
   box {0 0 {input.width} {input.height}}
   name Crop1
@@ -61,12 +67,11 @@ push $N3c97800
   xpos 646
   ypos 259
  }
-push $N3c97c00
+push $N64e17800
  STMap {
   inputs 2
   uv rgb
   name STMap1
-  selected true
   xpos 462
   ypos 249
  }
