@@ -4,32 +4,46 @@ Gizmo {
  tile_color 0xc166c1ff
  addUserKnob {20 User}
  addUserKnob {41 translate T offset.translate}
+ addUserKnob {41 filter T STMap1.filter}
+ addUserKnob {41 shutter T MotionBlur2D1.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T MotionBlur2D1.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T MotionBlur2D1.shuttercustomoffset}
 }
  Input {
   inputs 0
   name Input1
   xpos 462
-  ypos 137
+  ypos 87
  }
  Dot {
   name Dot1
   xpos 496
-  ypos 177
+  ypos 164
  }
-set N4b212000 [stack 0]
- Position {
+set N3c97c00 [stack 0]
+ Transform {
   name offset
-  xpos 606
-  ypos 173
+  xpos 612
+  ypos 160
  }
+set N3c97800 [stack 0]
+ Dot {
+  name Dot3
+  xpos 739
+  ypos 164
+ }
+ Dot {
+  name Dot2
+  xpos 739
+  ypos 363
+ }
+push $N3c97800
  Crop {
-  box {0 0 2048 1556}
+  box {0 0 {input.width} {input.height}}
   name Crop1
-  selected true
-  xpos 606
-  ypos 199
+  xpos 612
+  ypos 197
  }
-set N4b212800 [stack 0]
  Expression {
   temp_name0 xx
   temp_expr0 "(x + 0.5 - offset.translate.x) / input.width"
@@ -39,27 +53,40 @@ set N4b212800 [stack 0]
   expr1 "yy - floor(yy)"
   expr2 0
   name Expression1
-  xpos 606
-  ypos 230
+  xpos 612
+  ypos 233
  }
-push $N4b212000
+ Dot {
+  name Dot4
+  xpos 646
+  ypos 259
+ }
+push $N3c97c00
  STMap {
   inputs 2
   uv rgb
   name STMap1
+  selected true
   xpos 462
   ypos 249
+ }
+ MotionBlur2D {
+  inputs 2
+  shutteroffset centred
+  name MotionBlur2D1
+  xpos 462
+  ypos 359
+ }
+ VectorBlur2 {
+  uv motion
+  scale 2
+  name VectorBlur2_1
+  xpos 462
+  ypos 385
  }
  Output {
   name Output1
   xpos 462
-  ypos 349
- }
-push $N4b212800
- Viewer {
-  frame_range 1-100
-  name Viewer1
-  xpos 462
-  ypos 195
+  ypos 448
  }
 end_group
