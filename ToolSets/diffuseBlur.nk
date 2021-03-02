@@ -1,0 +1,217 @@
+set cut_paste_input [stack 0]
+version 12.1 v4
+push $cut_paste_input
+Dot {
+ name Dot11
+ note_font_size 22
+ selected true
+ xpos -446
+ ypos 30
+}
+set N59344800 [stack 0]
+Dot {
+ name Dot1
+ note_font_size 22
+ selected true
+ xpos -336
+ ypos 30
+}
+set N5cd2d000 [stack 0]
+Dot {
+ name Dot2
+ note_font_size 22
+ selected true
+ xpos -226
+ ypos 30
+}
+set N5cd2c800 [stack 0]
+Dot {
+ name Dot3
+ note_font_size 22
+ selected true
+ xpos -116
+ ypos 30
+}
+set N5cd2c400 [stack 0]
+Dot {
+ name Dot4
+ note_font_size 22
+ selected true
+ xpos -6
+ ypos 30
+}
+set N5cd2c000 [stack 0]
+Dot {
+ name Dot5
+ note_font_size 22
+ selected true
+ xpos 104
+ ypos 30
+}
+set N5931bc00 [stack 0]
+Dot {
+ name Dot6
+ note_font_size 22
+ selected true
+ xpos 214
+ ypos 30
+}
+set N5931b800 [stack 0]
+Dot {
+ name Dot7
+ note_font_size 22
+ selected true
+ xpos 324
+ ypos 30
+}
+set N5931b400 [stack 0]
+Dot {
+ name Dot8
+ note_font_size 22
+ selected true
+ xpos 434
+ ypos 30
+}
+set N5931ac00 [stack 0]
+Dot {
+ name Dot9
+ note_font_size 22
+ selected true
+ xpos 544
+ ypos 30
+}
+set N5931a400 [stack 0]
+Dot {
+ name Dot10
+ note_font_size 22
+ selected true
+ xpos 654
+ ypos 30
+}
+Blur {
+ channels rgba
+ size 2047
+ name Blur10
+ label "\[value size]"
+ selected true
+ xpos 620
+ ypos 95
+}
+push $N5931a400
+Blur {
+ channels rgba
+ size 1023
+ name Blur9
+ label "\[value size]"
+ selected true
+ xpos 510
+ ypos 95
+}
+push $N5931ac00
+Blur {
+ channels rgba
+ size 255
+ name Blur8
+ label "\[value size]"
+ selected true
+ xpos 400
+ ypos 95
+}
+push $N5931b400
+Blur {
+ channels rgba
+ size 127
+ name Blur7
+ label "\[value size]"
+ selected true
+ xpos 290
+ ypos 95
+}
+push $N5931b800
+Blur {
+ channels rgba
+ size 63
+ name Blur6
+ label "\[value size]"
+ selected true
+ xpos 180
+ ypos 95
+}
+push $N5931bc00
+Blur {
+ channels rgba
+ size 31
+ name Blur5
+ label "\[value size]"
+ selected true
+ xpos 70
+ ypos 95
+}
+push $N5cd2c000
+Blur {
+ channels rgba
+ size 15
+ name Blur4
+ label "\[value size]"
+ selected true
+ xpos -40
+ ypos 95
+}
+push $N5cd2c400
+Blur {
+ channels rgba
+ size 7
+ name Blur3
+ label "\[value size]"
+ selected true
+ xpos -150
+ ypos 95
+}
+push 0
+push $N5cd2c800
+Blur {
+ channels rgba
+ size 3
+ name Blur2
+ label "\[value size]"
+ selected true
+ xpos -260
+ ypos 95
+}
+push $N5cd2d000
+Blur {
+ channels rgba
+ size 1
+ name Blur1
+ label "\[value size]"
+ selected true
+ xpos -370
+ ypos 95
+}
+Merge2 {
+ inputs 10+1
+ operation plus
+ name Merge1
+ selected true
+ xpos -370
+ ypos 207
+}
+Multiply {
+ channels rgb
+ value {{"1 / input.inputs"}}
+ unpremult -rgba.alpha
+ name Multiply1
+ label "\[value value]"
+ selected true
+ xpos -370
+ ypos 243
+}
+push $N59344800
+Dissolve {
+ inputs 2
+ which 0.13
+ name Dissolve1
+ selected true
+ xpos -480
+ ypos 311
+}
