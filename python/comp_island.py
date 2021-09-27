@@ -104,12 +104,12 @@ def localise_proxy_path(nodes=None):
     """Set the proxy path to the local path for this file."""
 
     nodes = _smart_nodelist_expand(nodes)
-    print nodes
+    print( nodes )
     for node in [node for node in nodes if 'proxy' in node.knobs()]:
         knob = node.knob('proxy')
         # Don't double-localise_path.
         if localised_proxy_path(node): 
-            print 'skipping', knob.name()
+            print( 'skipping', knob.name() )
             continue
         # Assign and munge path
         knob.fromScript( node.knob('file').toScript() )

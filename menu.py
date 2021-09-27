@@ -56,7 +56,7 @@ try:
     import phoswindows
 except ImportError as e:
     nuke.tprint('*** Skipping import of phoswindows. Error:', e)
-  
+
 
 ##
 ## Methods
@@ -73,7 +73,7 @@ def findKnobsWithExpressions():
                 out.append(knobinfo)
 
     formatted_out = "\n".join(sorted(out))
-    print formatted_out
+    print(formatted_out)
 
     nuke.message(formatted_out)
 
@@ -114,7 +114,7 @@ def make_expression_reorder(order="rgba"):
     expr = nuke.createNode('Expression', inpanel=False)
     expr.setName('Expression_Reorder')
     for num, chan in enumerate(order[0:4]):
-        print num, chan
+        print(num, chan)
         expr.knob('expr'+str(num)).setText(chan)
     expr.knob('label').fromScript('[value expr0][value expr1][value expr2][value expr3]')
 
@@ -309,7 +309,7 @@ def frameRangeToViewer(node=None):
     first = node.firstFrame()
     last = node.lastFrame()
 
-    print first, last
+    print(first, last)
 
     viewers = nuke.allNodes('Viewer')
     for viewer in viewers:
@@ -325,7 +325,6 @@ def selfLabellingDot(name=None):
         dot.setName(name)
     return dot
 
-
 # Labeled Dot Organizer
 def labledDotOrganizer():
     items = ['Previous version', 'Plate', 'Last to client', 'Layout', 'Animation', 'Light', 'FX', 'Edit ref']
@@ -338,7 +337,7 @@ def labledDotOrganizer():
 def runAutoCrop():
     nukescripts.autocrop(first=None, last=None, inc=None, layer="rgba")
 
-
+"""
 ##
 ## Main
 ##
@@ -452,7 +451,7 @@ else:
 	tm.addCommand('Label Dots', "labelDots.dotLabel()", "Ctrl+Shift+L")
 
 
-
+"""
 
 nuke.tprint('ALL DONE from the ~/.nuke/menu.py')
 
