@@ -337,7 +337,7 @@ def labledDotOrganizer():
 def runAutoCrop():
     nukescripts.autocrop(first=None, last=None, inc=None, layer="rgba")
 
-"""
+
 ##
 ## Main
 ##
@@ -451,7 +451,6 @@ else:
 	tm.addCommand('Label Dots', "labelDots.dotLabel()", "Ctrl+Shift+L")
 
 
-"""
 
 nuke.tprint('ALL DONE from the ~/.nuke/menu.py')
 
