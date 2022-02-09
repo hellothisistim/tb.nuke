@@ -80,7 +80,7 @@ def findKnobsWithExpressions():
 
 # Read: local caching
 def setReadCache(mode='always'):
-    """Switch any selected read's local cahing to the specified mode. If no 
+    """Switch any selected read's local cahing to the specified mode. If no
     read nodes are selected, switch all the read nodes."""
     nodes = nuke.selectedNodes('Read')
     if len(nodes) == 0:
@@ -98,19 +98,19 @@ def aovMerge():
 # Expression Reorder
 # TODO: Remove this. It's a horrible idea. Expressions evaluate way more slowly than Shuffle nodes.
 def make_expression_reorder(order="rgba"):
-    """I can't stand that the Shuffle node is commonly used for simple 
-    reorder operations. An Expression node with smart labels shold be much 
-    more readable and not require the user to open the control panel in order 
+    """I can't stand that the Shuffle node is commonly used for simple
+    reorder operations. An Expression node with smart labels shold be much
+    more readable and not require the user to open the control panel in order
     to see what's happening.
 
-    'order' should be a four-character string containing something sensible 
+    'order' should be a four-character string containing something sensible
     like 'rgb1' or 'rrrr' or '0000'"""
 
     # Reality-check
     assert len(order) == 4
     for letter in order:
         assert letter in 'rgba01'
-    
+
     expr = nuke.createNode('Expression', inpanel=False)
     expr.setName('Expression_Reorder')
     for num, chan in enumerate(order[0:4]):
@@ -124,10 +124,10 @@ def tb_autobackdrop():
     '''
     Automatically puts a backdrop behind the selected nodes.
 
-    The backdrop will be just big enough to fit all the select nodes in, with room 
+    The backdrop will be just big enough to fit all the select nodes in, with room
     at the top for some text in a large font.
     '''
-    
+
     selNodes = nuke.selectedNodes()
 
 
@@ -142,15 +142,15 @@ def tb_autobackdrop():
     bdY = min([node.ypos() for node in selNodes])
     bdW = max([node.xpos() + node.screenWidth() for node in selNodes]) - bdX
     bdH = max([node.ypos() + node.screenHeight() for node in selNodes]) - bdY
-  
-    # Expand the bounds to leave a little border. Elements are offsets for 
+
+    # Expand the bounds to leave a little border. Elements are offsets for
     # left, top, right and bottom edges respectively
     left, top, right, bottom = (-32, -140, 32, 32)
     bdX += left
     bdY += top
     bdW += (right - left)
     bdH += (bottom - top)
-  
+
     n = nuke.nodes.BackdropNode(xpos = bdX,
                                 bdwidth = bdW,
                                 ypos = bdY,
@@ -163,14 +163,14 @@ def tb_autobackdrop():
     n['selected'].setValue(False)
     for node in selNodes:
         node['selected'].setValue(True)
- 
+
     return n
 
 
 # Node Has Transform Knobs
 def nodeHasTransformKnobs(node):
     """Return true if node has all of the following knobs: translate, rotate, scale, skew, center.
-    
+
     """
 
     required_knobs = ['translate', 'rotate', 'scale', 'skew', 'center']
@@ -182,10 +182,10 @@ def nodeHasTransformKnobs(node):
 
 # Tracked Bezier
 def trackedBezier(node, translate=True, rotate=True, scale=True, center=True):
-    """Given a node with appropriate transform knobs (see 
-    nodeHasTransformKnobs), create a new Bezier with it's Tranform 
+    """Given a node with appropriate transform knobs (see
+    nodeHasTransformKnobs), create a new Bezier with it's Tranform
     tab knobs expression-linked to the source node.
-    
+
     """
 
     if not nodeHasTransformKnobs(node):
@@ -196,7 +196,7 @@ def trackedBezier(node, translate=True, rotate=True, scale=True, center=True):
     knob_list = ['translate', 'rotate', 'scale', 'skew', 'center']
 
     node.setSelected(False)
-    
+
     # Build bezier
     b = nuke.createNode('Bezier')
     for knob in knob_list:
@@ -223,7 +223,7 @@ def editLabel():
 
     # selectedNodes() is much easier to work with than selectedNode()
     nodes = nuke.selectedNodes()
-  
+
     if len(nodes) < 1:
         return
     elif len(nodes) > 1:
@@ -242,20 +242,20 @@ def editLabel():
 
 # Smart Roto
 def smartBezier():
-    """If a node with some transform data (for example a Tracker or 
+    """If a node with some transform data (for example a Tracker or
     Transform node with translate, rotate, scale, and center knobs)
-    is selected when this method is called, a bezier will be created with 
-    it's transform tab bits expression-linked to the transform node. 
+    is selected when this method is called, a bezier will be created with
+    it's transform tab bits expression-linked to the transform node.
     Otherwise, a regular bezier will be created.
 
     Deprecated.
-    
+
     """
 
-    # TODO: Oh, bother... I really should be deselecting all the selected 
-    # nodes before I make the expression-linked bezier. But not before I 
+    # TODO: Oh, bother... I really should be deselecting all the selected
+    # nodes before I make the expression-linked bezier. But not before I
     # make a regular one.
-    
+
     nodes = nuke.selectedNodes()
     # Remove nodes that aren't linkable
     nodes = [node for node in nodes if nodeHasTransformKnobs(node)]
@@ -269,18 +269,18 @@ def smartBezier():
     trackedBezier(node)
 
 def smartRoto():
-    """If a node with some transform data (for example a Tracker or 
+    """If a node with some transform data (for example a Tracker or
     Transform node with translate, rotate, scale, and center knobs)
-    is selected when this method is called, a bezier will be created with 
-    it's transform tab bits expression-linked to the transform node. 
+    is selected when this method is called, a bezier will be created with
+    it's transform tab bits expression-linked to the transform node.
     Otherwise, a regular bezier will be created.
-    
+
     """
 
-    # TODO: Oh, bother... I really should be deselecting all the selected 
-    # nodes before I make the expression-linked bezier. But not before I 
+    # TODO: Oh, bother... I really should be deselecting all the selected
+    # nodes before I make the expression-linked bezier. But not before I
     # make a regular one.
-    
+
     nodes = nuke.selectedNodes()
     # Remove nodes that aren't linkable
     nodes = [node for node in nodes if nodeHasTransformKnobs(node)]
@@ -295,7 +295,7 @@ def smartRoto():
 
 # Frame Range to Viewer
 def frameRangeToViewer(node=None):
-    """Set the custom frame range for all viewers to match the frame range 
+    """Set the custom frame range for all viewers to match the frame range
     at the selected node.
 
     Returns None
@@ -346,11 +346,11 @@ user = getpass.getuser()
 if user is None:
     user = 'foo'
 
-## 
+##
 ## The "me" menu
 ##
 m = nuke.menu('Nodes')
-icon = user+'-icon.png'
+icon = os.path.join(os.path.expanduser("~/code/tb.nuke"), 'T-icon.png')
 if os.path.exists(icon):
     tm = m.addMenu(user, icon)
 else:
@@ -374,15 +374,15 @@ if nuke.env['NukeVersionMajor'] <= 9:
 # AOV Merge
 tm.addCommand('AOVMerge', "aovMerge()")
 # Tracked Bezier
-tm.addCommand('Linked Bezier from Tracker (all)', 
+tm.addCommand('Linked Bezier from Tracker (all)',
     lambda: trackedBezier(nuke.selectedNode()))
-tm.addCommand('Linked Bezier from Tracker (trans, center)', 
+tm.addCommand('Linked Bezier from Tracker (trans, center)',
     lambda: trackedBezier(nuke.selectedNode(), translate=True, rotate=False, scale=False, center=True))
-tm.addCommand('Linked Bezier from Tracker (trans, rot, center)', 
+tm.addCommand('Linked Bezier from Tracker (trans, rot, center)',
     lambda: trackedBezier(nuke.selectedNode(), translate=True, rotate=True, scale=False, center=True))
 
 #tm.addCommand('findKnobsWithExpressions', lambda: findKnobsWithExpressions())
-tm.addCommand('Remove proxy from Reads', 
+tm.addCommand('Remove proxy from Reads',
     lambda: removeProxyFromReads(nuke.selectedNodes()))
 tm.addCommand('Frame Range to Viewer', lambda: frameRangeToViewer())
 tm.addCommand('Labeled Dot Organizer', lambda: labeledDotOrganizer())
@@ -453,5 +453,3 @@ else:
 
 
 nuke.tprint('ALL DONE from the ~/.nuke/menu.py')
-
-
