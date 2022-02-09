@@ -125,6 +125,8 @@ def aovMerge():
 def make_shuffle2_reorder(order='rgba'):
     nuke.message("It's not built yet. See " + os.path.realpath(__file__) + " for more details.")
 
+# TODO: Also make a labelling callback for Shuffle2 reorders.
+
 # AutoBackdrop
 def tb_autobackdrop():
     '''
