@@ -30,13 +30,14 @@ except ImportError as e:
     nuke.tprint('*** Skipping import of comp_island. Error:', e)
 
 ### TabTabTab -- BenD's tab magic
-try:
-    import tabtabtab
-except ImportError as e:
-    nuke.tprint('*** Skipping import of tabtabtab. Error:', e)
-else:
-    m_edit = nuke.menu("Nuke").findItem("Edit")
-    m_edit.addCommand("Tabtabtab", tabtabtab.main, "Tab")
+# This (or something similar enough) is included in Nuke now.
+# try:
+#     import tabtabtab
+# except ImportError as e:
+#     nuke.tprint('*** Skipping import of tabtabtab. Error:', e)
+# else:
+#     m_edit = nuke.menu("Nuke").findItem("Edit")
+#     m_edit.addCommand("Tabtabtab", tabtabtab.main, "Tab")
 
 ### mark_tricky_nodes
 nuke.tprint('Importing mark_tricky_nodes')
@@ -46,16 +47,18 @@ except ImportError as e:
     nuke.tprint('*** Skipping import of mark_tricky_nodes. Error:', e)
 
 ### Load bgNukes
-try:
-    import bgNukes
-except ImportError as e:
-    nuke.tprint('*** Skipping import of bgNukes. Error:', e)
+# bgNukes is also unnecessary in current Nuke.
+# try:
+#     import bgNukes
+# except ImportError as e:
+#     nuke.tprint('*** Skipping import of bgNukes. Error:', e)
 
 ### Load phoswindows
-try:
-    import phoswindows
-except ImportError as e:
-    nuke.tprint('*** Skipping import of phoswindows. Error:', e)
+# This is no longer necessary.
+# try:
+#     import phoswindows
+# except ImportError as e:
+#     nuke.tprint('*** Skipping import of phoswindows. Error:', e)
 
 
 ##
