@@ -14,18 +14,18 @@ def getParentNode(node):
                 if not parentNode['label'].getValue():
                     return getParentNode(parentNode)
                 else:
-                    return parentNode   
+                    return parentNode
 
     except AttributeError:
         return
-    
+
 def dotLabel():
         if not nuke.selectedNodes('Dot'):
-            nuke.message('Please select a dot')
+            nuke.message('Please select a dot.')
             return
         else:
             nodes= nuke.selectedNodes('Dot')
-          
+
         for i in nodes:
             try:
                 pn=getParentNode(i)
