@@ -6,11 +6,7 @@
 nuke.pluginAddPath('./gizmos')
 nuke.pluginAddPath('./icons')
 nuke.pluginAddPath('./python')
-
-nuke.pluginAddPath('/Volumes/Support/software/binks/jops/2.2v1/osx/J_Ops')
-
-nuke.pluginAddPath('/Volumes/Work/jobs/phos/gizmos')
-nuke.pluginAddPath('/Volumes/Support/software/frischluft/lenscare-v1.44/mac')
+#nuke.pluginAddPath('/Volumes/Work/jobs/phos/gizmos')
 
 ## Create output directories automatically
 ## Taken from the Nuke Python Dev Guide
