@@ -100,27 +100,30 @@ def aovMerge():
 
 # Expression Reorder
 # TODO: Remove this. It's a horrible idea. Expressions evaluate way more slowly than Shuffle nodes.
-def make_expression_reorder(order="rgba"):
-    """I can't stand that the Shuffle node is commonly used for simple
-    reorder operations. An Expression node with smart labels shold be much
-    more readable and not require the user to open the control panel in order
-    to see what's happening.
+# def make_expression_reorder(order="rgba"):
+#     """I can't stand that the Shuffle node is commonly used for simple
+#     reorder operations. An Expression node with smart labels shold be much
+#     more readable and not require the user to open the control panel in order
+#     to see what's happening.
+#
+#     'order' should be a four-character string containing something sensible
+#     like 'rgb1' or 'rrrr' or '0000'"""
+#
+#     # Reality-check
+#     assert len(order) == 4
+#     for letter in order:
+#         assert letter in 'rgba01'
+#
+#     expr = nuke.createNode('Expression', inpanel=False)
+#     expr.setName('Expression_Reorder')
+#     for num, chan in enumerate(order[0:4]):
+#         print(num, chan)
+#         expr.knob('expr'+str(num)).setText(chan)
+#     expr.knob('label').fromScript('[value expr0][value expr1][value expr2][value expr3]')
 
-    'order' should be a four-character string containing something sensible
-    like 'rgb1' or 'rrrr' or '0000'"""
-
-    # Reality-check
-    assert len(order) == 4
-    for letter in order:
-        assert letter in 'rgba01'
-
-    expr = nuke.createNode('Expression', inpanel=False)
-    expr.setName('Expression_Reorder')
-    for num, chan in enumerate(order[0:4]):
-        print(num, chan)
-        expr.knob('expr'+str(num)).setText(chan)
-    expr.knob('label').fromScript('[value expr0][value expr1][value expr2][value expr3]')
-
+# TODO: This four-letter format for reordering channels is still super-useful. Make it use new Shuffle2 nodes.
+def make_shuffle2_reorder(order='rgba'):
+    nuke.message("It's not built yet. See " + os.path.realpath(__file__) + " for more details.")
 
 # AutoBackdrop
 def tb_autobackdrop():
@@ -361,15 +364,15 @@ else:
 
 
 # Expression Reorder
-tm.addCommand('RGBA', "make_expression_reorder('rgba')")
-tm.addCommand('RGB1', "make_expression_reorder('rgb1')")
-tm.addCommand('RGB0', "make_expression_reorder('rgb0')")
-tm.addCommand('RRRR', "make_expression_reorder('rrrr')")
-tm.addCommand('GGGG', "make_expression_reorder('gggg')")
-tm.addCommand('BBBB', "make_expression_reorder('bbbb')")
-tm.addCommand('AAAA', "make_expression_reorder('aaaa')")
-tm.addCommand('1111', "make_expression_reorder('1111')")
-tm.addCommand('0000', "make_expression_reorder('0000')")
+tm.addCommand('RGBA', "make_shuffle2_reorder('rgba')")
+tm.addCommand('RGB1', "make_shuffle2_reorder('rgb1')")
+tm.addCommand('RGB0', "make_shuffle2_reorder('rgb0')")
+tm.addCommand('RRRR', "make_shuffle2_reorder('rrrr')")
+tm.addCommand('GGGG', "make_shuffle2_reorder('gggg')")
+tm.addCommand('BBBB', "make_shuffle2_reorder('bbbb')")
+tm.addCommand('AAAA', "make_shuffle2_reorder('aaaa')")
+tm.addCommand('1111', "make_shuffle2_reorder('1111')")
+tm.addCommand('0000', "make_shuffle2_reorder('0000')")
 # Read: local caching (obsolete in Nuke10!)
 if nuke.env['NukeVersionMajor'] <= 9:
 	for mode in nuke.nodes.Read().knob('cacheLocal').values():
