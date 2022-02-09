@@ -12,11 +12,11 @@ nuke.pluginAddPath('./icons')
 nuke.pluginAddPath('./python')
 nuke.pluginAddPath('./nukepedia')
 nuke.pluginAddPath('./studio')
-nuke.pluginAddPath(os.getenv('HOME') + '/code/skunkworks')
+#nuke.pluginAddPath(os.getenv('HOME') + '/code/skunkworks')
 # AtomKraft
-nuke.pluginAddPath(os.getenv('HOME') + '/atomkraft-1.1.0-0/plugin')
+#nuke.pluginAddPath(os.getenv('HOME') + '/atomkraft-1.1.0-0/plugin')
 # bgNukes
-nuke.pluginAddPath('../bgNukes')
+#nuke.pluginAddPath('../bgNukes')
 
 
 ##
