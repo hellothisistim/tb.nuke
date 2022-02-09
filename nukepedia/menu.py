@@ -1,10 +1,11 @@
 # ~/.nuke/nukepedia/menu.py
 
-nuke.tprint('HELLO from the ~/.nuke/nukepedia/menu.py')
+nuke.tprint('HELLO from '+ os.path.realpath(__file__))
+
 
 nuke.pluginAddPath('./viewerInput1_1')
 
-# 
+#
 ## The "me" menu
 ##
 m = nuke.menu('Nodes')
@@ -27,4 +28,4 @@ except:
     nuke.tprint('cycle_vlut not found.')
 
 
-nuke.tprint('ALL DONE from the ~/.nuke/nukepedia/menu.py')
+nuke.tprint('ALL DONE from '+ os.path.realpath(__file__))

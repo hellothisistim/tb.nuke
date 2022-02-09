@@ -344,7 +344,7 @@ def runAutoCrop():
 ##
 ## Main
 ##
-nuke.tprint('HELLO from the ~/.nuke/menu.py')
+nuke.tprint('HELLO from '+ os.path.realpath(__file__))
 user = getpass.getuser()
 if user is None:
     user = 'foo'
@@ -455,4 +455,4 @@ else:
 
 
 
-nuke.tprint('ALL DONE from the ~/.nuke/menu.py')
+nuke.tprint('ALL DONE from '+ os.path.realpath(__file__))
