@@ -1,0 +1,33 @@
+set cut_paste_input [stack 0]
+version 12.2 v10
+push $cut_paste_input
+NoOp {
+ name COC_Calc
+ tile_color 0xffff00ff
+ note_font_size 24
+ selected true
+ xpos 181
+ ypos -6
+ addUserKnob {20 User}
+ addUserKnob {7 poc l "Pixels of confusion" t diameter}
+ poc {{"coc / film_back * 1556"}}
+ addUserKnob {26 ""}
+ addUserKnob {7 focal l "Lens focal length" t "in millimeters." R 0 150}
+ focal 40
+ addUserKnob {7 fstop l "F stop" R 0 22}
+ fstop 11
+ addUserKnob {7 film_back l "Film Back Height" t "in millimeters" R 0 50}
+ film_back 18.6
+ addUserKnob {26 ""}
+ addUserKnob {7 focus_dist l "Focus distance" R 0 100}
+ focus_dist 5
+ addUserKnob {7 obj_dist l "Object distance" R 0 100}
+ obj_dist 100
+ addUserKnob {26 ""}
+ addUserKnob {7 aperture l "Aperture size" t "diameter. in millimeters."}
+ aperture {{"focal / fstop"}}
+ addUserKnob {7 coc t "Circle of confusion, diameter, millimeters, film plane"}
+ coc {{"aperture * (abs(obj_dist - focus_dist) * 1000) / (obj_dist * 1000) * mag"}}
+ addUserKnob {7 mag l Magnification}
+ mag {{"focal / 1000 * focus_dist / (focus_dist - (focal / 1000))"}}
+}
