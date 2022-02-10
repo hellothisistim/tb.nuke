@@ -1,0 +1,11 @@
+set cut_paste_input [stack 0]
+version 12.2 v10
+push $cut_paste_input
+Dot {
+ name Dot3
+ label "\[value \[topnode].file]"
+ note_font_size 22
+ selected true
+ xpos 104
+ ypos 286
+}

@@ -1,0 +1,22 @@
+set cut_paste_input [stack 0]
+version 12.2 v10
+push $cut_paste_input
+Blur {
+ channels rgba
+ size {{"distance * multiple"}}
+ name DistanceBlur
+ help "Blur size is determined by the distance between Point 1 and Point 2, times the chosen Multiple."
+ label "\[value size]"
+ selected true
+ xpos 250
+ ypos 201
+ addUserKnob {20 User}
+ addUserKnob {12 point1 l "Point 1"}
+ addUserKnob {12 point2 l "Point 2"}
+ point2 {100 100}
+ addUserKnob {7 multiple l Multiple t "Use this to chnage the size of the blur relative to the distance between the points. " R 0 4}
+ multiple 1
+ addUserKnob {26 do_not_edit l "" +STARTLINE}
+ addUserKnob {7 distance l Distance t "Distance in pixels between point 1 and point 2."}
+ distance {{"sqrt( pow2(point2.x-point1.x) + pow2(point2.y-point1.y) )"}}
+}

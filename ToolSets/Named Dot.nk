@@ -1,0 +1,11 @@
+set cut_paste_input [stack 0]
+version 12.2 v10
+push $cut_paste_input
+Dot {
+ name NamedDot
+ label "\[value name]"
+ note_font_size 44
+ selected true
+ xpos 124
+ ypos 358
+}
