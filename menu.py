@@ -422,7 +422,7 @@ nuke.knobDefault("Gamma.channels", "rgb")
 #nuke.knobDefault("Shuffle.label", "[value in] => [value out]")
 nuke.knobDefault("Remove.channels", "rgba")
 nuke.knobDefault("Remove.operation", "keep")
-nuke.knobDefault("Remove.label", "[value channels]")
+# nuke.knobDefault("Remove.label", "[value channels]") # Default in Nuke now.
 nuke.knobDefault("Output.note_font_size", "18")
 nuke.knobDefault("Output.note_font", "bold")
 nuke.knobDefault("FrameRange.label", "x[value knob.first_frame]-[value knob.last_frame]")
@@ -438,7 +438,7 @@ nuke.knobDefault("ContactSheet.colorder", 'LeftRight')
 nuke.knobDefault("ContactSheet.rows", '{"splitinputs ? ceil((endframe-startframe+1)/columns) : ceil(inputs/columns)"}')
 nuke.knobDefault("ContactSheet.columns", '{"splitinputs ? ceil(sqrt(endframe-startframe+1)) : ceil(sqrt(inputs))"}')
 
-#nuke.knobDefault("Grade.unpremult","-rgba.alpha")
+nuke.knobDefault("EXPTool.mode", "Stops")
 nuke.knobDefault("VectorBlur.uv","forward")
 nuke.knobDefault("Dot.note_font_size","22")
 
