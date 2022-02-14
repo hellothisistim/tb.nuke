@@ -1,0 +1,681 @@
+set cut_paste_input [stack 0]
+version 12.2 v10
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name ChromaOver
+ help "Merges the A image over the B image while applying tweakable chromatic aberration to the A image.\n\nWhy do these two things together instead of separately? \n\nApplying chromatic aberration to an image that has an alpha channel before merging it over another image doesn't work. Once we've applied the chromatic aberration, the red, green, and blue channels no longer line up with the alpha channel. This will cause problems during our over because the hole we cut in the background won't be properly filled with our foreground.\n\nTo avoid this problem in the ChromaOver, we merge each chromatically aberrated color channel separately. This lets us scale each channel to create the aberration we want, and merge it using an alpha channel that has had the same manipulation.\n\nWe will also have the same issue when applying grain to chromatically aberrated images. ChromaOver outputs an alpha that's the union of the three alpha channels used to merge the color channels. Using this alpha to regrain may result in doubling grain on some channels in the areas of high color separation. Use the grain masks in the regrainMask layer to do a per-channel regrain.\n\n\nChromaOver by Tim Bowman \[hellothisistim.com]\n(CC BY 4.0) https://creativecommons.org/licenses/by/4.0/\n\nMany thanks to the authors of this Wikipedia article: https://en.wikipedia.org/wiki/Chromatic_aberration"
+ tile_color 0x595ed4ff
+ note_font_size 22
+ selected true
+ xpos 199
+ ypos -100
+ addUserKnob {20 User}
+ addUserKnob {18 axialColor l "Axial Color" t "Axial chromatic aberration appears throughout the entire image. It occurs because the lens focusses different wavelengths of light at different distances.\n\nThis control selects the color of the fringing of a light area spilling over a dark one. If your foreground is dark, going over a light background, the your fringing will be the compliment of this color.\n\nThe amount of blur is relative to the diagonal size of the image in pixels, scaled to make the 0-to-1 range useful for most image sizes. \n\nFor more blur, use a higher value color. For more intense color, add more saturation.\n\nNegative values are bad, and will be clipped at zero."}
+ axialColor {0 0 0}
+ addUserKnob {6 axialColor_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 disableAxial l "Disable Axial Aberration" +STARTLINE}
+ addUserKnob {18 transverseColor l "Transverse Color" t "Transverse chromatic aberration is seen mostly in the corners of the image and does not appear in the center. It happens because lenses refract different wavelengths of light to different extents. The center of the image hasn't been refracted very much, so it doesn't exhibit much transverse aberration.\n\nThe color set here will appear on the outside edge (toward the sides of the image) of a light foreground going over a dark background. If your foreground is dark and going over a light background, the aberration color will be the compliment of this one.\n\nValues larger than one or less than zero are valid, and can create very large aberrations." R -1 1}
+ transverseColor {0 0 0}
+ addUserKnob {6 transverseColor_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 transverseBlurMult l "Transverse Blur Multiplier" t "1 is \"enough\" vector blur to smooth the red, green, and blue channels into a nice rainbow. Adjust here to get more or less. Set this to zero for no blur." R 0 2}
+ transverseBlurMult 1
+ addUserKnob {6 disableTransverse l "Disable Transverse Aberration" +STARTLINE}
+ addUserKnob {12 center l "Lens Center" t "Location of the center of the lens. This point will receive no transverse aberration."}
+ center {540 960}
+ addUserKnob {22 resetCenter l "Reset Center" -STARTLINE T "# Set X\nnuke.thisNode().knob('center').setValue(nuke.thisNode().input(0).width()/2, 0)\n# Set Y\nnuke.thisNode().knob('center').setValue(nuke.thisNode().input(0).height()/2, 1)"}
+ addUserKnob {26 ""}
+ addUserKnob {6 bypass l Bypass t "Bypass the ChromaOver internals and use a regular Merge node instead. " +STARTLINE}
+}
+ Input {
+  inputs 0
+  name InputA
+  xpos -150
+  ypos -569
+  number 1
+ }
+ Dot {
+  name Dot1
+  label "A in"
+  xpos -116
+  ypos -446
+ }
+set N454e4400 [stack 0]
+ Dot {
+  name Dot13
+  note_font_size 22
+  xpos -446
+  ypos -446
+ }
+ Dot {
+  name Dot14
+  note_font_size 22
+  xpos -446
+  ypos -286
+ }
+ Input {
+  inputs 0
+  name InputB
+  xpos -40
+  ypos -569
+ }
+ Dot {
+  name Dot2
+  label "B in"
+  xpos -6
+  ypos -486
+ }
+set N4549b000 [stack 0]
+ Dot {
+  name Dot12
+  note_font_size 22
+  xpos -556
+  ypos -486
+ }
+ Merge2 {
+  inputs 2
+  name Merge4
+  xpos -590
+  ypos -249
+ }
+ Dot {
+  name Dot15
+  note_font_size 22
+  xpos -556
+  ypos 1074
+ }
+push $N454e4400
+ Dot {
+  name Dot20
+  note_font_size 22
+  xpos -116
+  ypos -366
+ }
+ AdjBBox {
+  numpixels {{"30 * Multiply_scale_for_color_difference.value * parent.transverseBlurMult"}}
+  name AdjBBox2
+  xpos -150
+  ypos -329
+ }
+set N45499c00 [stack 0]
+ AdjBBox {
+  numpixels {{"max( width, height, parent.center.x, parent.center.y, abs(parent.center.x), abs(parent.center.y) )"}}
+  name AdjBBox1
+  xpos -260
+  ypos -369
+ }
+ Expression {
+  expr0 x/width
+  expr1 y/width
+  name Expression2
+  xpos -260
+  ypos -345
+ }
+ Transform {
+  translate {{parent.center.x} {parent.center.y}}
+  name Transform1
+  xpos -260
+  ypos -321
+ }
+ Multiply {
+  channels rgb
+  value {{"max(parent.transverseColor.r, parent.transverseColor.g, parent.transverseColor.b) - min(parent.transverseColor.r, parent.transverseColor.g, parent.transverseColor.b)"}}
+  unpremult -rgba.alpha
+  name Multiply_scale_for_color_difference
+  label "\[value value]"
+  xpos -260
+  ypos -297
+ }
+ Multiply {
+  channels rgb
+  value {{"30 * transverseBlurMult"}}
+  unpremult -rgba.alpha
+  name Multiply_scale_blur
+  label "\[value value]"
+  xpos -260
+  ypos -254
+ }
+ Dot {
+  name Dot21
+  note_font_size 22
+  xpos -226
+  ypos -206
+ }
+push $N45499c00
+add_layer {vectorBlur vectorBlur.u vectorBlur.v}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 vectorBlur.u
+  from1 rgba.green
+  to1 vectorBlur.v
+  bbox B
+  name Copy3
+  xpos -150
+  ypos -218
+ }
+ Dot {
+  name Dot5
+  xpos -116
+  ypos -126
+ }
+ Dot {
+  name Dot41
+  note_font_size 22
+  xpos 41
+  ypos -126
+ }
+set N1f7b3400 [stack 0]
+ Dot {
+  name Dot32
+  note_font_size 22
+  xpos 214
+  ypos 65
+ }
+set N1f7b3000 [stack 0]
+ Dot {
+  name Dot33
+  note_font_size 22
+  xpos 214
+  ypos 185
+ }
+push $N1f7b3400
+ VectorBlur2 {
+  uv vectorBlur
+  scale 1
+  name VectorBlur1
+  xpos 137
+  ypos -133
+ }
+set N1f7b2800 [stack 0]
+ Dot {
+  name Dot11
+  note_font_size 22
+  xpos 324
+  ypos -126
+ }
+set N1f7b2000 [stack 0]
+ Transform {
+  scale {{"1 + (parent.transverseColor.r  * 0.01)"}}
+  center {{parent.center.x} {parent.center.y}}
+  name Transform_transverse_R
+  xpos 290
+  ypos 142
+ }
+ Switch {
+  inputs 2
+  which {{parent.disableTransverse}}
+  name Switch_disable_transverse_R
+  xpos 290
+  ypos 182
+ }
+ Dot {
+  name Dot34
+  note_font_size 22
+  xpos 324
+  ypos 304
+ }
+set N1f7b1800 [stack 0]
+ Dot {
+  name Dot35
+  note_font_size 22
+  xpos 214
+  ypos 304
+ }
+ Dot {
+  name Dot36
+  note_font_size 22
+  xpos 214
+  ypos 383
+ }
+push $N1f7b1800
+ Blur {
+  channels rgba
+  size {{"max( 0, parent.axialColor.r * sqrt(pow2(width)+pow2(height)) /100)"}}
+  name Blur_axial_R
+  label "\[value size]"
+  xpos 290
+  ypos 338
+ }
+ Switch {
+  inputs 2
+  which {{parent.disableAxial}}
+  name Switch_disable_axial_R
+  xpos 290
+  ypos 380
+ }
+set N4549cf00 [stack 0]
+ Dot {
+  name Dot38
+  note_font_size 22
+  xpos 324
+  ypos 744
+ }
+push $N1f7b3000
+ Dot {
+  name Dot26
+  note_font_size 22
+  xpos 544
+  ypos 66
+ }
+set N1f7b0400 [stack 0]
+ Dot {
+  name Dot23
+  note_font_size 22
+  xpos 872
+  ypos 65
+ }
+ Dot {
+  name Dot19
+  note_font_size 22
+  xpos 872
+  ypos 186
+ }
+push $N1f7b2000
+ Dot {
+  name Dot6
+  xpos 654
+  ypos -126
+ }
+set N1f76b400 [stack 0]
+ Dot {
+  name Dot9
+  xpos 982
+  ypos -125
+ }
+ Transform {
+  scale {{"1 + (parent.transverseColor.b * 0.01)"}}
+  center {{parent.center.x} {parent.center.y}}
+  name Transform_transverse_B
+  xpos 948
+  ypos 143
+ }
+set N1f76ac00 [stack 0]
+ Switch {
+  inputs 2
+  which {{parent.disableTransverse}}
+  name Switch_disable_transverse_B
+  xpos 948
+  ypos 183
+ }
+ Dot {
+  name Dot17
+  note_font_size 22
+  xpos 982
+  ypos 305
+ }
+set N1f76a800 [stack 0]
+ Dot {
+  name Dot18
+  note_font_size 22
+  xpos 872
+  ypos 305
+ }
+ Dot {
+  name Dot16
+  note_font_size 22
+  xpos 872
+  ypos 385
+ }
+push $N1f76a800
+ Blur {
+  channels rgba
+  size {{"max( 0, parent.axialColor.b * sqrt(pow2(width)+pow2(height)) / 100)"}}
+  name Blur_axial_B
+  label "\[value size]"
+  xpos 948
+  ypos 339
+ }
+ Switch {
+  inputs 2
+  which {{parent.disableAxial}}
+  name Switch_disable_axial_B
+  xpos 948
+  ypos 382
+ }
+set N4549c100 [stack 0]
+ Dot {
+  name Dot37
+  note_font_size 22
+  xpos 984
+  ypos 744
+ }
+push $N1f7b0400
+ Dot {
+  name Dot27
+  note_font_size 22
+  xpos 544
+  ypos 186
+ }
+push $N1f76b400
+ Transform {
+  scale {{"1 + (parent.transverseColor.g * 0.01)"}}
+  center {{parent.center.x} {parent.center.y}}
+  name Transform_transverse_G
+  xpos 620
+  ypos 142
+ }
+ Switch {
+  inputs 2
+  which {{parent.disableTransverse}}
+  name Switch_disable_transverse_G
+  xpos 620
+  ypos 183
+ }
+ Dot {
+  name Dot28
+  note_font_size 22
+  xpos 654
+  ypos 305
+ }
+set N1f768c00 [stack 0]
+ Dot {
+  name Dot29
+  note_font_size 22
+  xpos 544
+  ypos 305
+ }
+ Dot {
+  name Dot30
+  note_font_size 22
+  xpos 544
+  ypos 384
+ }
+push $N1f768c00
+ Blur {
+  channels rgba
+  size {{"max( 0, parent.axialColor.g * sqrt(pow2(width)+pow2(height)) / 100)"}}
+  name Blur_Axial_G
+  label "\[value size]"
+  xpos 620
+  ypos 339
+ }
+ Switch {
+  inputs 2
+  which {{parent.disableAxial}}
+  name Switch_disable_axial_G
+  xpos 620
+  ypos 381
+ }
+set N1f737200 [stack 0]
+ Dot {
+  name Dot39
+  note_font_size 22
+  xpos 654
+  ypos 744
+ }
+ Merge2 {
+  inputs 2
+  name Merge5
+  xpos 620
+  ypos 781
+ }
+ Merge2 {
+  inputs 2
+  name Merge6
+  xpos 620
+  ypos 821
+ }
+ Dot {
+  name Dot40
+  note_font_size 22
+  xpos 654
+  ypos 864
+ }
+push $N4549b000
+ Dot {
+  name Dot4
+  xpos -6
+  ypos -86
+ }
+set N1f726800 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge7
+  xpos -40
+  ypos 861
+ }
+push $N4549c100
+push $N1f726800
+ Dot {
+  name Dot22
+  note_font_size 22
+  xpos 434
+  ypos -85
+ }
+set N1f726000 [stack 0]
+ Dot {
+  name Dot3
+  xpos 764
+  ypos -85
+ }
+set N1f725c00 [stack 0]
+ Dot {
+  name Dot7
+  xpos 1094
+  ypos -85
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos 1060
+  ypos 462
+ }
+ Dot {
+  name Dot10
+  xpos 1094
+  ypos 585
+ }
+push $N4549cf00
+push $N1f726000
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos 400
+  ypos 461
+ }
+ Dot {
+  name Dot8
+  xpos 434
+  ypos 544
+ }
+push $N1f737200
+push $N1f725c00
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos 730
+  ypos 461
+ }
+add_layer {regrainMask regrainMask.red regrainMask.green regrainMask.blue regrainMask.alpha}
+ Shuffle2 {
+  fromInput1 {{0} B}
+  out1 regrainMask
+  fromInput2 {{0} B}
+  mappings "4 black -1 -1 regrainMask.red 0 0 black -1 -1 regrainMask.blue 0 2 black -1 -1 regrainMask.alpha 0 3 rgba.alpha 0 3 regrainMask.green 0 1"
+  name Shuffle_regrain_G
+  xpos 730
+  ypos 501
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.red
+  from1 rgba.alpha
+  to1 regrainMask.red
+  name Copy1
+  xpos 730
+  ypos 537
+ }
+ Copy {
+  inputs 2
+  from0 rgba.blue
+  to0 rgba.blue
+  from1 rgba.alpha
+  to1 regrainMask.blue
+  name Copy2
+  xpos 730
+  ypos 587
+ }
+ Remove {
+  channels vectorBlur
+  name Remove1
+  xpos 730
+  ypos 667
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy4
+  xpos 730
+  ypos 937
+ }
+ Switch {
+  inputs 2
+  which {{parent.bypass}}
+  name Switch_regular_merge
+  xpos 730
+  ypos 1071
+ }
+ Output {
+  name Output1
+  xpos 730
+  ypos 1111
+ }
+push $N1f76ac00
+push $N1f7b3400
+push $N1f7b2800
+ Viewer {
+  inputs 3
+  frame 35
+  frame_range 1-100
+  name Viewer1
+  selected true
+  xpos -182
+  ypos 941
+ }
+end_group
+Dot {
+ name Dot1
+ label "regrain in"
+ note_font_size 22
+ selected true
+ xpos 233
+ ypos -3
+}
+set N67d91000 [stack 0]
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ in2 regrainMask
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 regrainMask.blue 1 2 rgba.alpha 0 3"
+ name Shuffle_regrainMask_B
+ selected true
+ xpos 408
+ ypos 51
+}
+Dot {
+ name Dot4
+ label "regrain blue"
+ selected true
+ xpos 442
+ ypos 89
+}
+Grain2 {
+ name Grain2_4
+ label "Kodak 5248"
+ selected true
+ xpos 408
+ ypos 123
+ black {0 0 0}
+ minimum {0 0 0}
+}
+push $N67d91000
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ in2 regrainMask
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 regrainMask.green 1 1 rgba.alpha 0 3"
+ name Shuffle_regrainMask_G
+ selected true
+ xpos 302
+ ypos 51
+}
+Dot {
+ name Dot3
+ label "regrain  green"
+ selected true
+ xpos 336
+ ypos 91
+}
+Grain2 {
+ name Grain2_3
+ label "Kodak 5248"
+ selected true
+ xpos 302
+ ypos 123
+ black {0 0 0}
+ minimum {0 0 0}
+}
+push $N67d91000
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ in2 regrainMask
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 regrainMask.red 1 0 rgba.alpha 0 3"
+ name Shuffle_regrainMask_R
+ selected true
+ xpos 199
+ ypos 51
+}
+Dot {
+ name Dot2
+ label "regrain red"
+ selected true
+ xpos 233
+ ypos 91
+}
+Grain2 {
+ name Grain2_2
+ label "Kodak 5248"
+ selected true
+ xpos 199
+ ypos 123
+ black {0 0 0}
+ minimum {0 0 0}
+}
+Copy {
+ inputs 2
+ from0 rgba.green
+ to0 rgba.green
+ name Copy1
+ selected true
+ xpos 199
+ ypos 171
+}
+Copy {
+ inputs 2
+ from0 rgba.blue
+ to0 rgba.blue
+ name Copy2
+ selected true
+ xpos 199
+ ypos 219
+}
+Remove {
+ channels regrainMask
+ name Remove1
+ selected true
+ xpos 199
+ ypos 267
+}
+Dot {
+ name Dot5
+ label "regrain out"
+ note_font_size 22
+ selected true
+ xpos 233
+ ypos 317
+}
