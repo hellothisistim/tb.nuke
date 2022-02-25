@@ -1,0 +1,272 @@
+#! /Applications/Nuke12.1v4/Nuke12.1v4.app/Contents/MacOS/libnuke-12.1.4.dylib -nx
+version 12.1 v4
+Gizmo {
+ help "Makes mattes for the colors that are related to each primary and secondary color.\n"
+ tile_color 0xaa55ffff
+ label "\[value this.corner]"
+ addUserKnob {20 User}
+ addUserKnob {4 corner l select M {red green blue cyan magenta yellow ""}}
+ addUserKnob {6 premultiply +STARTLINE}
+}
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "<alignl>Separating each of the primary and \nsecondary colors using a hue keyer and \nexpression to ramp off toward black seems \nto be working.\n\n"
+  note_font_size 66
+  xpos 746
+  ypos -13
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos -130
+  ypos -189
+ }
+ Dot {
+  name Dot2
+  note_font_size 22
+  xpos -96
+  ypos -102
+ }
+ Dot {
+  name Dot12
+  note_font_size 22
+  xpos -96
+  ypos -31
+ }
+set N2e096000 [stack 0]
+ Dot {
+  name Dot13
+  note_font_size 22
+  xpos -96
+  ypos 257
+ }
+set N2e0bbc00 [stack 0]
+ Dot {
+  name Dot16
+  note_font_size 22
+  xpos -96
+  ypos 545
+ }
+set N2e0bb800 [stack 0]
+ Dot {
+  name Dot17
+  note_font_size 22
+  xpos -96
+  ypos 833
+ }
+set N2e0bb400 [stack 0]
+ Dot {
+  name Dot18
+  note_font_size 22
+  xpos -96
+  ypos 1121
+ }
+set N2e0bb000 [stack 0]
+ Dot {
+  name Dot19
+  note_font_size 22
+  xpos -96
+  ypos 1409
+ }
+ HueKeyer {
+  lut {amount {curve L 0 0 1 0 0 0 0}
+    sat_thrsh {curve L 1 1 1 1 1 1 1}}
+  invert false
+  name HueKeyer_select_yellow
+  xpos -20
+  ypos 1438
+ }
+ Expression {
+  temp_name0 y
+  temp_expr0 max(r,g,b)
+  channel0 none
+  expr0 r*y
+  channel1 none
+  channel2 none
+  channel3 alpha
+  expr3 a*y
+  name Expression_black_to_zero5
+  xpos -20
+  ypos 1482
+ }
+ Dot {
+  name Dot9
+  note_font_size 22
+  xpos 14
+  ypos 1589
+ }
+push $N2e0bb000
+ HueKeyer {
+  lut {amount {curve L 1 0 0 0 0 0 1}
+    sat_thrsh {curve L 1 1 1 1 1 1 1}}
+  invert false
+  name HueKeyer_select_magenta
+  xpos -20
+  ypos 1150
+ }
+ Expression {
+  temp_name0 y
+  temp_expr0 max(r,g,b)
+  channel0 none
+  expr0 r*y
+  channel1 none
+  channel2 none
+  channel3 alpha
+  expr3 a*y
+  name Expression_black_to_zero4
+  xpos -20
+  ypos 1190
+ }
+ Dot {
+  name Dot4
+  note_font_size 22
+  xpos 14
+  ypos 1301
+ }
+push $N2e0bb400
+ HueKeyer {
+  lut {amount {curve L 0 0 0 0 1 0 0}
+    sat_thrsh {curve L 1 1 1 1 1 1 1}}
+  invert false
+  name HueKeyer_select_cyan
+  xpos -20
+  ypos 862
+ }
+ Expression {
+  temp_name0 y
+  temp_expr0 max(r,g,b)
+  channel0 none
+  expr0 r*y
+  channel1 none
+  channel2 none
+  channel3 alpha
+  expr3 a*y
+  name Expression_black_to_zero3
+  xpos -20
+  ypos 902
+ }
+ Dot {
+  name Dot8
+  note_font_size 22
+  xpos 14
+  ypos 1013
+ }
+push $N2e0bb800
+ HueKeyer {
+  lut {amount {curve L 0 0 0 0 0 1 0}
+    sat_thrsh {curve L 1 1 1 1 1 1 1}}
+  invert false
+  name HueKeyer_select_blue
+  xpos -20
+  ypos 574
+ }
+ Expression {
+  temp_name0 y
+  temp_expr0 max(r,g,b)
+  channel0 none
+  expr0 r*y
+  channel1 none
+  channel2 none
+  channel3 alpha
+  expr3 a*y
+  name Expression_black_to_zero2
+  xpos -20
+  ypos 618
+ }
+ Dot {
+  name Dot7
+  note_font_size 22
+  xpos 14
+  ypos 725
+ }
+push $N2e0bbc00
+ HueKeyer {
+  lut {amount {curve L 0 0 0 1 0 0 0}
+    sat_thrsh {curve L 1 1 1 1 1 1 1}}
+  invert false
+  name HueKeyer_select_green
+  xpos -20
+  ypos 286
+ }
+ Expression {
+  temp_name0 y
+  temp_expr0 max(r,g,b)
+  channel0 none
+  expr0 r*y
+  channel1 none
+  channel2 none
+  channel3 alpha
+  expr3 a*y
+  name Expression_black_to_zero
+  xpos -20
+  ypos 330
+ }
+ Dot {
+  name Dot6
+  note_font_size 22
+  xpos 14
+  ypos 437
+ }
+push $N2e096000
+ HueKeyer {
+  lut {amount {curve L 0 1 0 0 0 0 0}
+    sat_thrsh {curve L 1 1 1 1 1 1 1}}
+  invert false
+  name HueKeyer_select_red
+  xpos -20
+  ypos -2
+ }
+ Expression {
+  temp_name0 y
+  temp_expr0 max(r,g,b)
+  channel0 none
+  expr0 r*y
+  channel1 none
+  channel2 none
+  channel3 alpha
+  expr3 a*y
+  name Expression_black_to_zero1
+  xpos -20
+  ypos 38
+ }
+ Dot {
+  name Dot5
+  note_font_size 22
+  xpos 14
+  ypos 149
+ }
+ Switch {
+  inputs 6
+  which {{corner}}
+  name Switch1
+  xpos 444
+  ypos 839
+ }
+ Dot {
+  name Dot3
+  note_font_size 22
+  xpos 478
+  ypos 1686
+ }
+set N2e108000 [stack 0]
+ Premult {
+  name Premult1
+  xpos 528
+  ypos 1706
+ }
+push $N2e108000
+ Switch {
+  inputs 2
+  which {{premultiply}}
+  name Switch2
+  selected true
+  xpos 444
+  ypos 1747
+ }
+ Output {
+  name Output1
+  xpos 444
+  ypos 1811
+ }
+end_group
