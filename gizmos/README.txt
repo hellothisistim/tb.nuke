@@ -5,6 +5,9 @@ Filter
   Vector Extend Edge
   http://www.nukepedia.com/gizmos/filter/vectorextendedge
 
+  apChroma
+  http://www.nukepedia.com/gizmos/filter/apchroma
+
 Keyer
 
   Despill Madness
@@ -20,3 +23,4 @@ Transform
 
   ITransform
   http://www.nukepedia.com/gizmos/transform/itransform
+
