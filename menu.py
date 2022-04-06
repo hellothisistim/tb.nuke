@@ -1,4 +1,5 @@
 # ~/.nuke/menu.py
+nuke.tprint('START: '+ os.path.realpath(__file__))
 
 import getpass
 import os
@@ -460,4 +461,4 @@ else:
 
 
 
-nuke.tprint('ALL DONE from '+ os.path.realpath(__file__))
+nuke.tprint('  END: '+ os.path.realpath(__file__))
