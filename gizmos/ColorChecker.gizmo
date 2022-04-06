@@ -1,7 +1,8 @@
 #! /Applications/Nuke12.1v4/Nuke12.1v4.app/Contents/MacOS/libnuke-12.1.4.dylib -nx
 version 12.1 v4
-Gizmo {
+Group {
 inputs 0
+name ColorChecker
 help "Xrite ColorChecker values from https://xritephoto.com/ph_product_overview.aspx?ID=820&Action=support&SupportID=5159\n\nThe provided sRGB values are converted to linear float values, keeping the D50 illuminant."
 tile_color 0x645064ff
 gl_color 0x645064ff
