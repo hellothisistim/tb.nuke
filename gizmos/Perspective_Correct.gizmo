@@ -1,6 +1,7 @@
 #! /Applications/Nuke8.0v5/Nuke8.0v5.app/Contents/MacOS/libnuke-8.0.v5.dylib -nx
 version 8.0 v5
-Gizmo {
+Group {
+ name Perspective_Correct
  help "This gizmo does a down-n-dirty vanishing point adjustment for single-point perspective situations.\n\nPut src_center at the vanishing point in the source image, and move dest_center where you need the vanishing point to be. Distorted edges can be smoothed out using the soften control, which is measured in pixels. It may be helpful to stabilize moving footage before applying the perspective correction."
  tile_color 0x19d2ffff
  addUserKnob {20 User}

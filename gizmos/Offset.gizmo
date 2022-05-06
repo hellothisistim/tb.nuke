@@ -1,7 +1,7 @@
 set cut_paste_input [stack 0]
 version 10.5 v6
 push $cut_paste_input
-Gizmo {
+Group {
  name Offset
  help "Shift the image. Pixels that fall off one side magically reappear of the opposite side. Well, actually it's not magic, it's math.\n\nThis gizmo is very similar to the Offset plugin in After Effects."
  tile_color 0xc166c1ff

@@ -1,6 +1,7 @@
 #! /Applications/Nuke12.1v4/Nuke12.1v4.app/Contents/MacOS/libnuke-12.1.4.dylib -nx
 version 12.1 v4
-Gizmo {
+Group {
+ name RGBCMY_Selector
  help "Makes mattes for the colors that are related to each primary and secondary color.\n"
  tile_color 0xaa55ffff
  label "\[value this.corner]"
