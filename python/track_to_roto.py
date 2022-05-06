@@ -87,3 +87,5 @@ def TrackToRoto():
             rot['hide_input'].setValue(0)
     except:
         nuke.createNode("Roto")
+
+TrackToRoto()
