@@ -13,6 +13,6 @@ if tm is not None:
     tm.addCommand('Gizmos/Merge/apChromaMerge', "nuke.createNode('apChromaMerge')", icon = "apChroma.png")
 
 else:
-    print("User " + user + " does not have a menu. Not adding gizmos.")
+    nuke.tprint("User " + user + " does not have a menu. Not adding gizmos.")
 
 nuke.tprint('  END: '+ os.path.realpath(__file__))
