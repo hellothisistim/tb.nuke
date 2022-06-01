@@ -1,16 +1,6 @@
 # ~/.nuke/menu.py
 nuke.tprint('START: '+ os.path.realpath(__file__))
 
-
-
-##
-## Plugin Paths
-##
-nuke.pluginAddPath('./gizmos')
-nuke.pluginAddPath('./icons')
-nuke.pluginAddPath('./python')
-
-
 ##
 ## External modules
 ##
