@@ -3,7 +3,7 @@ nuke.tprint('START: '+ os.path.realpath(__file__))
 
 # Find the current user's nodes menu.
 m = nuke.menu('Nodes')
-user = os.getenv('USER')
+user = 'tim'
 tm = m.findItem(user)
 
 if tm is not None:
