@@ -68,7 +68,6 @@ def add_menu(target=None):
     # Build Tracked Bezier menu
     m = nuke.menu('Nodes')
     if target is not None:
-        nuke.tprint("target is:", target, type(target))
         m = target
     tbm = m.addMenu("Tracked Bezier")
     # Add Tracked Bezier features
