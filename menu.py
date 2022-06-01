@@ -1,15 +1,6 @@
 # ~/.nuke/menu.py
 nuke.tprint('START: '+ os.path.realpath(__file__))
 
-##
-## External modules
-##
-
-### Load Comp Island
-try:
-    import comp_island
-except ImportError as e:
-    nuke.tprint('*** Skipping import of comp_island. Error:', e)
 
 
 
@@ -330,6 +321,15 @@ mkshort.addCommand('Edit Label', "editLabel()", shortcut='Ctrl+L')
 # It's time to let this go until I get smartRoto working for the Nuke7 world.
 #mkshort.addCommand('Smart Roto', "smartBezier()", shortcut='p')
 
+
+### Load Comp Island
+try:
+    import comp_island
+except ImportError as e:
+    nuke.tprint('*** Skipping import of comp_island. Error:', e)
+else:
+    comp_island.add_menu()
+    
 ### Load labelDots
 try:
     import labelDots
