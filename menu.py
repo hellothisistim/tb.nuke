@@ -28,12 +28,6 @@ try:
 except ImportError as e:
     nuke.tprint('*** Skipping import of mark_tricky_nodes. Error:', e)
 
-### mark_tricky_nodes
-nuke.tprint('Importing trackedbezier')
-try:
-    import trackedbezier
-except ImportError as e:
-    nuke.tprint('*** Skipping import of trackedbezier. Error:', e)
 
 
 ##
@@ -364,6 +358,7 @@ else:
         tooltip = "This will label any dots to the same as the first higer level dot, with a label, found."
         )
 
+### Load trackedbezier
 try:
     import trackedbezier
 except ImportError as e:
