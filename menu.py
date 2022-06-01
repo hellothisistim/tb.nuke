@@ -9,13 +9,6 @@ nuke.tprint('START: '+ os.path.realpath(__file__))
 nuke.pluginAddPath('./gizmos')
 nuke.pluginAddPath('./icons')
 nuke.pluginAddPath('./python')
-nuke.pluginAddPath('./nukepedia')
-nuke.pluginAddPath('./studio')
-#nuke.pluginAddPath(os.getenv('HOME') + '/code/skunkworks')
-# AtomKraft
-#nuke.pluginAddPath(os.getenv('HOME') + '/atomkraft-1.1.0-0/plugin')
-# bgNukes
-#nuke.pluginAddPath('../bgNukes')
 
 
 ##
@@ -28,16 +21,6 @@ try:
 except ImportError as e:
     nuke.tprint('*** Skipping import of comp_island. Error:', e)
 
-### TabTabTab -- BenD's tab magic
-# This (or something similar enough) is included in Nuke now.
-# try:
-#     import tabtabtab
-# except ImportError as e:
-#     nuke.tprint('*** Skipping import of tabtabtab. Error:', e)
-# else:
-#     m_edit = nuke.menu("Nuke").findItem("Edit")
-#     m_edit.addCommand("Tabtabtab", tabtabtab.main, "Tab")
-
 ### mark_tricky_nodes
 nuke.tprint('Importing mark_tricky_nodes')
 try:
@@ -45,19 +28,12 @@ try:
 except ImportError as e:
     nuke.tprint('*** Skipping import of mark_tricky_nodes. Error:', e)
 
-### Load bgNukes
-# bgNukes is also unnecessary in current Nuke.
-# try:
-#     import bgNukes
-# except ImportError as e:
-#     nuke.tprint('*** Skipping import of bgNukes. Error:', e)
-
-### Load phoswindows
-# This is no longer necessary.
-# try:
-#     import phoswindows
-# except ImportError as e:
-#     nuke.tprint('*** Skipping import of phoswindows. Error:', e)
+### mark_tricky_nodes
+nuke.tprint('Importing trackedbezier')
+try:
+    import trackedbezier
+except ImportError as e:
+    nuke.tprint('*** Skipping import of trackedbezier. Error:', e)
 
 
 ##
@@ -383,7 +359,11 @@ try:
 except ImportError as e:
     nuke.tprint('*** Skipping import of labelDots. Error:', e)
 else:
-	tm.addCommand('Label Dots', "labelDots.dotLabel()", "Ctrl+Shift+L")
+	tm.addCommand('Label Dots',
+        command = "labelDots.dotLabel()",
+        shortcut = "Ctrl+Shift+L",
+        tooltip = "This will label any dots to the same as the first higer level dot, with a label, found."
+        )
 
 
 
