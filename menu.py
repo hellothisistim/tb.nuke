@@ -296,7 +296,7 @@ tm.addCommand('AOVMerge', "aovMerge()")
 tm.addCommand('Remove proxy from Reads',
     lambda: removeProxyFromReads(nuke.selectedNodes()))
 tm.addCommand('Frame Range to Viewer', lambda: frameRangeToViewer())
-tm.addCommand('Labeled Dot Organizer', lambda: labeledDotOrganizer())
+tm.addCommand('Labeled Dot Organizer', lambda: labledDotOrganizer())
 tm.addCommand('AutoCrop', lambda: runAutoCrop())
 
 ##
@@ -363,6 +363,14 @@ else:
         shortcut = "Ctrl+Shift+L",
         tooltip = "This will label any dots to the same as the first higer level dot, with a label, found."
         )
+
+try:
+    import trackedbezier
+except ImportError as e:
+    nuke.tprint('*** Skipping import of trackedbezier. Error:', e)
+else:
+    trackedbezier.add_menu(tm)
+
 
 
 
