@@ -304,7 +304,7 @@ tm.addCommand('AutoCrop', lambda: runAutoCrop())
 ##
 
 # Pre-select alpha for "unpremult" knob on these nodes:
-nodes = ['Grade', 'ColorCorrect', 'Add', 'Gamma', 'Multiply', 'HueCorrect', 'EXPTool']
+nodes = ['Grade', 'ColorCorrect', 'Add', 'Gamma', 'Multiply', 'HueCorrect', 'EXPTool', 'ColorLookup']
 for node in nodes:
     nuke.knobDefault(node+'.unpremult', '-rgba.alpha')
 
