@@ -12,7 +12,6 @@ this module mark those nodes to make such troublemakers more obvious.
 """
 
 import nuke
-import os.path
 
 #-----------------------------------------------------------------------------
 ## Globals
@@ -73,12 +72,9 @@ def markThisNode(node, expr):
 
 def markNodesWithDangerousExpressions():
     """For any expression-driven knob that has a potentially confusing
-    expression in it, mark it's node orange and put a warning in the label.
+    expression in it (expression list stored in dangerous_expressions), mark its node red and put a warning in the label.
 
     """
-
-    # List of expressions that can cause us trouble. Add more as you wish.
-    dangerous_expressions = ['$gui', 'proxy']
 
     knobs=allKnobsWithExpressions()
 
@@ -88,7 +84,6 @@ def markNodesWithDangerousExpressions():
                 # Mark this one
                 markThisNode(knob.node(), str(expr))
 
-
 def markNodesWithHiddenInputs():
     """For any node with a hidden input, mark it and put a warning in the label.
     """
@@ -96,8 +91,27 @@ def markNodesWithHiddenInputs():
     for node in allNodesWithHiddenInputs():
         markThisNode(node, 'hiddden input')
 
+def markTrickyNodes():
+    """Mark nodes with dangerous expressions and hidden inputs.
 
-nuke.tprint(os.path.realpath(__file__) + " adding callback: markNodesWithDangerousExpressions")
-nuke.addOnScriptLoad(markNodesWithDangerousExpressions)
-nuke.tprint(os.path.realpath(__file__) + " adding callback: markNodesWithHiddenInputs")
-nuke.addOnScriptLoad(markNodesWithHiddenInputs)
+    Runs both markNodesWithDangerousExpressions and markNodesWithHiddenInputs."""
+
+    markNodesWithDangerousExpressions()
+    markNodesWithHiddenInputs()
+
+def add_menu(target=None):
+    """Add "Mark Tricky Nodes" submenu to specified target menu. If no target is
+    supplied, put it in the root of the Nodes menu."""
+
+    # Build Mark Tricky Nodes menu
+    m = nuke.menu('Nodes')
+    if target is not None:
+        m = target
+    tbm = m.addMenu("Mark Tricky Nodes")
+    # Add Mark Tricky Nodes features
+    tbm.addCommand('Mark nodes with dangerous expressions (' + ', '.join(dangerous_expressions) + ')',
+        lambda: markNodesWithDangerousExpressions())
+    tbm.addCommand('Mark nodes with hidden inputs',
+        lambda: markNodesWithHiddenInputs())
+    tbm.addCommand('Mark all tricky nodes',
+        lambda: markTrickyNodes())

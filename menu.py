@@ -21,12 +21,6 @@ try:
 except ImportError as e:
     nuke.tprint('*** Skipping import of comp_island. Error:', e)
 
-### mark_tricky_nodes
-nuke.tprint('Importing mark_tricky_nodes')
-try:
-    import mark_tricky_nodes
-except ImportError as e:
-    nuke.tprint('*** Skipping import of mark_tricky_nodes. Error:', e)
 
 
 
@@ -357,6 +351,15 @@ else:
         shortcut = "Ctrl+Shift+L",
         tooltip = "This will label any dots to the same as the first higer level dot, with a label, found."
         )
+
+### mark_tricky_nodes
+nuke.tprint('Importing mark_tricky_nodes')
+try:
+    import mark_tricky_nodes
+except ImportError as e:
+    nuke.tprint('*** Skipping import of mark_tricky_nodes. Error:', e)
+else:
+    mark_tricky_nodes.add_menu(tm)
 
 ### Load trackedbezier
 try:
