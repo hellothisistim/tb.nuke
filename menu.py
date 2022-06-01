@@ -322,7 +322,6 @@ nuke.knobDefault("Add.channels", "rgb")
 nuke.knobDefault("Gamma.label", "[value value]")
 nuke.knobDefault("Add.channels", "rgb")
 nuke.knobDefault("Gamma.channels", "rgb")
-#nuke.knobDefault("Shuffle.label", "[value in] => [value out]")
 nuke.knobDefault("Remove.channels", "rgba")
 nuke.knobDefault("Remove.operation", "keep")
 # nuke.knobDefault("Remove.label", "[value channels]") # Default in Nuke now.
