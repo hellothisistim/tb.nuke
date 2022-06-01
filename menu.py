@@ -42,34 +42,42 @@ def aovMerge():
     m = nuke.createNode('Merge2', "Achannels none Bchannels none output none also_merge all", inpanel=False)
     m.setName('MergeAOVs')
 
-# Expression Reorder
-# TODO: Remove this. It's a horrible idea. Expressions evaluate way more slowly than Shuffle nodes.
-# def make_expression_reorder(order="rgba"):
-#     """I can't stand that the Shuffle node is commonly used for simple
-#     reorder operations. An Expression node with smart labels shold be much
-#     more readable and not require the user to open the control panel in order
-#     to see what's happening.
-#
-#     'order' should be a four-character string containing something sensible
-#     like 'rgb1' or 'rrrr' or '0000'"""
-#
-#     # Reality-check
-#     assert len(order) == 4
-#     for letter in order:
-#         assert letter in 'rgba01'
-#
-#     expr = nuke.createNode('Expression', inpanel=False)
-#     expr.setName('Expression_Reorder')
-#     for num, chan in enumerate(order[0:4]):
-#         print(num, chan)
-#         expr.knob('expr'+str(num)).setText(chan)
-#     expr.knob('label').fromScript('[value expr0][value expr1][value expr2][value expr3]')
+
 
 # TODO: This four-letter format for reordering channels is still super-useful. Make it use new Shuffle2 nodes.
 def make_shuffle2_reorder(order='rgba'):
-    nuke.message("It's not built yet. See " + os.path.realpath(__file__) + " for more details.")
+    """Create a new-style Shuffle2 that's patched according to a Shake-style sequence of letters and numbers.
 
-# TODO: Also make a labelling callback for Shuffle2 reorders.
+    'order' should be a four-character string containing something sensible
+    like 'rgb1' or 'rrrr' or '0000'"""
+
+    # Reality-check
+    try:
+        assert len(order) == 4
+        for letter in order:
+            assert letter in 'rgba01'
+    except:
+        nuke.message("Please use a four-character sequence, consisting of r, g, b, a, 1, and 0.")
+        return
+
+    char_to_chan = {'r': 'rgba.red',
+                       'g': 'rgba.green',
+                       'b': 'rgba.blue',
+                       'a': 'rgba.alpha',
+                       '0': 'black',
+                       '1': 'white' }
+    channels = ['rgba.red', 'rgba.green', 'rgba.blue', 'rgba.alpha']
+    n = nuke.createNode('Shuffle2', inpanel=False)
+    map = n.knob('mappings')
+    for num, chan in enumerate(order[0:4]):
+        #print(num, chan)
+        if chan in '01':
+            map.setValue(-1, char_to_chan[chan], channels[num])
+        else:
+            map.setValue(0, char_to_chan[chan], channels[num])
+    n.knob('label').setValue(order)
+
+# TODO: Also make a labeling callback for Shuffle2 reorders.
 
 # AutoBackdrop
 def tb_autobackdrop():
@@ -308,10 +316,9 @@ nuke.knobDefault("ContactSheet.roworder", 'TopBottom')
 nuke.knobDefault("ContactSheet.colorder", 'LeftRight')
 nuke.knobDefault("ContactSheet.rows", '{"splitinputs ? ceil((endframe-startframe+1)/columns) : ceil(inputs/columns)"}')
 nuke.knobDefault("ContactSheet.columns", '{"splitinputs ? ceil(sqrt(endframe-startframe+1)) : ceil(sqrt(inputs))"}')
-
+nuke.knobDefault("Dot.note_font_size","22")
 nuke.knobDefault("EXPTool.mode", "Stops")
 nuke.knobDefault("VectorBlur.uv","forward")
-nuke.knobDefault("Dot.note_font_size","22")
 
 ### My keyboard shortcuts
 tm.addSeparator()
@@ -329,7 +336,7 @@ except ImportError as e:
     nuke.tprint('*** Skipping import of comp_island. Error:', e)
 else:
     comp_island.add_menu()
-    
+
 ### Load labelDots
 try:
     import labelDots
