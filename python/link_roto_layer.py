@@ -10,6 +10,8 @@ transform controls to a separate Tracker or Transform node.
 """
 
 import nuke
+import _curvelib
+
 
 
 def link_roto_layer():
@@ -43,41 +45,62 @@ def link_roto_layer():
     root = curves.rootLayer
 
     # print(root, dir(root))
-    print("Curves:", curves, '\nRoot: ', root)
+    # print("Curves:", curves, '\nRoot: ', root)
     # Adding new layer. Sourced from https://community.foundry.com/discuss/post/989127
-    layer_name = 'Linked to: ' + trans.name() + ' :'
+    layer_name = 'Tracked to: ' + trans.name() + ' :'
+
     new_layer = nuke.rotopaint.Layer(curves, name=layer_name)
     # print("New layer:", type(new_layer), '\n', new_layer)
-    # print(dir(new_layer))
     root.append(new_layer)
 
+    # Now, we need to find the layer again because it got a number appended to its name.
+    # Nuke appends a sequential number, even if we end the name with a number.
+    layer = None
+    names = []
+    for shape in root:
+        print(shape.name)
+        if shape.name.startswith(layer_name):
+            names.append(shape.name)
+
+    name = sorted(names)
+    # print("Sorted layer names:", names)
+    # print("Last one:", names[-1])
+    layer_name = names[-1]
 
     # some examples for setting expressions in the python api for the nuke rotopaint system
     # https://gist.github.com/jedypod/52cf750e02ee2cee2e407b16e1616540
     # get a specific shape
     layer = curves.toElement(layer_name)
-    print(layer.name, layer) # TODO: Why is this returning NoneType?
+    print(layer.name, layer)
 
     # We will set an expression on the translate, rotate, and scale for this shape
     xform = layer.getTransform()
+    # Let's try putting the transform on the root layer instead.
+    xform = root.getTransform()
 
     # Find all the things you can do with this object with
     #print(help(xform))
 
     # First we have to create an _curvelib.AnimCurve object to hold our animation curve.
-    translation_curve_x = nuke._curvelib.AnimCurve()
-    translation_curve_y = nuke._curvelib.AnimCurve()
-    rotation_curve = nuke._curvelib.AnimCurve()
-    scale_curve = nuke._curvelib.AnimCurve()
+    translation_curve_x = _curvelib.AnimCurve()
+    translation_curve_y = _curvelib.AnimCurve()
+    rotation_curve = _curvelib.AnimCurve()
+    scale_curve_w = _curvelib.AnimCurve()
+    scale_curve_h = _curvelib.AnimCurve()
+    center_curve_x = _curvelib.AnimCurve()
+    center_curve_y = _curvelib.AnimCurve()
 
     # To set an expression on our curve we have to set the expressionString and useExpression to True
-    translation_curve_x.expressionString = 'frame'
-    translation_curve_y.expressionString = 'frame%2'
-    rotation_curve.expressionString = 'frame'
-    scale_curve.expressionString = 'frame/100+0.5'
+    translation_curve_x.expressionString = trans.name() + '.translate'
+    translation_curve_y.expressionString = trans.name() + '.translate'
+    rotation_curve.expressionString = trans.name() + '.rotate'
+    scale_curve_w.expressionString = trans.name() + '.scale'
+    scale_curve_h.expressionString = trans.name() + '.scale'
+    center_curve_x.expressionString = trans.name() + '.center'
+    center_curve_y.expressionString = trans.name() + '.center'
 
     # set useExpression=True for all curves
-    for curve in [translation_curve_x, translation_curve_y, rotation_curve, scale_curve]:
+    for curve in [translation_curve_x, translation_curve_y, rotation_curve, scale_curve_w, scale_curve_h, center_curve_x, center_curve_y]:
         curve.useExpression = True
 
     # Now we overwrite the animcurves on the shape
@@ -86,9 +109,11 @@ def link_roto_layer():
     # Index value of setRotationAnimCurve is 2 even though there is only 1 parameter...
     # http://www.mail-archive.com/nuke-python@support.thefoundry.co.uk/msg02295.html
     xform.setRotationAnimCurve(2, rotation_curve)
-    xform.setScaleAnimCurve(0, scale_curve)
-    xform.setScaleAnimCurve(1, scale_curve)
+    xform.setScaleAnimCurve(0, scale_curve_w)
+    xform.setScaleAnimCurve(1, scale_curve_h)
+    xform.setPivotPointAnimCurve(0, center_curve_x)
+    xform.setPivotPointAnimCurve(1, center_curve_y)
 
 
 
-link_roto_layer()
+#link_roto_layer()
