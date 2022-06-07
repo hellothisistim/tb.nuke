@@ -44,7 +44,6 @@ def aovMerge():
 
 
 
-# TODO: This four-letter format for reordering channels is still super-useful. Make it use new Shuffle2 nodes.
 def make_shuffle2_reorder(order='rgba'):
     """Create a new-style Shuffle2 that's patched according to a Shake-style sequence of letters and numbers.
 
@@ -365,6 +364,14 @@ except ImportError as e:
     nuke.tprint('*** Skipping import of trackedbezier. Error:', e)
 else:
     trackedbezier.add_menu(tm)
+
+### Load trackedroto
+try:
+    import trackedroto
+except ImportError as e:
+    nuke.tprint('*** Skipping import of trackedroto. Error:', e)
+else:
+    trackedroto.add_menu(tm)
 
 
 

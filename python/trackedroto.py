@@ -68,5 +68,13 @@ def trackedroto():
     cy.expressionString = 'parent.' + trans.name() + '.center'
     cy.useExpression = True
 
+def add_menu(target=None):
+    """Add "Tracked Roto" option to specified target menu. If no target is
+    supplied, put it in the root of the Nodes menu."""
 
-#link_roto_layer()
+    # Build Tracked Bezier menu
+    m = nuke.menu('Nodes')
+    if target is not None:
+        m = target
+    m.addCommand('Tracked Roto',
+        lambda: trackedroto())
