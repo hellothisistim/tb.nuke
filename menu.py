@@ -373,6 +373,14 @@ except ImportError as e:
 else:
     trackedroto.add_menu(tm)
 
+### Load trackerstablemm
+try:
+    import trackerstablemm
+except ImportError as e:
+    nuke.tprint('*** Skipping import of trackerstablemm. Error:', e)
+else:
+    trackerstablemm.add_menu(tm)
+
 
 
 
