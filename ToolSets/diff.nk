@@ -1,0 +1,28 @@
+set cut_paste_input [stack 0]
+version 13.1 v2
+push $cut_paste_input
+push 0
+Merge2 {
+ inputs 2
+ operation difference
+ name diff
+ selected true
+ xpos 63882
+ ypos 170739
+}
+Multiply {
+ value 100
+ unpremult -rgba.alpha
+ name Multiply7
+ label "\[value value]"
+ selected true
+ xpos 63882
+ ypos 170765
+}
+Dilate {
+ size 20
+ name Dilate1
+ selected true
+ xpos 63882
+ ypos 170815
+}
