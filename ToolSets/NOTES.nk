@@ -1,0 +1,11 @@
+set cut_paste_input [stack 0]
+version 13.1 v4
+StickyNote {
+ inputs 0
+ name NOTES
+ label "Done:\n\nTo do:\n\nQuestions:\n"
+ note_font_size 44
+ selected true
+ xpos 474
+ ypos 8387
+}

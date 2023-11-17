@@ -1,0 +1,11 @@
+set cut_paste_input [stack 0]
+version 13.1 v4
+push $cut_paste_input
+Crop {
+ box {{input.bbox.x} {input.bbox.y} {input.bbox.r} {input.bbox.t}}
+ reformat true
+ name Crop_to_bbox
+ selected true
+ xpos 295
+ ypos 1349
+}

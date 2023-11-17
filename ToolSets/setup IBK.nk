@@ -1,0 +1,25 @@
+set cut_paste_input [stack 0]
+version 13.1 v4
+push $cut_paste_input
+Dot {
+ name Dot18
+ note_font_size 22
+ selected true
+ xpos 1647
+ ypos 950
+}
+set N3c29c100 [stack 0]
+IBKColourV3 {
+ name IBKColourV3_1
+ selected true
+ xpos 1682
+ ypos 989
+}
+push $N3c29c100
+IBKGizmoV3 {
+ inputs 2
+ name IBKGizmoV3_1
+ xpos 1613
+ ypos 1047
+ st C-green
+}

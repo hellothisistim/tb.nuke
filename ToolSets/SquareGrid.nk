@@ -1,0 +1,15 @@
+set cut_paste_input [stack 0]
+version 13.1 v4
+push $cut_paste_input
+Grid {
+opacity 0.2
+number {{"input.width / gridSize"} {"input.height / gridSize"}}
+color {0.18 0.18 0.18 1}
+name SquareGrid
+selected true
+xpos 419
+ypos 794
+addUserKnob {20 squareGrid l "Square Grid"}
+addUserKnob {16 gridSize l "Grid Size"}
+gridSize 50
+}
