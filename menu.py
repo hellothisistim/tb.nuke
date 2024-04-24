@@ -381,7 +381,12 @@ except ImportError as e:
 else:
     trackerstablemm.add_menu(tm)
 
-
+### Load unhook_viewer_input_one
+nuke.tprint('Importing unhook_viewer_input_one')
+try:
+    import unhook_viewer_input_one
+except ImportError as e:
+    nuke.tprint('Skipping import of unhook_viewer_input_one. Error:', e)
 
 
 nuke.tprint('  END: '+ os.path.realpath(__file__))
