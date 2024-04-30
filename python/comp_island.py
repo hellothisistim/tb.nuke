@@ -5,7 +5,7 @@
 
 Here's how it works:
 
-First, make sure you have a local copy of all your source footage using Nuke's built-in localization tools in the Cache menu. Then, use Comp Island to switch all of your Read nodes to the local copy. This provides a speed boost because Nuke can read the cached local files much more quickly than the originals on the slow server. When you're done working, delocalise the paths and you're back to reading the original files on the server.
+First, make sure you have a local copy of all your source footage using Nuke's built-in localization tools in the Cache menu. Then, use Comp Island to switch all of your Read nodes to the local copy. This provides a speed boost because Nuke stops checking to see if the originals on the slow server have been updated. Comp Island stops Nuke from checking on the originals. When you're done working, delocalise the paths and you're back to reading the original files on the server.
 
 Comp Island provides two different ways to switch to local files:
 
