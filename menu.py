@@ -288,6 +288,9 @@ tm.addCommand('AutoCrop', lambda: runAutoCrop())
 ## Node defaults
 ##
 
+# Global 
+nuke.knobDefault('shutteroffset','centered')
+
 # Pre-select alpha for "unpremult" knob on these nodes:
 nodes = ['Grade', 'ColorCorrect', 'Add', 'Gamma', 'Multiply', 'HueCorrect', 'EXPTool', 'ColorLookup']
 for node in nodes:
@@ -315,6 +318,8 @@ nuke.knobDefault("Output.note_font_size", "18")
 nuke.knobDefault("Output.note_font", "bold")
 nuke.knobDefault("FrameRange.label", "x[value knob.first_frame]-[value knob.last_frame]")
 # TODO: Figure out why this isn't working. It's probably because StickyNotes get created by a method in Nuke's menu.py.
+nuke.knobDefault('Roto.toolbox','createBSpline')
+nuke.knobDefault("RotoPaint.toolbox", "brush {{brush ltt 0} {clone ltt 0}}")
 nuke.knobDefault("StickyNote.label", '<align left>')
 nuke.knobDefault("Retime.before", "continue")
 nuke.knobDefault("Retime.after", "continue")
