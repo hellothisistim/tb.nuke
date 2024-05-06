@@ -1,0 +1,332 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+Group {
+ inputs 0
+ name fake_render_with_inf_and_nan_errors
+ tile_color 0x7842bcff
+ selected true
+ xpos -438
+ ypos 246
+ addUserKnob {20 User}
+ addUserKnob {41 format T Constant3.format}
+}
+ Constant {
+  inputs 0
+  channels rgb
+  format {{{parent.Constant3.format}}}
+  name Constant2
+  xpos -880
+  ypos -464
+  postage_stamp false
+ }
+ Radial {
+  replace true
+  area {{"width * 0.1"} {"height * 0.33"} {"width * 1.1"} {"height * 0.95"}}
+  softness 0
+  name Radial1
+  xpos -880
+  ypos -430
+ }
+ Radial {
+  area {{"width * -0.15"} {"height * 0.2"} {"width * 0.5"} {"height * 0.66"}}
+  softness 0.13
+  name Radial2
+  xpos -880
+  ypos -396
+ }
+ Radial {
+  area {{"width * 0.66"} {"height * 0.1"} {"width * 0.85"} {"height * 0.33"}}
+  softness 0.5
+  name Radial3
+  xpos -880
+  ypos -362
+ }
+ Dot {
+  name Dot15
+  note_font_size 22
+  xpos -848
+  ypos -264
+ }
+ CheckerBoard2 {
+  inputs 0
+  boxsize 128
+  color0 {1 0 0 1}
+  color1 {0 1 0 1}
+  color2 {0 0 1 1}
+  color3 {1 1 1 1}
+  centerlinewidth 0
+  name CheckerBoard1
+  xpos -351
+  ypos -513
+ }
+set Nb6b75800 [stack 0]
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.07400000095 0.1140000001 0.1539999992 0.1800000072}
+  name Constant3
+  xpos -600
+  ypos -1226
+  postage_stamp false
+ }
+ Ramp {
+  p0 {278 216}
+  p1 {1128 522}
+  color {0.2599999905 0.2099999934 0.1599999964 0.2099999934}
+  name Ramp1
+  xpos -600
+  ypos -1128
+ }
+ Dot {
+  name Dot8
+  label "clean rgb"
+  note_font_size 22
+  xpos -568
+  ypos -1000
+ }
+ Dot {
+  name Dot9
+  note_font_size 22
+  xpos -568
+  ypos -808
+ }
+set Nb6b74c00 [stack 0]
+ Dot {
+  name Dot10
+  note_font_size 22
+  xpos -708
+  ypos -808
+ }
+ Dot {
+  name Dot3
+  note_font_size 22
+  xpos -708
+  ypos -552
+ }
+set N75353c00 [stack 0]
+push $Nb6b75800
+push $N75353c00
+push $Nb6b75800
+push $N75353c00
+ Constant {
+  inputs 0
+  channels rgb
+  format {{{parent.Constant3.format}}}
+  name Constant1
+  xpos -320
+  ypos -1226
+  postage_stamp false
+ }
+ Dot {
+  name Dot14
+  note_font_size 22
+  xpos -288
+  ypos -1160
+ }
+set N73a55c00 [stack 0]
+ Dot {
+  name Dot11
+  note_font_size 22
+  xpos -148
+  ypos -1160
+ }
+set N96d0e800 [stack 0]
+ Dot {
+  name Dot12
+  note_font_size 22
+  xpos -8
+  ypos -1160
+ }
+set N752a0000 [stack 0]
+ Dot {
+  name Dot13
+  note_font_size 22
+  xpos 132
+  ypos -1160
+ }
+ Noise {
+  size 5
+  zoffset 10
+  octaves 1
+  gain 1
+  gamma 1
+  center {640 360}
+  name Noise2
+  xpos 100
+  ypos -940
+ }
+ Grade {
+  channels rgba
+  blackpoint 0.8
+  whitepoint 0.88
+  white_clamp true
+  unpremult -rgba.alpha
+  name Grade3
+  xpos 100
+  ypos -906
+ }
+ Dot {
+  name Dot4
+  note_font_size 22
+  xpos 132
+  ypos -872
+ }
+push $N752a0000
+ Expression {
+  channel0 rgb
+  expr0 inf
+  channel1 none
+  channel2 none
+  name Expression2
+  xpos -40
+  ypos -1098
+ }
+ Dot {
+  name Dot2
+  label inf
+  note_font_size 22
+  xpos -8
+  ypos -1000
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy3
+  xpos -40
+  ypos -880
+ }
+ Premult {
+  name Premult3
+  xpos -40
+  ypos -834
+ }
+ Dot {
+  name Dot5
+  note_font_size 22
+  xpos -8
+  ypos -648
+ }
+push $N96d0e800
+ Noise {
+  size 5
+  octaves 1
+  gain 1
+  gamma 1
+  center {640 360}
+  name Noise1
+  xpos -180
+  ypos -940
+ }
+ Grade {
+  channels rgba
+  blackpoint 0.8
+  whitepoint 0.88
+  white_clamp true
+  unpremult -rgba.alpha
+  name Grade2
+  xpos -180
+  ypos -906
+ }
+ Dot {
+  name Dot6
+  note_font_size 22
+  xpos -148
+  ypos -872
+ }
+push $N73a55c00
+ Expression {
+  channel0 rgb
+  expr0 nan
+  channel1 none
+  channel2 none
+  name Expression1
+  xpos -320
+  ypos -1098
+ }
+ Dot {
+  name Dot1
+  label nan
+  note_font_size 22
+  xpos -288
+  ypos -1000
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy2
+  xpos -320
+  ypos -880
+ }
+ Premult {
+  name Premult2
+  xpos -320
+  ypos -834
+ }
+ Dot {
+  name Dot7
+  note_font_size 22
+  xpos -288
+  ypos -712
+ }
+push $Nb6b74c00
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos -600
+  ypos -714
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos -600
+  ypos -650
+ }
+ Keymix {
+  inputs 3
+  channels {rgba.red -rgba.green -rgba.blue none}
+  maskChannel rgba.red
+  invertMask true
+  name Keymix_red
+  xpos -600
+  ypos -522
+ }
+ Keymix {
+  inputs 3
+  channels {-rgba.red rgba.green -rgba.blue none}
+  maskChannel rgba.green
+  invertMask true
+  name Keymix_green
+  xpos -600
+  ypos -488
+ }
+ Keymix {
+  inputs 3
+  channels {-rgba.red -rgba.green rgba.blue none}
+  maskChannel rgba.blue
+  invertMask true
+  name Keymix_blue
+  xpos -600
+  ypos -454
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy1
+  xpos -600
+  ypos -272
+ }
+ Premult {
+  name Premult1
+  xpos -600
+  ypos -234
+ }
+ Output {
+  name Output1
+  xpos -600
+  ypos -74
+ }
+end_group
