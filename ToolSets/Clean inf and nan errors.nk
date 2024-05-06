@@ -1,0 +1,139 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+push $cut_paste_input
+Dot {
+ name Dot1
+ label "inf and nan cleaner in"
+ note_font_size 22
+ selected true
+ xpos -568
+ ypos 856
+}
+Dot {
+ name Dot4
+ note_font_size 22
+ selected true
+ xpos -568
+ ypos 920
+}
+set N59ddb000 [stack 0]
+Dot {
+ name Dot10
+ note_font_size 22
+ selected true
+ xpos -708
+ ypos 920
+}
+Dot {
+ name Dot2
+ note_font_size 22
+ selected true
+ xpos -708
+ ypos 1304
+}
+push $N59ddb000
+Unpremult {
+ name Unpremult1
+ selected true
+ xpos -320
+ ypos 918
+}
+Expression {
+ channel0 rgba
+ expr0 "isinf(r) || isinf(g) || isinf(b) || isnan(r) || isnan(g) || isnan(b)"
+ channel1 none
+ channel2 none
+ name Expression3
+ selected true
+ xpos -320
+ ypos 952
+}
+Dot {
+ name Dot5
+ label "inf and nan matte"
+ note_font_size 22
+ selected true
+ xpos -288
+ ypos 1016
+}
+push $N59ddb000
+Merge2 {
+ inputs 2
+ operation stencil
+ name Merge1
+ selected true
+ xpos -600
+ ypos 1014
+}
+set N603e2400 [stack 0]
+Dot {
+ name Dot6
+ note_font_size 22
+ selected true
+ xpos -428
+ ypos 1080
+}
+Blur {
+ channels rgba
+ size 2
+ name Blur1
+ label "\[value size]"
+ selected true
+ xpos -460
+ ypos 1110
+}
+Blur {
+ channels rgba
+ size 5
+ mix 0.1
+ name Blur2
+ label "\[value size]"
+ selected true
+ xpos -460
+ ypos 1156
+}
+Unpremult {
+ name Unpremult2
+ selected true
+ xpos -460
+ ypos 1202
+}
+Dot {
+ name Dot9
+ note_font_size 22
+ selected true
+ xpos -428
+ ypos 1240
+}
+push $N603e2400
+Merge2 {
+ inputs 2
+ operation under
+ name Merge2
+ selected true
+ xpos -600
+ ypos 1238
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy1
+ selected true
+ xpos -600
+ ypos 1296
+}
+Premult {
+ name Premult1
+ selected true
+ xpos -600
+ ypos 1342
+}
+Dot {
+ name Dot3
+ label "inf and nan cleaner out"
+ note_font_size 22
+ selected true
+ xpos -568
+ ypos 1400
+}
