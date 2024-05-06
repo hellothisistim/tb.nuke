@@ -6,37 +6,37 @@ Dot {
  label "inf and nan cleaner in"
  note_font_size 22
  selected true
- xpos -568
- ypos 856
+ xpos 183
+ ypos -31
 }
 Dot {
  name Dot4
  note_font_size 22
  selected true
- xpos -568
- ypos 920
+ xpos 183
+ ypos 33
 }
-set N59ddb000 [stack 0]
+set N809fc400 [stack 0]
 Dot {
  name Dot10
  note_font_size 22
  selected true
- xpos -708
- ypos 920
+ xpos 43
+ ypos 33
 }
 Dot {
  name Dot2
  note_font_size 22
  selected true
- xpos -708
- ypos 1304
+ xpos 43
+ ypos 417
 }
-push $N59ddb000
+push $N809fc400
 Unpremult {
  name Unpremult1
  selected true
- xpos -320
- ypos 918
+ xpos 431
+ ypos 31
 }
 Expression {
  channel0 rgba
@@ -45,33 +45,34 @@ Expression {
  channel2 none
  name Expression3
  selected true
- xpos -320
- ypos 952
+ xpos 431
+ ypos 65
 }
 Dot {
  name Dot5
  label "inf and nan matte"
  note_font_size 22
  selected true
- xpos -288
- ypos 1016
+ xpos 463
+ ypos 129
 }
-push $N59ddb000
+push $N809fc400
 Merge2 {
  inputs 2
  operation stencil
+ bbox B
  name Merge1
  selected true
- xpos -600
- ypos 1014
+ xpos 151
+ ypos 127
 }
-set N603e2400 [stack 0]
+set N809fdc00 [stack 0]
 Dot {
  name Dot6
  note_font_size 22
  selected true
- xpos -428
- ypos 1080
+ xpos 323
+ ypos 193
 }
 Blur {
  channels rgba
@@ -79,8 +80,8 @@ Blur {
  name Blur1
  label "\[value size]"
  selected true
- xpos -460
- ypos 1110
+ xpos 291
+ ypos 223
 }
 Blur {
  channels rgba
@@ -89,30 +90,31 @@ Blur {
  name Blur2
  label "\[value size]"
  selected true
- xpos -460
- ypos 1156
+ xpos 291
+ ypos 269
 }
 Unpremult {
  name Unpremult2
  selected true
- xpos -460
- ypos 1202
+ xpos 291
+ ypos 315
 }
 Dot {
  name Dot9
  note_font_size 22
  selected true
- xpos -428
- ypos 1240
+ xpos 323
+ ypos 353
 }
-push $N603e2400
+push $N809fdc00
 Merge2 {
  inputs 2
  operation under
+ bbox B
  name Merge2
  selected true
- xpos -600
- ypos 1238
+ xpos 151
+ ypos 351
 }
 Copy {
  inputs 2
@@ -120,20 +122,20 @@ Copy {
  to0 rgba.alpha
  name Copy1
  selected true
- xpos -600
- ypos 1296
+ xpos 151
+ ypos 409
 }
 Premult {
  name Premult1
  selected true
- xpos -600
- ypos 1342
+ xpos 151
+ ypos 455
 }
 Dot {
  name Dot3
  label "inf and nan cleaner out"
  note_font_size 22
  selected true
- xpos -568
- ypos 1400
+ xpos 183
+ ypos 513
 }
