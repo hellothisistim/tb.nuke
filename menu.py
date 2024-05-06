@@ -240,6 +240,15 @@ def runAutoCrop():
     nukescripts.autocrop(first=None, last=None, inc=None, layer="rgba")
 
 
+# Reset viewer gain and gamma controls
+# Sourced from: https://www.hiramgifford.com/nuke-tools-and-scripts/nuke-python-code-snippets Many thanks!
+def reset_viewers_gain_gamma():
+    for node in nuke.allNodes():
+        if node.Class() == 'Viewer':
+            node.knob('gain').setValue(1)
+            node.knob('gamma').setValue(1)
+
+
 ##
 ## Main
 ##
@@ -326,6 +335,7 @@ mkshort.addCommand('AutoBackdrop', "tb_autobackdrop()", shortcut='Alt+Shift+B')
 mkshort.addCommand('Edit Label', "editLabel()", shortcut='Ctrl+L')
 # It's time to let this go until I get smartRoto working for the Nuke7 world.
 #mkshort.addCommand('Smart Roto', "smartBezier()", shortcut='p')
+mkshort.addCommand('Reset Viewer Gain & Gamma', "reset_viewers_gain_gamma()", shortcut='Alt+V')
 
 
 ### Load Comp Island
