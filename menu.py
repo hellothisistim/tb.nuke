@@ -248,6 +248,18 @@ def reset_viewers_gain_gamma():
             node.knob('gain').setValue(1)
             node.knob('gamma').setValue(1)
 
+# Apply my default labels
+def apply_default_label(nodes, append=False):
+    """Applies the current default label text to all selected nodes. 
+    Will replace any existing label by default! Use 'append=True' to 
+    place the default label text after any existing label text."""
+    for node in nodes:
+        label_text = nuke.knobDefault(node.Class()+'.label')
+        if append:
+            label_text = node.knob('label').getValue() + '\n' + label_text
+        node.knob('label').setValue(label_text)
+
+
 
 ##
 ## Main
@@ -283,6 +295,8 @@ tm.addCommand('Remove proxy from Reads',
 tm.addCommand('Frame Range to Viewer', lambda: frameRangeToViewer())
 tm.addCommand('Labeled Dot Organizer', lambda: labledDotOrganizer())
 tm.addCommand('AutoCrop', lambda: runAutoCrop())
+tm.addCommand('Apply Default Label', lambda:apply_default_label(nuke.selectedNodes()))
+tm.addCommand('Append Default Label', lambda:apply_default_label(nuke.selectedNodes(), append=True))
 
 ##
 ## Node defaults
@@ -324,6 +338,8 @@ nuke.knobDefault("StickyNote.label", '<align left>')
 nuke.knobDefault("Retime.before", "continue")
 nuke.knobDefault("Retime.after", "continue")
 nuke.knobDefault("Roto.output", 'rgba')
+nuke.knobDefault("Tracker4.label", """mode: [value transform]
+    ref: x[value reference_frame]""")
 nuke.knobDefault("ContactSheet.width", '{"input.width * columns"}')
 nuke.knobDefault("ContactSheet.height", '{"input.height * rows"}')
 nuke.knobDefault("ContactSheet.roworder", 'TopBottom')
