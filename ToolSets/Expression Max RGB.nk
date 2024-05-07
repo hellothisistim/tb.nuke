@@ -1,0 +1,14 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+push $cut_paste_input
+Expression {
+ channel0 rgba
+ expr0 max(r,g,b)
+ channel1 none
+ channel2 none
+ name Expression1
+ label "\[value expr0]"
+ selected true
+ xpos -623
+ ypos 54
+}

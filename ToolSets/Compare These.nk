@@ -1,0 +1,13 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+push 0
+push $cut_paste_input
+Merge2 {
+ inputs 2
+ operation difference
+ bbox B
+ name Merge2
+ selected true
+ xpos -623
+ ypos 86
+}

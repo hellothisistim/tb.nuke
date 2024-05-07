@@ -1,0 +1,77 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+push $cut_paste_input
+Dot {
+ name Dot1
+ note_font_size 22
+ selected true
+ xpos -428
+ ypos 56
+}
+set Necaf2400 [stack 0]
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.green 0 1 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.green 0 1 rgba.alpha 0 3"
+ name Shuffle2
+ label gggg
+ selected true
+ xpos -460
+ ypos 80
+}
+set Nfcd33800 [stack 0]
+push $Necaf2400
+Dot {
+ name Dot3
+ note_font_size 22
+ selected true
+ xpos -288
+ ypos 56
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.blue 0 2 rgba.red 0 0 rgba.blue 0 2 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.blue 0 2 rgba.alpha 0 3"
+ name Shuffle3
+ label bbbb
+ selected true
+ xpos -320
+ ypos 80
+}
+Merge2 {
+ inputs 2
+ operation difference
+ bbox B
+ name Merge3
+ selected true
+ xpos -320
+ ypos 126
+}
+push $Nfcd33800
+push $Necaf2400
+Dot {
+ name Dot2
+ note_font_size 22
+ selected true
+ xpos -568
+ ypos 56
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.red 0 0 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+ name Shuffle1
+ label rrrr
+ selected true
+ xpos -600
+ ypos 80
+}
+Merge2 {
+ inputs 2
+ operation difference
+ bbox B
+ name Merge2
+ selected true
+ xpos -600
+ ypos 126
+}
