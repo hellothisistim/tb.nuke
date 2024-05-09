@@ -28,3 +28,7 @@ Color
 
   VoronoiGradient
   https://www.nukepedia.com/gizmos/colour/voronoi-gradient
+
+3D
+  blink_fog_3d
+  https://www.nukepedia.com/blink/3d/blink_fog_3d
