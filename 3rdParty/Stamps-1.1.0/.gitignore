@@ -1,0 +1,5 @@
+
+*.pyc
+extras/.DS_Store
+.DS_Store
+*.dat
