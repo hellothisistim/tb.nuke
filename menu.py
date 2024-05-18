@@ -259,6 +259,42 @@ def apply_default_label(nodes, append=False):
             label_text = node.knob('label').getValue() + '\n' + label_text
         node.knob('label').setValue(label_text)
 
+# Sort inputs, by Hugh Macdonald
+# https://discord.com/channels/1207369533254406247/1239977318580092959/1239977318580092959
+def sort_inputs():
+    """Useful for nodes like ContactSheet where you might have multiple 
+    inputs. If you have a load of nodes to connect in, and a disconnected 
+    ContactSheet node, and connect them all at once using "y", the inputs 
+    often end up in a relatively arbitrary order.
+
+    Selecting the ContactSheet node and running this code will re-order 
+    the inputs based on the x position of the input node."""
+
+    n = nuke.selectedNode()
+    n.inputs()
+    input_nodes = [n.input(i) for i in range(n.inputs())]
+    input_nodes.sort(key = lambda a: a['xpos'].getValue())
+    for i, input_node in enumerate(input_nodes):
+        n.setInput(i, input_node)
+
+# Multi paste, by Hugh Macdonald
+# # https://discord.com/channels/1207369533254406247/1239977318580092959/1239977318580092959
+def multi_paste():
+    """Paste the same nodes under a number of other nodes. You could copy 
+    and then select, paste, select, paste, select, paste, etc, but that's 
+    painful.
+
+    This scriptlet will allow you to select all of the nodes you want to 
+    paste under, and then have it do this all in one go."""
+    
+    nodes = nuke.selectedNodes()
+    for n in nodes:
+        for selected in nuke.selectedNodes():
+            selected["selected"].setValue(False)
+        n["selected"].setValue(True)
+        nuke.nodePaste("%clipboard%")
+    for selected in nuke.selectedNodes():
+        selected["selected"].setValue(False)
 
 
 ##
@@ -352,12 +388,13 @@ nuke.knobDefault("VectorBlur.uv","forward")
 
 ### My keyboard shortcuts
 tm.addSeparator()
-mkshort = tm.addMenu('(These are my special keyboard shortcuts)')
-mkshort.addCommand('AutoBackdrop', "tb_autobackdrop()", shortcut='Alt+Shift+B')
-mkshort.addCommand('Edit Label', "editLabel()", shortcut='Ctrl+L')
+tm.addCommand('AutoBackdrop', "tb_autobackdrop()", shortcut='Alt+Shift+B')
+tm.addCommand('Edit Label', "editLabel()", shortcut='Ctrl+L')
 # It's time to let this go until I get smartRoto working for the Nuke7 world.
-#mkshort.addCommand('Smart Roto', "smartBezier()", shortcut='p')
-mkshort.addCommand('Reset Viewer Gain & Gamma', "reset_viewers_gain_gamma()", shortcut='Alt+V')
+#tm.addCommand('Smart Roto', "smartBezier()", shortcut='p')
+tm.addCommand('Reset Viewer Gain & Gamma', "reset_viewers_gain_gamma()", shortcut='Alt+V')
+tm.addCommand('Sort Inputs', "sort_inputs()")
+tm.addCommand('Multi Paste', "multi_paste()")
 
 
 ### Load Comp Island
