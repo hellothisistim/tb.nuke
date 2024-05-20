@@ -333,6 +333,16 @@ tm.addCommand('Labeled Dot Organizer', lambda: labledDotOrganizer())
 tm.addCommand('AutoCrop', lambda: runAutoCrop())
 tm.addCommand('Apply Default Label', lambda:apply_default_label(nuke.selectedNodes()))
 tm.addCommand('Append Default Label', lambda:apply_default_label(nuke.selectedNodes(), append=True))
+tm.addCommand('Sort Inputs', "sort_inputs()")
+tm.addCommand('Multi Paste', "multi_paste()")
+
+### Keyboard shortcuts
+tm.addSeparator()
+tm.addCommand('AutoBackdrop', "tb_autobackdrop()", shortcut='Alt+Shift+B')
+tm.addCommand('Edit Label', "editLabel()", shortcut='Ctrl+L')
+# It's time to let this go until I get smartRoto working for the Nuke7 world.
+#tm.addCommand('Smart Roto', "smartBezier()", shortcut='p')
+tm.addCommand('Reset Viewer Gain & Gamma', "reset_viewers_gain_gamma()", shortcut='Alt+V')
 
 ##
 ## Node defaults
@@ -385,16 +395,6 @@ nuke.knobDefault("ContactSheet.columns", '{"splitinputs ? ceil(sqrt(endframe-sta
 nuke.knobDefault("Dot.note_font_size","22")
 nuke.knobDefault("EXPTool.mode", "Stops")
 nuke.knobDefault("VectorBlur.uv","forward")
-
-### My keyboard shortcuts
-tm.addSeparator()
-tm.addCommand('AutoBackdrop', "tb_autobackdrop()", shortcut='Alt+Shift+B')
-tm.addCommand('Edit Label', "editLabel()", shortcut='Ctrl+L')
-# It's time to let this go until I get smartRoto working for the Nuke7 world.
-#tm.addCommand('Smart Roto', "smartBezier()", shortcut='p')
-tm.addCommand('Reset Viewer Gain & Gamma', "reset_viewers_gain_gamma()", shortcut='Alt+V')
-tm.addCommand('Sort Inputs', "sort_inputs()")
-tm.addCommand('Multi Paste', "multi_paste()")
 
 
 ### Load Comp Island
