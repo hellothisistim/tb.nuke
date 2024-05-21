@@ -1,0 +1,230 @@
+#! /Applications/Nuke8.0v2/Nuke8.0v2.app/Contents/MacOS/libnuke-8.0.v2.dylib -nx
+version 8.0 v2
+Group {
+ name TX_HueKeyer
+ help "created by Tomas Lefebvre\n\n/// v1.1"
+ knobChanged "\nthisNode = nuke.thisNode()\nthisKnob = nuke.thisKnob()\n\nsatList = \['satRangeMin', 'satRangeMax', 'satFalloffMin', 'satFalloffMax', 'satFalloffType']\nlumaList = \['lumaRangeMin', 'lumaRangeMax', 'lumaFalloffMin', 'lumaFalloffMax', 'lumaFalloffType']\n\nif thisKnob.name() == 'useSat':\n    if thisKnob.value() == 0:\n        for n in satList:\n            thisNode\[n].setFlag(0x00000080)\n    else :\n        for n in satList :\n            thisNode\[n].clearFlag(0x00000080)\nelif thisKnob.name() == 'useLuma':\n    if thisKnob.value() == 0:\n        for n in lumaList:\n            thisNode\[n].setFlag(0x00000080)\n    else :\n        for n in lumaList :\n            thisNode\[n].clearFlag(0x00000080)\n\n"
+ tile_color 0xff00ff
+ addUserKnob {20 User l Settings}
+ addUserKnob {18 huePicker l "hue picker"}
+ huePicker {0.5 0.5 0.5}
+ addUserKnob {6 huePicker_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 useUnpremult l unpremult +STARTLINE}
+ addUserKnob {26 dummy1 l "" +STARTLINE T " "}
+ addUserKnob {7 rangeMin l "min range" R 0 0.5}
+ rangeMin 0.1
+ addUserKnob {7 falloffMin l "  falloff" -STARTLINE}
+ falloffMin 1
+ addUserKnob {7 rangeMax l "max range" R 0 0.5}
+ rangeMax 0.1
+ addUserKnob {7 falloffMax l "  falloff" -STARTLINE}
+ falloffMax 1
+ addUserKnob {4 falloffType l "falloff type" M {linear smooth ""}}
+ falloffType smooth
+ addUserKnob {26 dummy2 l "" +STARTLINE T " "}
+ addUserKnob {6 useSat l "use saturation" +STARTLINE}
+ addUserKnob {7 satRangeMin l "min range" +DISABLED}
+ satRangeMin 0.1
+ addUserKnob {7 satFalloffMin l "  falloff" -STARTLINE +DISABLED}
+ satFalloffMin 1
+ addUserKnob {7 satRangeMax l "max range" +DISABLED}
+ satRangeMax 0.1
+ addUserKnob {7 satFalloffMax l "  falloff" -STARTLINE +DISABLED}
+ satFalloffMax 1
+ addUserKnob {4 satFalloffType l "falloff type" +DISABLED M {linear smooth ""}}
+ satFalloffType smooth
+ addUserKnob {26 dummy3 l "" +STARTLINE T " "}
+ addUserKnob {6 useLuma l "use luminance" +STARTLINE}
+ addUserKnob {7 lumaRangeMin l "min range" +DISABLED}
+ lumaRangeMin 0.1
+ addUserKnob {7 lumaFalloffMin l "  falloff" -STARTLINE +DISABLED}
+ lumaFalloffMin 1
+ addUserKnob {7 lumaRangeMax l "max range" +DISABLED}
+ lumaRangeMax 1
+ addUserKnob {7 lumaFalloffMax l "  falloff" -STARTLINE +DISABLED}
+ lumaFalloffMax 1
+ addUserKnob {4 lumaFalloffType l "falloff type" +DISABLED M {linear smooth ""}}
+ lumaFalloffType smooth
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 credits l "" +STARTLINE T "TX_HueKeyer v1.1   -   Tomas Lefebvre (c)"}
+}
+ Constant {
+  inputs 0
+  channels rgb
+  color {{parent.huePicker.r i} {parent.huePicker.g i} {parent.huePicker.b i} {curve i}}
+  format "1024 1024 0 0 1024 1024 1 square_1K"
+  name Constant1
+  xpos -35
+  ypos 87
+ }
+ Reformat {
+  type "to box"
+  box_width {{parent.Input.width i}}
+  box_height {{parent.Input.height i}}
+  box_fixed true
+  box_pixel_aspect {{parent.Input.pixel_aspect i}}
+  name Reformat1
+  xpos -35
+  ypos 192
+ }
+ Colorspace {
+  colorspace_out HSV
+  name Colorspace2
+  xpos -35
+  ypos 248
+ }
+set N216b5f90 [stack 0]
+ Input {
+  inputs 0
+  name Input
+  xpos -336
+  ypos 70
+ }
+ Dot {
+  name Dot2
+  xpos -302
+  ypos 181
+ }
+set N216be2e0 [stack 0]
+ Unpremult {
+  name Unpremult1
+  xpos -183
+  ypos 177
+  disable {{!parent.useUnpremult i}}
+ }
+ Colorspace {
+  colorspace_out HSV
+  name Colorspace1
+  xpos -183
+  ypos 247
+ }
+set N21c03df0 [stack 0]
+ MergeExpression {
+  inputs 2
+  temp_name0 dif
+  temp_expr0 A.b-B.b
+  channel0 rgb
+  expr0 "clamp((B.b-A.b)<-lumaRangeMin || (B.b-A.b)>lumaRangeMax ? 0 : B.b-A.b<0 ? 1-(abs(B.b-A.b)-lumaRangeMin*(1-lumaFalloffMin))/(lumaRangeMin-lumaRangeMin*(1-lumaFalloffMin)) : B.b-A.b>0 ? 1-(abs(B.b-A.b)-lumaRangeMax*(1-lumaFalloffMax))/(lumaRangeMax-lumaRangeMax*(1-lumaFalloffMax))  : 1)"
+  name MergeExpression3
+  xpos 129
+  ypos 336
+ }
+set N200c13a0 [stack 0]
+ Expression {
+  channel0 rgb
+  expr0 smoothstep(0,1,r)
+  name Smooth2
+  xpos 130
+  ypos 383
+  disable {{!parent.lumaFalloffType i}}
+ }
+ Dot {
+  name Dot3
+  xpos 164
+  ypos 481
+ }
+push $N216b5f90
+push $N21c03df0
+ MergeExpression {
+  inputs 2
+  temp_name0 dif
+  temp_expr0 A.g-B.g
+  channel0 rgb
+  expr0 "clamp((B.g-A.g)<-satRangeMin || (B.g-A.g)>satRangeMax ? 0 : B.g-A.g<0 ? 1-(abs(B.g-A.g)-satRangeMin*(1-satFalloffMin))/(satRangeMin-satRangeMin*(1-satFalloffMin)) : B.g-A.g>0 ? 1-(abs(B.g-A.g)-satRangeMax*(1-satFalloffMax))/(satRangeMax-satRangeMax*(1-satFalloffMax))  : 1)"
+  name MergeExpression1
+  xpos -35
+  ypos 346
+ }
+ Expression {
+  channel0 rgb
+  expr0 smoothstep(0,1,r)
+  name Smooth1
+  xpos -35
+  ypos 385
+  disable {{!parent.satFalloffType i}}
+ }
+set N200d3910 [stack 0]
+ Dot {
+  name Dot1
+  xpos -1
+  ypos 435
+ }
+push $N216b5f90
+push $N21c03df0
+ MergeExpression {
+  inputs 2
+  temp_name0 hue
+  temp_expr0 A.r(10,10)
+  expr0 "B.r-(hue-0.5) < 0 ? 1+B.r-(hue-0.5) : B.r-(hue-0.5)>1 ? B.r-(hue-0.5)-1 : B.r-(hue-0.5)"
+  name MergeExpression2
+  xpos -183
+  ypos 319
+ }
+ Expression {
+  temp_expr3 (0.5+rangeMax-falloffMax*rangeMax)
+  channel0 rgb
+  expr0 "r<0.5-rangeMin || r>0.5+rangeMax ? 0 : r<0.5 ? clamp((r-0.5+rangeMin)/(rangeMin*falloffMin)) :  r>0.5 ? clamp(1-(r-(0.5+rangeMax-falloffMax*rangeMax))/(falloffMax*rangeMax)) : 1"
+  name Expression1
+  xpos -183
+  ypos 363
+ }
+ Expression {
+  channel0 rgb
+  expr0 smoothstep(0,1,r)
+  name Smooth
+  xpos -183
+  ypos 389
+  disable {{!parent.falloffType i}}
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  output rgb
+  name Merge1
+  xpos -183
+  ypos 431
+  disable {{!parent.useSat i}}
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  output rgb
+  name Merge2
+  xpos -183
+  ypos 477
+  disable {{!parent.useLuma i}}
+ }
+ Premult {
+  name Premult1
+  xpos -183
+  ypos 518
+  disable {{!parent.useUnpremult i}}
+ }
+push $N216be2e0
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.alpha
+  name Copy1
+  xpos -336
+  ypos 512
+ }
+ Output {
+  name Output1
+  xpos -336
+  ypos 631
+ }
+push $N200c13a0
+push $N200d3910
+ Viewer {
+  inputs 2
+  input_number 1
+  useGPUForViewer true
+  useGPUForInputs true
+  input_process false
+  name Viewer1
+  selected true
+  xpos 25
+  ypos 576
+ }
+end_group

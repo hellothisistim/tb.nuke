@@ -21,6 +21,8 @@ if tm is not None:
     tm.addCommand('Gizmos/Filter/apScreenClean', "nuke.createNode('apScreenClean')", icon="apScreenClean.png")
     tm.addCommand('Gizmos/Filter/apScreenGrow', "nuke.createNode('apScreenGrow')", icon="apScreenGrow.png")
 
+    tm.addCommand('Gizmos/Keyer/TX_HueKeyer', "nuke.createNode('TX_HueKeyer')")
+
 else:
     nuke.tprint("User " + user + " does not have a menu. Not adding gizmos.")
 
