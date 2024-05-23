@@ -457,5 +457,11 @@ try:
 except ImportError as e:
     nuke.tprint('Skipping import of unhook_viewer_input_one. Error:', e)
 
+### Load bgNukes
+nuke.tprint('Importing bgNukes')
+try:
+    import bgNukes
+except ImportError as e:
+    nuke.tprint('Skipping import of bgNukes. Error:', e)
 
 nuke.tprint('  END: '+ os.path.realpath(__file__))
