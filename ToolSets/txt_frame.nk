@@ -5,7 +5,7 @@ Text2 {
  font_size_toolbar 100
  font_width_toolbar 100
  font_height_toolbar 100
- message "\[frame]"
+ message "x\[frame]"
  old_message {{49 48 48 56}
    }
  old_expression_markers {{0 3}
