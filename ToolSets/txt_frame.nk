@@ -1,0 +1,33 @@
+set cut_paste_input [stack 0]
+version 15.0 v1
+push $cut_paste_input
+Text2 {
+ font_size_toolbar 100
+ font_width_toolbar 100
+ font_height_toolbar 100
+ message "\[frame]"
+ old_message {{49 48 48 56}
+   }
+ old_expression_markers {{0 3}
+   }
+ box {10 10 1910 111}
+ transforms {{0 2}
+   }
+ cursor_position 7
+ font {{ Arial : Regular : Arial.ttf : 0 }}
+ center {2048 858}
+ cursor_initialised true
+ autofit_bbox false
+ initial_cursor_position {{0 1716}
+   }
+ group_animations {{0} imported: 0 selected: items: "root transform/"}
+ animation_layers {{1 11 2048 858 0 0 1 1 0 0 0 0}
+   }
+ enable_background true
+ name TXT_Frame
+ tile_color 0xff0000ff
+ selected true
+ xpos -81
+ ypos 54
+ disable {{"\$gui ? 0 : 1"}}
+}
