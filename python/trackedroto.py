@@ -30,6 +30,7 @@ def trackedroto():
     roto = nuke.createNode('Roto')
 
     roto.setName('TrackedRoto')
+    roto['label'].setValue('track src: ' + trans.name())
 
     # print("Tracker:", trans.name())
     # print("Roto:", roto.name())
