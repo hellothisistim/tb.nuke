@@ -37,7 +37,7 @@ def dotLabel():
             try:
                 pn=getParentNode(i)
                 pnlabel=pn['label'].value()
-                pnLabelSize=pn['note_font_size'].value()
+                # pnLabelSize=pn['note_font_size'].value()
                 pnLabelColour=pn['note_font_color'].value()
 
                 i['label'].setValue(pnlabel)
