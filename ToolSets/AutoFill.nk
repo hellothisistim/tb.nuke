@@ -1,0 +1,276 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name AutoFill
+ selected true
+ xpos 10883
+ ypos 418
+ addUserKnob {20 User l AutoFill}
+ addUserKnob {26 label_1 l "" -STARTLINE T "AutoFill v2.1"}
+ addUserKnob {26 ""}
+ addUserKnob {41 uv_scale l Amount T IDistort1.uv_scale}
+ addUserKnob {41 size l Smooth T Blur1.size}
+ addUserKnob {6 Invert_matte l "Invert Matte" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 erodeMatte l "Erode Matte In" T FilterErode1.size}
+ addUserKnob {41 BlurMatteIn l "Blur Matte In" T Blur2.size}
+ addUserKnob {26 ""}
+ addUserKnob {41 erodeMatteOut l "Erode Matte Out" T Erode1.size}
+ addUserKnob {41 BlurMatteOut l "Blur Matte Out" T Blur3.size}
+ addUserKnob {6 InvertMatteOut l "Invert Matte" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {4 AlphaIs l "Alpha is" M {Unmultiplied Premultiplied "Full on (whilte)" "Full off (black)" "" "" ""}}
+}
+ Input {
+  inputs 0
+  name Shape
+  xpos 290
+  ypos -256
+  number 1
+ }
+ Invert {
+  mix {{parent.Invert_matte}}
+  name Invert1
+  xpos 290
+  ypos -191
+ }
+set N99e10c00 [stack 0]
+ Dot {
+  name Dot5
+  xpos 464
+  ypos -182
+ }
+ Dot {
+  name Dot2
+  xpos 464
+  ypos 485
+ }
+set N20f68400 [stack 0]
+ Invert {
+  mix {{parent.InvertMatteOut}}
+  name Invert2
+  xpos 430
+  ypos 537
+ }
+ Erode {
+  size 0
+  name Erode1
+  xpos 430
+  ypos 593
+ }
+ Blur {
+  name Blur3
+  xpos 430
+  ypos 644
+ }
+ Dot {
+  name Dot4
+  xpos 464
+  ypos 744
+ }
+push $N20f68400
+ Input {
+  inputs 0
+  name Matte_Out
+  xpos 579
+  ypos -230
+  number 2
+ }
+ Dot {
+  name Dot11
+  xpos 613
+  ypos -127
+ }
+set N20f69c00 [stack 0]
+ Dot {
+  name Dot10
+  xpos 613
+  ypos 280
+ }
+push $N20f69c00
+push $N99e10c00
+ FilterErode {
+  inputs 1+1
+  channels rgba
+  size 0
+  invert_mask true
+  name FilterErode1
+  xpos 290
+  ypos -131
+ }
+ Dot {
+  name Dot3
+  xpos 324
+  ypos -34
+ }
+set Ne9df4800 [stack 0]
+ LevelSet {
+  name LevelSet1
+  xpos 70
+  ypos -44
+ }
+set Ne9df4c00 [stack 0]
+ Shuffle {
+  in forward
+  name Shuffle1
+  xpos 185
+  ypos 7
+ }
+push $Ne9df4c00
+ Shuffle {
+  in alpha
+  name Shuffle2
+  xpos 70
+  ypos 7
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  also_merge all
+  name Merge2
+  xpos 70
+  ypos 60
+ }
+push $Ne9df4800
+ Dot {
+  name Dot1
+  xpos 324
+  ypos 111
+ }
+ Merge2 {
+  inputs 2
+  operation in
+  also_merge all
+  name Merge3
+  xpos 70
+  ypos 107
+ }
+ Multiply {
+  value -2
+  name Multiply1
+  xpos 70
+  ypos 146
+ }
+ Blur {
+  name Blur1
+  xpos 70
+  ypos 197
+ }
+ Input {
+  inputs 0
+  name Image
+  xpos -40
+  ypos -37
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 forward.u
+  from1 rgba.green
+  to1 forward.v
+  name Copy1
+  xpos -40
+  ypos 191
+ }
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy2
+  xpos -40
+  ypos 276
+ }
+ IDistort {
+  uv forward
+  maskChannel rgba.alpha
+  invert_mask true
+  name IDistort1
+  xpos -40
+  ypos 331
+ }
+set Nba633800 [stack 0]
+ Blur {
+  inputs 1+1
+  name Blur2
+  xpos -40
+  ypos 475
+ }
+ Remove {
+  channels forward
+  name Remove1
+  xpos -40
+  ypos 549
+ }
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy1
+  xpos -40
+  ypos 740
+ }
+ Dot {
+  name Dot6
+  xpos -6
+  ypos 802
+ }
+set N99bcc800 [stack 0]
+ Dot {
+  name Dot7
+  xpos 104
+  ypos 802
+ }
+set N99bccc00 [stack 0]
+ Dot {
+  name Dot8
+  xpos 190
+  ypos 802
+ }
+set N99bcd000 [stack 0]
+ Dot {
+  name Dot9
+  xpos 300
+  ypos 802
+ }
+ Shuffle {
+  alpha black
+  name Shuffle4
+  xpos 266
+  ypos 863
+ }
+push $N99bcd000
+ Shuffle {
+  alpha white
+  name Shuffle3
+  xpos 156
+  ypos 862
+ }
+push $N99bccc00
+ Premult {
+  name Premult2
+  xpos 43
+  ypos 862
+ }
+push $N99bcc800
+ Switch {
+  inputs 4
+  which {{AlphaIs}}
+  name Switch1
+  xpos -40
+  ypos 973
+ }
+ Output {
+  name Output1
+  xpos -40
+  ypos 1106
+ }
+push $Nba633800
+push 0
+ Viewer {
+  inputs 2
+  input_number 1
+  input_process false
+  name Viewer1
+  xpos 584
+  ypos 686
+ }
+end_group
