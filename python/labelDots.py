@@ -41,7 +41,7 @@ def dotLabel():
                 pnLabelColour=pn['note_font_color'].value()
 
                 i['label'].setValue(pnlabel)
-                i['note_font_size'].setValue(pnLabelSize)
+                # i['note_font_size'].setValue(pnLabelSize)
                 i['note_font_color'].setValue(int(pnLabelColour))
             except TypeError:
                 pass
