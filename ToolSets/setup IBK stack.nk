@@ -16,16 +16,24 @@ Dot {
  note_font_size 22
  selected true
  xpos 10172
- ypos -691
+ ypos -731
 }
 Dot {
  name Dot68
  note_font_size 22
  selected true
  xpos 10172
- ypos -622
+ ypos -662
 }
 set Ncf643800 [stack 0]
+Saturation {
+ saturation 2
+ name Saturation2
+ selected true
+ xpos 10138
+ ypos -610
+ disable true
+}
 IBKColourV3 {
  name IBKColourV3_MASTER4
  label "start with darks, lights\nerode to remove pollution"
@@ -103,47 +111,63 @@ EdgeExtend {
  xpos 10138
  ypos -300
 }
+Saturation {
+ saturation 0.5
+ name Saturation4
+ selected true
+ xpos 10138
+ ypos -266
+ disable true
+}
 Dot {
  name Dot69
  note_font_size 22
  selected true
  xpos 10172
- ypos -266
+ ypos -230
 }
 Dot {
  name Dot70
  note_font_size 22
  selected true
  xpos 10239
- ypos -236
+ ypos -200
 }
 NoOp {
  name NoOp5
  label prerender
  selected true
  xpos 10205
- ypos -210
+ ypos -174
+}
+Dot {
+ name Dot85
+ label "don't forget to check for flickering!"
+ note_font_size 22
+ selected true
+ xpos 10239
+ ypos 48
 }
 Dot {
  name Dot71
  note_font_size 22
  selected true
  xpos 10239
- ypos -7
+ ypos 74
 }
 Dot {
  name Dot72
  note_font_size 22
  selected true
  xpos 10172
- ypos 23
+ ypos 104
 }
 Dot {
  name Dot73
  note_font_size 22
  selected true
  xpos 10172
- ypos 90
+ ypos 171
 }
 push $Ncf643800
 Dot {
@@ -151,13 +175,13 @@ Dot {
  note_font_size 22
  selected true
  xpos 10353
- ypos -622
+ ypos -662
 }
 IBKGizmoV3 {
  inputs 2
  name IBKGizmoV3_5
  xpos 10319
- ypos 86
+ ypos 167
  ss false
 }
 Dot {
@@ -166,7 +190,7 @@ Dot {
  note_font_size 22
  selected true
  xpos 10353
- ypos 203
+ ypos 284
 }
 Expression {
  inputs 0
@@ -184,16 +208,24 @@ Dot {
  note_font_size 22
  selected true
  xpos 10736
- ypos -673
+ ypos -713
 }
 Dot {
  name Dot77
  note_font_size 22
  selected true
  xpos 10736
- ypos -618
+ ypos -658
 }
 set Nf1428400 [stack 0]
+Saturation {
+ saturation 2
+ name Saturation3
+ selected true
+ xpos 10702
+ ypos -606
+ disable true
+}
 IBKColourV3 {
  name IBKColourV3_MASTER5
  label "start with darks, lights\nerode to remove pollution"
@@ -277,47 +309,63 @@ EdgeExtend {
  xpos 10702
  ypos -296
 }
+Saturation {
+ saturation 0.5
+ name Saturation5
+ selected true
+ xpos 10702
+ ypos -262
+ disable true
+}
 Dot {
  name Dot78
  note_font_size 22
  selected true
  xpos 10736
- ypos -262
+ ypos -226
 }
 Dot {
  name Dot79
  note_font_size 22
  selected true
  xpos 10803
- ypos -232
+ ypos -196
 }
 NoOp {
  name NoOp6
  label prerender
  selected true
  xpos 10769
- ypos -206
+ ypos -170
+}
+Dot {
+ name Dot86
+ label "don't forget to check for flickering!"
+ note_font_size 22
+ selected true
+ xpos 10803
+ ypos 52
 }
 Dot {
  name Dot80
  note_font_size 22
  selected true
  xpos 10803
- ypos -3
+ ypos 78
 }
 Dot {
  name Dot81
  note_font_size 22
  selected true
  xpos 10736
- ypos 27
+ ypos 108
 }
 Dot {
  name Dot82
  note_font_size 22
  selected true
  xpos 10736
- ypos 94
+ ypos 175
 }
 push $Nf1428400
 Dot {
@@ -325,13 +373,13 @@ Dot {
  note_font_size 22
  selected true
  xpos 10917
- ypos -618
+ ypos -658
 }
 IBKGizmoV3 {
  inputs 2
  name IBKGizmoV3_6
  xpos 10883
- ypos 90
+ ypos 171
  st C-green
  ss false
 }
@@ -341,5 +389,5 @@ Dot {
  note_font_size 22
  selected true
  xpos 10917
- ypos 207
+ ypos 288
 }
