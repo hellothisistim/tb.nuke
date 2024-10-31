@@ -1,0 +1,40 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+push $cut_paste_input
+Group {
+ name RadialCentered
+ tile_color 0xff8ed2ff
+ selected true
+ xpos -10
+ ypos 52
+ addUserKnob {20 User}
+ addUserKnob {41 output T Radial1.output}
+ addUserKnob {41 cliptype l "clip to" T Radial1.cliptype}
+ addUserKnob {41 radius T Radial1.radius}
+ addUserKnob {41 softness T Radial1.softness}
+ addUserKnob {41 invert T Radial1.invert}
+ addUserKnob {41 replace T Radial1.replace}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -102
+  ypos -32
+ }
+ Radial {
+  area {{"format_center.x - radius / format.pixel_aspect"} {"format_center.y - radius"} {"format_center.x + radius / format.pixel_aspect"} {"format_center.y + radius"}}
+  name Radial1
+  xpos -102
+  ypos 19
+  addUserKnob {20 User}
+  addUserKnob {7 radius R 0 6000}
+  radius 1440
+  addUserKnob {12 format_center l "format center"}
+  format_center {{"format.width / 2"} {"format.height / 2"}}
+ }
+ Output {
+  name Output1
+  xpos -102
+  ypos 108
+ }
+end_group
