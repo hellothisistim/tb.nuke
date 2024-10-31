@@ -384,6 +384,7 @@ nuke.knobDefault("StickyNote.label", '<align left>')
 nuke.knobDefault("Retime.before", "continue")
 nuke.knobDefault("Retime.after", "continue")
 nuke.knobDefault("Roto.output", 'rgba')
+nuke.knobDefault('TimeOffset.label','[value time_offset] frames\nsource: x[expression [value frame]-[value time_offset]]')
 nuke.knobDefault("Tracker4.label", """mode: [value transform]
     ref: x[value reference_frame]""")
 nuke.knobDefault("ContactSheet.width", '{"input.width * columns"}')
