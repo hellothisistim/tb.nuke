@@ -53,6 +53,7 @@ def trackerstablemm(node):
     stable = nuke.toNode(sort_names[-1])
 
     stable.setInput(0, track)
+    stable['shutteroffset'].setValue('centered')
 
     # Well done. Now make that matchmove.
     cpo.setValue('Transform (match-move)')
@@ -68,7 +69,7 @@ def trackerstablemm(node):
     sort_names = sorted([node.name() for node in noconnect])
     mm = nuke.toNode(sort_names[-1])
 
-    # TODO: Name them
+    # Name them
     name = track.name()
     if '_' in name:
         name = name.split('_')[-1]
@@ -76,6 +77,7 @@ def trackerstablemm(node):
     mm.setName('mm_' + name)
 
     mm.setInput(0, stable)
+    mm['shutteroffset'].setValue('centered')
 
     # Arrange neatly
     stable.autoplace()
