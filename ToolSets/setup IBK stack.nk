@@ -1,0 +1,345 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+Expression {
+ inputs 0
+ channel0 rgba
+ expr0 "a > 0.5"
+ name Expression5
+ label "\[value expr0]"
+ selected true
+ xpos 9986
+ ypos -516
+}
+push $cut_paste_input
+Dot {
+ name Dot67
+ note_font_size 22
+ selected true
+ xpos 10172
+ ypos -691
+}
+Dot {
+ name Dot68
+ note_font_size 22
+ selected true
+ xpos 10172
+ ypos -622
+}
+set Ncf643800 [stack 0]
+IBKColourV3 {
+ name IBKColourV3_MASTER4
+ label "start with darks, lights\nerode to remove pollution"
+ selected true
+ xpos 10138
+ ypos -576
+ Size 1
+}
+Merge2 {
+ inputs 2
+ operation stencil
+ bbox B
+ name Merge13
+ label "roto to remove anything big"
+ selected true
+ xpos 10138
+ ypos -516
+ disable true
+}
+IBKColourV3 {
+ name IBKColourV3_stackA4
+ selected true
+ xpos 10138
+ ypos -470
+ Size 1
+ off {{parent.IBKColourV3_MASTER4.off} {parent.IBKColourV3_MASTER4.off} {parent.IBKColourV3_MASTER4.off}}
+ mult {{parent.IBKColourV3_MASTER4.mult} {parent.IBKColourV3_MASTER4.mult} {parent.IBKColourV3_MASTER4.mult}}
+ multi 1
+}
+IBKColourV3 {
+ name IBKColourV3_stackB4
+ selected true
+ xpos 10138
+ ypos -436
+ Size 1
+ off {{parent.IBKColourV3_MASTER4.off} {parent.IBKColourV3_MASTER4.off} {parent.IBKColourV3_MASTER4.off}}
+ mult {{parent.IBKColourV3_MASTER4.mult} {parent.IBKColourV3_MASTER4.mult} {parent.IBKColourV3_MASTER4.mult}}
+ multi 2
+}
+IBKColourV3 {
+ name IBKColourV3_stackC4
+ selected true
+ xpos 10138
+ ypos -402
+ Size 1
+ off {{parent.IBKColourV3_MASTER4.off} {parent.IBKColourV3_MASTER4.off} {parent.IBKColourV3_MASTER4.off}}
+ mult {{parent.IBKColourV3_MASTER4.mult} {parent.IBKColourV3_MASTER4.mult} {parent.IBKColourV3_MASTER4.mult}}
+ multi 4
+}
+IBKColourV3 {
+ name IBKColourV3_stackD4
+ selected true
+ xpos 10138
+ ypos -368
+ Size 1
+ off {{parent.IBKColourV3_MASTER4.off} {parent.IBKColourV3_MASTER4.off} {parent.IBKColourV3_MASTER4.off}}
+ mult {{parent.IBKColourV3_MASTER4.mult} {parent.IBKColourV3_MASTER4.mult} {parent.IBKColourV3_MASTER4.mult}}
+ multi 8
+}
+IBKColourV3 {
+ name IBKColourV3_stackE4
+ selected true
+ xpos 10138
+ ypos -334
+ Size 1
+ off {{parent.IBKColourV3_MASTER4.off} {parent.IBKColourV3_MASTER4.off} {parent.IBKColourV3_MASTER4.off}}
+ mult {{parent.IBKColourV3_MASTER4.mult} {parent.IBKColourV3_MASTER4.mult} {parent.IBKColourV3_MASTER4.mult}}
+ multi 16
+}
+EdgeExtend {
+ detailAmount 0
+ premultiply false
+ name EdgeExtend5
+ selected true
+ xpos 10138
+ ypos -300
+}
+Dot {
+ name Dot69
+ note_font_size 22
+ selected true
+ xpos 10172
+ ypos -266
+}
+Dot {
+ name Dot70
+ note_font_size 22
+ selected true
+ xpos 10239
+ ypos -236
+}
+NoOp {
+ name NoOp5
+ label prerender
+ selected true
+ xpos 10205
+ ypos -210
+}
+Dot {
+ name Dot71
+ note_font_size 22
+ selected true
+ xpos 10239
+ ypos -7
+}
+Dot {
+ name Dot72
+ note_font_size 22
+ selected true
+ xpos 10172
+ ypos 23
+}
+Dot {
+ name Dot73
+ note_font_size 22
+ selected true
+ xpos 10172
+ ypos 90
+}
+push $Ncf643800
+Dot {
+ name Dot74
+ note_font_size 22
+ selected true
+ xpos 10353
+ ypos -622
+}
+IBKGizmoV3 {
+ inputs 2
+ name IBKGizmoV3_5
+ xpos 10319
+ ypos 86
+ ss false
+}
+Dot {
+ name Dot75
+ label bluescreen
+ note_font_size 22
+ selected true
+ xpos 10353
+ ypos 203
+}
+Expression {
+ inputs 0
+ channel0 rgba
+ expr0 "a > 0.5"
+ name Expression6
+ label "\[value expr0]"
+ selected true
+ xpos 10550
+ ypos -512
+}
+push $cut_paste_input
+Dot {
+ name Dot76
+ note_font_size 22
+ selected true
+ xpos 10736
+ ypos -673
+}
+Dot {
+ name Dot77
+ note_font_size 22
+ selected true
+ xpos 10736
+ ypos -618
+}
+set Nf1428400 [stack 0]
+IBKColourV3 {
+ name IBKColourV3_MASTER5
+ label "start with darks, lights\nerode to remove pollution"
+ selected true
+ xpos 10702
+ ypos -572
+ screen_type green
+ Size 1
+}
+Merge2 {
+ inputs 2
+ operation stencil
+ bbox B
+ name Merge14
+ label "roto to remove anything big"
+ selected true
+ xpos 10702
+ ypos -512
+ disable true
+}
+IBKColourV3 {
+ name IBKColourV3_stackA5
+ selected true
+ xpos 10702
+ ypos -466
+ screen_type green
+ Size 1
+ off {{parent.IBKColourV3_MASTER5.off} {parent.IBKColourV3_MASTER5.off} {parent.IBKColourV3_MASTER5.off}}
+ mult {{parent.IBKColourV3_MASTER5.mult} {parent.IBKColourV3_MASTER5.mult} {parent.IBKColourV3_MASTER5.mult}}
+ multi 1
+}
+IBKColourV3 {
+ name IBKColourV3_stackB5
+ selected true
+ xpos 10702
+ ypos -432
+ screen_type green
+ Size 1
+ off {{parent.IBKColourV3_MASTER5.off} {parent.IBKColourV3_MASTER5.off} {parent.IBKColourV3_MASTER5.off}}
+ mult {{parent.IBKColourV3_MASTER5.mult} {parent.IBKColourV3_MASTER5.mult} {parent.IBKColourV3_MASTER5.mult}}
+ multi 2
+}
+IBKColourV3 {
+ name IBKColourV3_stackC5
+ selected true
+ xpos 10702
+ ypos -398
+ screen_type green
+ Size 1
+ off {{parent.IBKColourV3_MASTER5.off} {parent.IBKColourV3_MASTER5.off} {parent.IBKColourV3_MASTER5.off}}
+ mult {{parent.IBKColourV3_MASTER5.mult} {parent.IBKColourV3_MASTER5.mult} {parent.IBKColourV3_MASTER5.mult}}
+ multi 4
+}
+IBKColourV3 {
+ name IBKColourV3_stackD5
+ selected true
+ xpos 10702
+ ypos -364
+ screen_type green
+ Size 1
+ off {{parent.IBKColourV3_MASTER5.off} {parent.IBKColourV3_MASTER5.off} {parent.IBKColourV3_MASTER5.off}}
+ mult {{parent.IBKColourV3_MASTER5.mult} {parent.IBKColourV3_MASTER5.mult} {parent.IBKColourV3_MASTER5.mult}}
+ multi 8
+}
+IBKColourV3 {
+ name IBKColourV3_stackE5
+ selected true
+ xpos 10702
+ ypos -330
+ screen_type green
+ Size 1
+ off {{parent.IBKColourV3_MASTER5.off} {parent.IBKColourV3_MASTER5.off} {parent.IBKColourV3_MASTER5.off}}
+ mult {{parent.IBKColourV3_MASTER5.mult} {parent.IBKColourV3_MASTER5.mult} {parent.IBKColourV3_MASTER5.mult}}
+ multi 16
+}
+EdgeExtend {
+ detailAmount 0
+ premultiply false
+ name EdgeExtend6
+ selected true
+ xpos 10702
+ ypos -296
+}
+Dot {
+ name Dot78
+ note_font_size 22
+ selected true
+ xpos 10736
+ ypos -262
+}
+Dot {
+ name Dot79
+ note_font_size 22
+ selected true
+ xpos 10803
+ ypos -232
+}
+NoOp {
+ name NoOp6
+ label prerender
+ selected true
+ xpos 10769
+ ypos -206
+}
+Dot {
+ name Dot80
+ note_font_size 22
+ selected true
+ xpos 10803
+ ypos -3
+}
+Dot {
+ name Dot81
+ note_font_size 22
+ selected true
+ xpos 10736
+ ypos 27
+}
+Dot {
+ name Dot82
+ note_font_size 22
+ selected true
+ xpos 10736
+ ypos 94
+}
+push $Nf1428400
+Dot {
+ name Dot83
+ note_font_size 22
+ selected true
+ xpos 10917
+ ypos -618
+}
+IBKGizmoV3 {
+ inputs 2
+ name IBKGizmoV3_6
+ xpos 10883
+ ypos 90
+ st C-green
+ ss false
+}
+Dot {
+ name Dot84
+ label greenscreen
+ note_font_size 22
+ selected true
+ xpos 10917
+ ypos 207
+}

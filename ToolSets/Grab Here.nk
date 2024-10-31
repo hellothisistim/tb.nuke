@@ -1,0 +1,14 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+StickyNote {
+ inputs 0
+ name Grab_Here
+ tile_color 0x777777ff
+ gl_color 0x777777ff
+ label "grab here"
+ note_font_size 999
+ note_font_color 0xff
+ selected true
+ xpos 7675
+ ypos -481
+}

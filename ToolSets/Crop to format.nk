@@ -1,0 +1,11 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+push $cut_paste_input
+Crop {
+ box {{format.x} {format.y} {format.r} {format.t}}
+ crop false
+ name Crop_to_format
+ selected true
+ xpos 359
+ ypos 42
+}
