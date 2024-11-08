@@ -465,4 +465,12 @@ try:
 except ImportError as e:
     nuke.tprint('Skipping import of bgNukes. Error:', e)
 
+### Load viewer_connect_default_inputs
+try:
+    import viewer_connect_default_inputs
+except ImportError as e:
+    nuke.tprint('*** Skipping import of viewer_connect_default_inputs. Error:', e)
+else:
+    viewer_connect_default_inputs.add_menu(tm)
+
 nuke.tprint('  END: '+ os.path.realpath(__file__))
