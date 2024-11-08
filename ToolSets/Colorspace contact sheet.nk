@@ -1,0 +1,170 @@
+set cut_paste_input [stack 0]
+version 14.1 v3
+push $cut_paste_input
+Dot {
+ name Dot1
+ note_font_size 22
+ selected true
+ xpos 414
+ ypos -102
+}
+set N4d224400 [stack 0]
+Dot {
+ name Dot2
+ note_font_size 22
+ selected true
+ xpos 554
+ ypos -102
+}
+set N835bc000 [stack 0]
+Dot {
+ name Dot3
+ note_font_size 22
+ selected true
+ xpos 694
+ ypos -102
+}
+set N835bc400 [stack 0]
+Dot {
+ name Dot4
+ note_font_size 22
+ selected true
+ xpos 834
+ ypos -102
+}
+set N835bc800 [stack 0]
+Dot {
+ name Dot5
+ note_font_size 22
+ selected true
+ xpos 974
+ ypos -102
+}
+set N835bcc00 [stack 0]
+Dot {
+ name Dot6
+ note_font_size 22
+ selected true
+ xpos 1114
+ ypos -102
+}
+Colorspace {
+ colorspace_out CIE-Lab
+ name Colorspace7
+ label "in: \[value colorspace_in] \[value illuminant_in] \[value primary_in]\nout: \[value colorspace_out] \[value illuminant_out] \[value primary_out]"
+ selected true
+ xpos 1080
+ ypos -76
+}
+push $N835bcc00
+Colorspace {
+ colorspace_out YCbCr
+ name Colorspace6
+ label "in: \[value colorspace_in] \[value illuminant_in] \[value primary_in]\nout: \[value colorspace_out] \[value illuminant_out] \[value primary_out]"
+ selected true
+ xpos 940
+ ypos -76
+}
+push $N835bc800
+Colorspace {
+ colorspace_out HSL
+ name Colorspace4
+ label "in: \[value colorspace_in] \[value illuminant_in] \[value primary_in]\nout: \[value colorspace_out] \[value illuminant_out] \[value primary_out]"
+ selected true
+ xpos 800
+ ypos -76
+}
+push $N835bc400
+Colorspace {
+ colorspace_out HSV
+ name Colorspace3
+ label "in: \[value colorspace_in] \[value illuminant_in] \[value primary_in]\nout: \[value colorspace_out] \[value illuminant_out] \[value primary_out]"
+ selected true
+ xpos 660
+ ypos -76
+}
+push $N835bc000
+Colorspace {
+ colorspace_out AlexaV3LogC
+ name Colorspace2
+ label "in: \[value colorspace_in] \[value illuminant_in] \[value primary_in]\nout: \[value colorspace_out] \[value illuminant_out] \[value primary_out]"
+ selected true
+ xpos 520
+ ypos -76
+}
+push $N4d224400
+add_layer {cspace_LogC cspace_LogC.red cspace_LogC.green cspace_LogC.blue}
+Shuffle2 {
+ inputs 2
+ fromInput1 {{1} B A}
+ out1 cspace_LogC
+ fromInput2 {{0} B A}
+ mappings "3 rgba.red 0 0 cspace_LogC.red 0 0 rgba.green 0 1 cspace_LogC.green 0 1 rgba.blue 0 2 cspace_LogC.blue 0 2"
+ name Shuffle1
+ selected true
+ xpos 380
+ ypos -10
+}
+add_layer {cspace_HSV cspace_HSV.red cspace_HSV.green cspace_HSV.blue}
+Shuffle2 {
+ inputs 2
+ fromInput1 {{1} B A}
+ out1 cspace_HSV
+ fromInput2 {{0} B A}
+ mappings "3 rgba.red 0 0 cspace_HSV.red 0 0 rgba.green 0 1 cspace_HSV.green 0 1 rgba.blue 0 2 cspace_HSV.blue 0 2"
+ name Shuffle2
+ selected true
+ xpos 380
+ ypos 24
+}
+add_layer {cspace_HSL cspace_HSL.red cspace_HSL.green cspace_HSL.blue}
+Shuffle2 {
+ inputs 2
+ fromInput1 {{1} B A}
+ out1 cspace_HSL
+ fromInput2 {{0} B A}
+ mappings "3 rgba.red 0 0 cspace_HSL.red 0 0 rgba.green 0 1 cspace_HSL.green 0 1 rgba.blue 0 2 cspace_HSL.blue 0 2"
+ name Shuffle3
+ selected true
+ xpos 380
+ ypos 54
+}
+add_layer {cspace_YCBCr cspace_YCBCr.red cspace_YCBCr.green cspace_YCBCr.blue}
+Shuffle2 {
+ inputs 2
+ fromInput1 {{1} B A}
+ out1 cspace_YCBCr
+ fromInput2 {{0} B A}
+ mappings "3 rgba.red 0 0 cspace_YCBCr.red 0 0 rgba.green 0 1 cspace_YCBCr.green 0 1 rgba.blue 0 2 cspace_YCBCr.blue 0 2"
+ name Shuffle4
+ selected true
+ xpos 380
+ ypos 88
+}
+add_layer {cspace_CIELab cspace_CIELab.red cspace_CIELab.green cspace_CIELab.blue}
+Shuffle2 {
+ inputs 2
+ fromInput1 {{1} B A}
+ out1 cspace_CIELab
+ fromInput2 {{0} B A}
+ mappings "3 rgba.red 0 0 cspace_CIELab.red 0 0 rgba.green 0 1 cspace_CIELab.green 0 1 rgba.blue 0 2 cspace_CIELab.blue 0 2"
+ name Shuffle5
+ selected true
+ xpos 380
+ ypos 122
+}
+LayerContactSheet {
+ showLayerNames true
+ name LayerContactSheet1
+ selected true
+ xpos 380
+ ypos 156
+}
+Dot {
+ name Dot7
+ label "colorspace contact sheet"
+ note_font_size 22
+ selected true
+ xpos 414
+ ypos 218
+}
