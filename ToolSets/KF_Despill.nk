@@ -1,0 +1,465 @@
+set cut_paste_input [stack 0]
+version 12.0 v3
+push $cut_paste_input
+Group {
+ name KF_Despill
+ tile_color 0x4e73ffff
+ selected true
+ xpos 180
+ ypos -633
+ addUserKnob {20 User l Despill}
+ addUserKnob {26 k_nn l "" +STARTLINE T "<font color=\"cornflower blue\" size=10>KF Despill<font color=\"gray\" size=2>v1.43</font>"}
+ addUserKnob {26 k_kf l "" +STARTLINE T "<font color=\"gray\">by Kevin Fisch</font>"}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {18 color l "Screen Color"}
+ color {0 0 1}
+ addUserKnob {6 color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 weights l Weights n 1}
+ weights 0
+ addUserKnob {7 rw l "Red Weight"}
+ rw 0.5
+ addUserKnob {7 bgw l "Blue/Green Weight"}
+ bgw 0.5
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {18 sat l Saturation}
+ sat {0 0 0}
+ addUserKnob {6 sat_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 sat_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 sat_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 sat_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 sat_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 sat_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 gain l Gain}
+ gain 1
+ addUserKnob {6 gain_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 gain_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 gain_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 gain_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 gain_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 gain_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 aliases l INVISIBLE -STARTLINE +INVISIBLE T KF_Despill}
+ addUserKnob {6 cfix l "Clamp Fix" t "IBK clamps for some reason. This -should- fix that." +STARTLINE}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -545
+  ypos -44
+ }
+set Na6cb580 [stack 0]
+ Dot {
+  name Dot20
+  xpos -511
+  ypos 52
+ }
+set Na6cf850 [stack 0]
+ Dot {
+  name Dot25
+  xpos -401
+  ypos 52
+ }
+set Na6d46a0 [stack 0]
+ Dot {
+  name Dot26
+  xpos -130
+  ypos 52
+ }
+ Dot {
+  name Dot27
+  xpos -130
+  ypos 417
+ }
+push $Na6d46a0
+ Input {
+  inputs 0
+  name Mask
+  xpos -344
+  ypos -42
+  number 1
+ }
+ Dot {
+  name Dot6
+  xpos -310
+  ypos 107
+ }
+set Na6e80d0 [stack 0]
+push $Na6cf850
+ Dot {
+  name Dot4
+  xpos -621
+  ypos 52
+ }
+ Dot {
+  name Dot5
+  xpos -621
+  ypos 152
+ }
+push $Na6cf850
+ IBKGizmoV3 {
+  name IBKGizmoV3_4
+  selected false
+  xpos -545
+  ypos 70
+  st pick
+  colour {{parent.color.r} {parent.color.g} {parent.color.b}}
+  red_weight {{parent.parent.rw}}
+  blue_green_weight {{parent.parent.bgw}}
+ }
+ Group {
+  inputs 3
+  name KF_IBKClampFix
+  tile_color 0x4e73ffff
+  selected true
+  xpos -545
+  ypos 148
+  disable {{1-parent.cfix}}
+ }
+  Input {
+   inputs 0
+   name Mask
+   xpos 11
+   ypos 170
+   number 2
+  }
+  Dot {
+   name Dot1
+   xpos 45
+   ypos 643
+  }
+  Input {
+   inputs 0
+   name Plate
+   xpos -663
+   ypos 160
+   number 1
+  }
+  Dot {
+   name Dot5
+   xpos -629
+   ypos 250
+  }
+set Na784460 [stack 0]
+  Dot {
+   name Dot13
+   xpos -388
+   ypos 250
+  }
+set Na789220 [stack 0]
+  Dot {
+   name Dot12
+   xpos -184
+   ypos 250
+  }
+  Shuffle {
+   red blue
+   green blue
+   name Shuffle3
+   xpos -218
+   ypos 317
+  }
+  Colorspace {
+   colorspace_out HSV
+   name Colorspace6
+   xpos -218
+   ypos 343
+  }
+  Dot {
+   name Dot16
+   xpos -184
+   ypos 387
+  }
+  Input {
+   inputs 0
+   name IBK
+   xpos -564
+   ypos 163
+  }
+  Dot {
+   name Dot6
+   xpos -530
+   ypos 270
+  }
+set Na7c65a0 [stack 0]
+  Dot {
+   name Dot2
+   xpos -455
+   ypos 270
+  }
+set Na7cb380 [stack 0]
+  Dot {
+   name Dot11
+   xpos -293
+   ypos 270
+  }
+set Na7d01d0 [stack 0]
+  Dot {
+   name Dot10
+   xpos -76
+   ypos 270
+  }
+  Shuffle {
+   red blue
+   green blue
+   name Shuffle6
+   xpos -110
+   ypos 319
+  }
+  Colorspace {
+   colorspace_out HSV
+   name Colorspace9
+   xpos -110
+   ypos 345
+  }
+  ChannelMerge {
+   inputs 2
+   A rgba.blue
+   operation min
+   B rgba.blue
+   output rgba.blue
+   name ChannelMerge4
+   xpos -110
+   ypos 371
+   disable {{1-parent.parent.cfix}}
+  }
+  Colorspace {
+   colorspace_in HSV
+   name Colorspace12
+   xpos -110
+   ypos 421
+  }
+  Dot {
+   name Dot8
+   xpos -76
+   ypos 547
+  }
+push $Na789220
+  Shuffle {
+   red green
+   blue green
+   name Shuffle2
+   xpos -422
+   ypos 317
+  }
+  Colorspace {
+   colorspace_out HSV
+   name Colorspace5
+   xpos -422
+   ypos 343
+  }
+  Dot {
+   name Dot15
+   xpos -388
+   ypos 386
+  }
+push $Na7d01d0
+  Shuffle {
+   red green
+   blue green
+   name Shuffle5
+   xpos -327
+   ypos 318
+  }
+  Colorspace {
+   colorspace_out HSV
+   name Colorspace8
+   xpos -327
+   ypos 344
+  }
+  ChannelMerge {
+   inputs 2
+   A rgba.blue
+   operation min
+   B rgba.blue
+   output rgba.blue
+   name ChannelMerge3
+   xpos -327
+   ypos 370
+   disable {{1-parent.parent.cfix}}
+  }
+  Colorspace {
+   colorspace_in HSV
+   name Colorspace11
+   xpos -327
+   ypos 420
+  }
+  Dot {
+   name Dot7
+   xpos -293
+   ypos 509
+  }
+push $Na784460
+  Shuffle {
+   green red
+   blue red
+   name Shuffle1
+   xpos -663
+   ypos 321
+  }
+  Colorspace {
+   colorspace_out HSV
+   name Colorspace4
+   xpos -663
+   ypos 347
+  }
+  Dot {
+   name Dot14
+   xpos -629
+   ypos 389
+  }
+push $Na7c65a0
+  Shuffle {
+   green red
+   blue red
+   name Shuffle4
+   xpos -564
+   ypos 321
+  }
+  Colorspace {
+   colorspace_out HSV
+   name Colorspace7
+   xpos -564
+   ypos 347
+  }
+  ChannelMerge {
+   inputs 2
+   A rgba.blue
+   operation min
+   B rgba.blue
+   output rgba.blue
+   name ChannelMerge2
+   xpos -564
+   ypos 373
+   disable {{1-parent.parent.cfix}}
+  }
+  Colorspace {
+   colorspace_in HSV
+   name Colorspace10
+   xpos -564
+   ypos 423
+  }
+  Copy {
+   inputs 2
+   from0 rgba.green
+   to0 rgba.green
+   name Copy1
+   xpos -564
+   ypos 499
+  }
+  Copy {
+   inputs 2
+   from0 rgba.blue
+   to0 rgba.blue
+   name Copy2
+   xpos -564
+   ypos 537
+  }
+  Dot {
+   name Dot3
+   xpos -530
+   ypos 643
+  }
+push $Na7cb380
+  Copy {
+   inputs 2+1
+   from0 -rgba.alpha
+   to0 -rgba.alpha
+   channels rgb
+   name Copy3
+   xpos -489
+   ypos 627
+  }
+  Output {
+   name Output1
+   xpos -489
+   ypos 725
+  }
+ end_group
+set Na76cae0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge13
+  xpos -435
+  ypos 148
+ }
+set Na95e950 [stack 0]
+ Dot {
+  name Dot1
+  xpos -225
+  ypos 152
+ }
+ ColorCorrect {
+  saturation 0
+  name ColorCorrect1
+  xpos -259
+  ypos 170
+ }
+ Dot {
+  name Dot2
+  xpos -225
+  ypos 376
+ }
+push $Na6e80d0
+ Dot {
+  name Dot3
+  xpos -310
+  ypos 335
+ }
+push $Na95e950
+ ColorCorrect {
+  inputs 1+1
+  saturation {{parent.sat.r} {parent.sat.g} {parent.sat.b} {parent.sat}}
+  gain {{parent.gain.r} {parent.gain.g} {parent.gain.b} {parent.gain}}
+  name ColorCorrect2
+  xpos -435
+  ypos 331
+ }
+push $Na76cae0
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  name Merge14
+  xpos -545
+  ypos 331
+ }
+add_layer {despill_mask despill_mask.a}
+ ShuffleCopy {
+  inputs 2
+  red red
+  out despill_mask
+  name ShuffleCopy1
+  xpos -545
+  ypos 372
+ }
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy2
+  xpos -545
+  ypos 413
+ }
+set Na9d3ab0 [stack 0]
+ Output {
+  name Output1
+  xpos -545
+  ypos 466
+ }
+push $Na9d3ab0
+push $Na6cb580
+ Viewer {
+  inputs 2
+  frame_range 1000-1064
+  fps 23.97602463
+  input_number 1
+  colour_sample_bbox {0.06041666493 0.3479166627 0.07604166865 0.3562499881}
+  name Viewer1
+  xpos -480
+  ypos -10
+  hide_input true
+ }
+end_group
