@@ -32,7 +32,7 @@ def viewer_connect_default_inputs():
         v.setInput(8, plate) # input 9 in the gui
 
 def add_menu(target=None):
-    """Add "Tracker Stable MM" option to specified target menu. If no target is
+    """Add "Connect Default Viewer Inputs" option to specified target menu. If no target is
     supplied, put it in the root of the Nodes menu."""
 
     # Build Tracked Bezier menu
