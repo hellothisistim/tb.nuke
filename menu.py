@@ -473,4 +473,12 @@ except ImportError as e:
 else:
     viewer_connect_default_inputs.add_menu(tm)
 
+### Load color_change
+try:
+    import color_change
+except ImportError as e:
+    nuke.tprint('*** Skipping import of color_change. Error:', e)
+else:
+    color_change.add_menu(tm)
+
 nuke.tprint('  END: '+ os.path.realpath(__file__))
