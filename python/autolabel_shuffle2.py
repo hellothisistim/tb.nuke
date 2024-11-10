@@ -4,12 +4,28 @@
 # Tim BOWMAN [tim@hellothisistim.com]
 #
 
-"""Label Shuffle2 nodes with mapping info in certain cases.
+"""An autolabel for Nuke's Shuffle2 node. It displays simple shuffles 
+completely and provides useful indicators for complex or non-standard 
+situations.
 
+If a single channel is shuffled into all output channels, display that channel as "layer.name".
+
+For all other situations, use Shake notation with a single character for each output channel in order. For example, a standard pass-through is notated as "rgba", putting black in the alpha becomes "rgb0". Any input channel names that are a single character get used as is (eg. "uv00" to shuffle UV components into red and green.) Input channel names with more than one character are all represented with an "X", indicating that you'd better open the Shuffle's panel and have a look for the specifics.
+
+If input layers other than "rgba" or "rgb" are used, put the list of active input layers in parenthesis and add it to the beginning of the label.
+
+Likewise with output layers, but put them at the end of the label.
+
+If any input other than B is used, add the active input letters to the beginning of the label.
+
+Examples:
+	"rgba.red" = Shuffle red into all channels.
+	"rgb1" = Keep red, green, and blue. Put white in the alpha.
+	"(depth,rgba)rgbZ" = Keep red, green, and blue. Put depth into the alpha.
+	"AB:(roto,diffuse)ZXXrb(mattes)" = Someone has done something complicated. 
 """
 
 import nuke
-from pprint import pprint
 
 def layers_in_mappings(mappings, input=True, output=True):
 	"""Return a list of all the layers connected in the specified inputs and/or outputs."""
