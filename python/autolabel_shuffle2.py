@@ -43,7 +43,6 @@ def channels_in_mappings(mappings, input=True, output=True, fullnames=True):
 					input = input.split('.')[1]
 			if input not in chans:
 				chans.append(input)
-	# print('chans:', chans)
 	return chans
 
 def inputs_in_mappings(node):
@@ -51,7 +50,6 @@ def inputs_in_mappings(node):
 	mappings = node['mappings'].getValue()
 	inputs = []
 	for chan in mappings:
-		print(chan[0], type(chan[0]))
 		if chan[0] == 0:
 			if node['fromInput1'].getValue() == 0:
 				inputs.append('B')
@@ -92,72 +90,58 @@ def mappings_channels_rgba01(mappings):
 			return False
 	return True
 
-def autolabel_shuffle2(node):
-	mappings = node['mappings'].getValue()
-	print("current mappings:")
-	pprint(mappings)
+def autolabel_shuffle2():
+	node = nuke.thisNode()
+	if node.Class() == 'Shuffle2':
+		mappings = node['mappings'].getValue()
+		in_layers = ''
+		out_layers = ''
+		inputs = ''
+		label = ''
 
-	label = ''
+		# If one channel in the source layer is connected to all of the output channels, use the source layer and channel name.
+		chans = channels_in_mappings(mappings, input=True, output=False, fullnames=True)
+		if len(chans) == 1 and len(inputs_in_mappings(node)) == 1:
+			label = chans[0]
+		else:
+			# Use Shake-style notation for all patched connections.
+			label = to_shake(mappings)
 
-	# If one channel in the source layer is connected to all of the output channels, use the source layer and channel name.
-	chans = channels_in_mappings(mappings, input=True, output=False, fullnames=True)
-	if len(chans) == 1 and len(inputs_in_mappings(node)) == 1:
-		label = chans[0]
-		return label
-	
-	# # If there are four or fewer connections, and all layers have red, green, blue, and alpha channels, use Shake-style shuffle notation for each output channel. (eg. "rrgb")
-	# if ( len(mappings) <= 4 and mappings_channels_rgba01(mappings) ):
-	# 	label = mappings_to_shake(mappings)
+			# If the input layer is not "rgba" or there are more than one active input layers, add the input layer(s') name(s) to the front.
+			rgba_only = True
+			layers = layers_in_mappings(mappings, input=True, output=False)
+			for layer in layers:
+				if layer not in  ['rgba', 'rgb']:
+					rgba_only = False
+			if not rgba_only:
+				in_layers = '(' + ','.join(layers) + ')'
+			# If the output  layer is not "rgba", or there are more than one active input layers, add the output layer(s') name(s) to the end.
+			rgba_only = True
+			layers = layers_in_mappings(mappings, input=False, output=True)
+			for layer in layers:
+				if layer not in  ['rgba', 'rgb']:
+					rgba_only = False
+			if not rgba_only:
+				out_layers = '(' + ','.join(layers) + ')'
 
-	# Use Shake-style notation for all patched connections.
-	label = to_shake(mappings)
+		# Look for A inputs
+		print('inputs_in_mappings', inputs_in_mappings(node))
+		if inputs_in_mappings(node) != ['B']:
+			inputs = ''.join(inputs_in_mappings(node))
 
-	# Look for A inputs
-	inputs = ''
-	print('inputs_in_mappings', inputs_in_mappings(node))
-	if inputs_in_mappings(node) != ['B']:
-		inputs = ''.join(inputs_in_mappings(node))
+		if in_layers != '':
+			label = in_layers + label
+		if out_layers != '':
+			label += out_layers
+		if inputs != '':
+			label = inputs + ':' + label
 
-	# If the input layer is not "rgba" or there are more than one active input layers, add the input layer(s') name(s) to the front.
-	rgba_only = True
-	in_layers = ''
-	layers = layers_in_mappings(mappings, input=True, output=False)
-	for layer in layers:
-		if layer not in  ['rgba', 'rgb']:
-			rgba_only = False
-	if not rgba_only:
-		in_layers = '(' + ','.join(layers) + ')'
-	# If the output  layer is not "rgba", or there are more than one active input layers, add the output layer(s') name(s) to the end.
-	rgba_only = True
-	out_layers = ''
-	layers = layers_in_mappings(mappings, input=False, output=True)
-	print('out layers', out_layers)
-	for layer in layers:
-		if layer not in  ['rgba', 'rgb']:
-			rgba_only = False
-	if not rgba_only:
-		out_layers = '(' + ','.join(layers) + ')'
+		label = node.name() + '\n' + label
+		if node['label'].getValue() != '':
+			label += '\n' + node['label'].getValue()
 
-	if in_layers != '':
-		label = in_layers + label
-	if out_layers != '':
-		label += out_layers
-	if inputs != '':
-		label = inputs + ':' + label
-
-
-
-	# If all of a layers channels are connected to the same channels in the output, use the source layer name.
-
-
-	# If the output layer is not rgba, add the output layer name in a second line.
-	# If in2 or out2 are not "none", use the label "multiple".
-
-	if label is not None:
 		return label
 
 
-
-print('label:', autolabel_shuffle2(nuke.selectedNode()))
-
+nuke.addAutolabel(autolabel_shuffle2)
 

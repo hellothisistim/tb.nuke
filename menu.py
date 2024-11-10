@@ -481,4 +481,10 @@ except ImportError as e:
 else:
     color_change.add_menu(tm)
 
+### Load color_change
+try:
+    import autolabel_shuffle2
+except ImportError as e:
+    nuke.tprint('*** Skipping import of autolabel_shuffle2. Error:', e)
+
 nuke.tprint('  END: '+ os.path.realpath(__file__))
