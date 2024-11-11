@@ -107,6 +107,7 @@ def mappings_channels_rgba01(mappings):
 	return True
 
 def autolabel_shuffle2():
+
 	node = nuke.thisNode()
 	if node.Class() == 'Shuffle2':
 		mappings = node['mappings'].getValue()
@@ -131,6 +132,7 @@ def autolabel_shuffle2():
 					rgba_only = False
 			if not rgba_only:
 				in_layers = '(' + ','.join(layers) + ')'
+
 			# If the output  layer is not "rgba", or there are more than one active input layers, add the output layer(s') name(s) to the end.
 			rgba_only = True
 			layers = layers_in_mappings(mappings, input=False, output=True)
@@ -141,7 +143,6 @@ def autolabel_shuffle2():
 				out_layers = '(' + ','.join(layers) + ')'
 
 		# Look for A inputs
-		print('inputs_in_mappings', inputs_in_mappings(node))
 		if inputs_in_mappings(node) != ['B']:
 			inputs = ''.join(inputs_in_mappings(node))
 
@@ -156,8 +157,23 @@ def autolabel_shuffle2():
 		if node['label'].getValue() != '':
 			label += '\n' + node['label'].getValue()
 
+		# -------------------------------------------------------------------
+		# *** The following is quoted directly from Foundry's autolabel.py, 
+		# which lives in the Nuke version's plugins folder.
+
+		# do the icons:
+		ind = nuke.expression("(keys?1:0)+(has_expression?2:0)+(clones?8:0)+(viewsplit?32:0)")
+
+		if int(nuke.numvalue("maskChannelInput", 0)) :
+			ind += 4
+		if int(nuke.numvalue("this.mix", 1)) < 1:
+			ind += 16
+		nuke.knob("this.indicators", str(ind))
+
+		# *** End of quote.
+		# -------------------------------------------------------------------
+
 		return label
 
 
 nuke.addAutolabel(autolabel_shuffle2)
-
