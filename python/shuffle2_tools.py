@@ -1,12 +1,15 @@
 #-----------------------------------------------------------------------------
-# autolabel_shuffle2.py
+# shuffle2_tools.py
 #
 # Tim BOWMAN [tim@hellothisistim.com]
 #
 
-"""An autolabel for Nuke's Shuffle2 node. It displays simple shuffles 
-completely and provides useful indicators for complex or non-standard 
-situations.
+"""Some tools that help with creating common Shuffle2 patches, and also an 
+autolabel script that helps to see what's happening in Shuffle2 without 
+opening the control panel.
+
+The autolabel displays simple shuffles completely and provides useful 
+indicators for complex or non-standard ones.
 
 If a single channel is shuffled into all output channels, display that channel as "layer.name".
 
@@ -176,4 +179,59 @@ def autolabel_shuffle2():
 		return label
 
 
+def make_shuffle2_reorder(order='rgba'):
+	"""Create a new-style Shuffle2 that's patched according to a Shake-style sequence of letters and numbers.
+
+	'order' should be a four-character string containing something sensible
+	like 'rgb1' or 'rrrr' or '0000'"""
+
+	# Reality-check
+	try:
+		assert len(order) == 4
+		for letter in order:
+			assert letter in 'rgba01'
+	except:
+		nuke.message("Please use a four-character sequence, consisting of r, g, b, a, 1, and 0.")
+		return
+
+	char_to_chan = {'r': 'rgba.red',
+					   'g': 'rgba.green',
+					   'b': 'rgba.blue',
+					   'a': 'rgba.alpha',
+					   '0': 'black',
+					   '1': 'white' }
+	channels = ['rgba.red', 'rgba.green', 'rgba.blue', 'rgba.alpha']
+	n = nuke.createNode('Shuffle2', inpanel=False)
+	map = n.knob('mappings')
+	for num, chan in enumerate(order[0:4]):
+		#print(num, chan)
+		if chan in '01':
+			map.setValue(-1, char_to_chan[chan], channels[num])
+		else:
+			map.setValue(0, char_to_chan[chan], channels[num])
+
+
+
+
 nuke.addAutolabel(autolabel_shuffle2)
+
+
+
+def add_menu(target=None):
+	"""Add "Connect Default Viewer Inputs" option to specified target menu. If no target is
+	supplied, put it in the root of the Nodes menu."""
+
+	# Build Tracked Bezier menu
+	m = nuke.menu('Nodes')
+	if target is not None:
+		m = target
+	tm = m.addMenu('Shuffle2 Tools')
+	tm.addCommand('RGBA', "shuffle2_tools.make_shuffle2_reorder('rgba')")
+	tm.addCommand('RGB1', "shuffle2_tools.make_shuffle2_reorder('rgb1')")
+	tm.addCommand('RGB0', "shuffle2_tools.make_shuffle2_reorder('rgb0')")
+	tm.addCommand('RRRR', "shuffle2_tools.make_shuffle2_reorder('rrrr')")
+	tm.addCommand('GGGG', "shuffle2_tools.make_shuffle2_reorder('gggg')")
+	tm.addCommand('BBBB', "shuffle2_tools.make_shuffle2_reorder('bbbb')")
+	tm.addCommand('AAAA', "shuffle2_tools.make_shuffle2_reorder('aaaa')")
+	tm.addCommand('1111', "shuffle2_tools.make_shuffle2_reorder('1111')")
+	tm.addCommand('0000', "shuffle2_tools.make_shuffle2_reorder('0000')")
