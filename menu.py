@@ -44,39 +44,7 @@ def aovMerge():
 
 
 
-def make_shuffle2_reorder(order='rgba'):
-    """Create a new-style Shuffle2 that's patched according to a Shake-style sequence of letters and numbers.
 
-    'order' should be a four-character string containing something sensible
-    like 'rgb1' or 'rrrr' or '0000'"""
-
-    # Reality-check
-    try:
-        assert len(order) == 4
-        for letter in order:
-            assert letter in 'rgba01'
-    except:
-        nuke.message("Please use a four-character sequence, consisting of r, g, b, a, 1, and 0.")
-        return
-
-    char_to_chan = {'r': 'rgba.red',
-                       'g': 'rgba.green',
-                       'b': 'rgba.blue',
-                       'a': 'rgba.alpha',
-                       '0': 'black',
-                       '1': 'white' }
-    channels = ['rgba.red', 'rgba.green', 'rgba.blue', 'rgba.alpha']
-    n = nuke.createNode('Shuffle2', inpanel=False)
-    map = n.knob('mappings')
-    for num, chan in enumerate(order[0:4]):
-        #print(num, chan)
-        if chan in '01':
-            map.setValue(-1, char_to_chan[chan], channels[num])
-        else:
-            map.setValue(0, char_to_chan[chan], channels[num])
-    n.knob('label').setValue(order)
-
-# TODO: Also make a labeling callback for Shuffle2 reorders.
 
 # AutoBackdrop
 def tb_autobackdrop():
@@ -308,16 +276,6 @@ nuke.tprint('Adding "tim" menu.')
 tm = m.addMenu(user, icon)
 
 
-# Expression Reorder
-tm.addCommand('RGBA', "make_shuffle2_reorder('rgba')")
-tm.addCommand('RGB1', "make_shuffle2_reorder('rgb1')")
-tm.addCommand('RGB0', "make_shuffle2_reorder('rgb0')")
-tm.addCommand('RRRR', "make_shuffle2_reorder('rrrr')")
-tm.addCommand('GGGG', "make_shuffle2_reorder('gggg')")
-tm.addCommand('BBBB', "make_shuffle2_reorder('bbbb')")
-tm.addCommand('AAAA', "make_shuffle2_reorder('aaaa')")
-tm.addCommand('1111', "make_shuffle2_reorder('1111')")
-tm.addCommand('0000', "make_shuffle2_reorder('0000')")
 # Read: local caching (obsolete in Nuke10!)
 if nuke.env['NukeVersionMajor'] <= 9:
 	for mode in nuke.nodes.Read().knob('cacheLocal').values():
@@ -481,10 +439,12 @@ except ImportError as e:
 else:
     color_change.add_menu(tm)
 
-### Load color_change
+### Load shuffle2_tools
 try:
-    import autolabel_shuffle2
+    import shuffle2_tools
 except ImportError as e:
-    nuke.tprint('*** Skipping import of autolabel_shuffle2. Error:', e)
+    nuke.tprint('*** Skipping import of shuffle2_tools. Error:', e)
+else:
+    shuffle2_tools.add_menu(tm)
 
 nuke.tprint('  END: '+ os.path.realpath(__file__))
