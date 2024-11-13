@@ -26,6 +26,8 @@ Examples:
 	"rgb1" = Keep red, green, and blue. Put white in the alpha.
 	"(depth,rgba)rgbZ" = Keep red, green, and blue. Put depth into the alpha.
 	"AB:(roto,diffuse)ZXXrb(mattes)" = Someone has done something complicated. 
+
+To use, place this file somewhere in your Nuke path (eg. in your .nuke folder), and import it in your menu.py.
 """
 
 import nuke
